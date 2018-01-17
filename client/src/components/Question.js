@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
 import '../assets/question.css'
+import API from "../utils/API";
 
 class Question extends Component 
 {
+	state =
+	{
+		text: ""
+	}
 
+	componentWillMount = () =>
+	{
+		console.log("Hey!")
+		API.getQuestion().then(function(result)
+		{
+			console.log(result.data[0].object)
+			console.log(JSON.parse(result.data[0].object))
+		})
+	}
 
 
 
