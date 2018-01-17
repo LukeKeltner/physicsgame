@@ -3,6 +3,7 @@
 	border: 1px solid #d6d6d6;
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	position: relative;
+	background-color: white;
 }
 
 .questionText
@@ -20,15 +21,15 @@
 	padding:20px;
 	margin-top:10px;
 	margin-bottom: 10px;
-
+	background-color: white;
 }
 
-.answerContainer:hover
+/* .answerContainer:hover
 {
 	border: 1px solid #84d8cb;
 	background-color: #8cffed;
 }
-
+ */
 .answerContainer:active { 
     transform: translateY(5px);
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.19);
@@ -40,6 +41,12 @@
 	margin-bottom: 20px;
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	padding:20px;
+}
+
+.selected-answer
+{
+	border: 1px solid #009ec1;
+	background-color: #00d0ff;	
 }
 
 .answer2

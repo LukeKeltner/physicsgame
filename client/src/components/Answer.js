@@ -4,12 +4,8 @@ class Answer extends Component
 {
 	state =
 	{
-		type:this.props.type
-	}
-
-	clicked = event =>
-	{
-		console.log("clicked")
+		type:this.props.type,
+		clicked: this.props.clicked
 	}
 
 	render()
@@ -18,9 +14,16 @@ class Answer extends Component
 			<div className="row">
 				<div className="col-md-1">
 				</div>
-				<div className="col-md-11 answerContainer answer1" id={this.props.id}>
-					{this.props.text}
-				</div>
+				{this.props.clicked === false
+				?
+					<div className="col-md-11 answerContainer answer" id={this.props.id} onClick={this.props.selected}>
+						{this.props.text}
+					</div>
+				:
+					<div className="col-md-11 answerContainer selected-answer" id={this.props.id} onClick={this.props.selected}>
+						{this.props.text}
+					</div>			
+				}
 			</div>
 		)
 	}
