@@ -7,17 +7,17 @@ class Question extends Component
 {
 	state =
 	{
-		text: "boop",
+		text: "",
 		answers:[],
 		correct: [],
 		wrong: [],
-		numberCorrect: 0
+		numberCorrect: 0,
+
 	}
 
 	componentDidMount = () =>
 	{
 		const This = this;
-		console.log("Hey!")
 		API.getQuestion().then(function(result)
 		{
 			const question = JSON.parse(result.data[0].question)
@@ -25,7 +25,6 @@ class Question extends Component
 			question.correct.forEach(answer => answers.push({text: answer, type: "correct"}))
 			question.wrong.forEach(answer => answers.push({text: answer, type: "wrong"}))
 
-			console.log(answers)
 			This.setState(
 			{
 				text:question.text,
@@ -35,11 +34,12 @@ class Question extends Component
 				numberCorrect:question.correct.length
 			})
 		})
+	}
 
-		setTimeout(function()
-		{
-			console.log(This.state)
-		}, 1000)
+	clicked = event =>
+	{
+		console.log(event.target)
+		console.log(event.target.id)
 	}
 
 	render()
@@ -55,7 +55,7 @@ class Question extends Component
 					<div className="col-md-4">
 						{this.state.answers.map((answer, i) =>
 							{
-								return <Answer key={i} text={answer.text}/>
+								return <div key={i} onClick={this.clicked}><Answer ref="child" key={i} text={answer.text} id={i}/></div>
 							})
 						}
 					</div>

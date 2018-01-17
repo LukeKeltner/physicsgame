@@ -10,7 +10,6 @@ router.route("/question").get(function(req, res)
 	connection.query("SELECT * FROM questions", function(err, result)
 	{
 		if(err){throw err}
-		console.log(result)
 		res.send(result)
 	})
 })
