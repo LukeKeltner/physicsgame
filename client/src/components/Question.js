@@ -1,25 +1,46 @@
 import React, { Component } from 'react';
 import '../assets/question.css'
 import API from "../utils/API";
+import Answer from './Answer'
 
 class Question extends Component 
 {
 	state =
 	{
-		text: ""
+		text: "boop",
+		answers:[],
+		correct: [],
+		wrong: [],
+		numberCorrect: 0
 	}
 
-	componentWillMount = () =>
+	componentDidMount = () =>
 	{
+		const This = this;
 		console.log("Hey!")
 		API.getQuestion().then(function(result)
 		{
-			console.log(result.data[0].object)
-			console.log(JSON.parse(result.data[0].object))
+			const question = JSON.parse(result.data[0].question)
+			const answers = []
+			question.correct.forEach(answer => answers.push({text: answer, type: "correct"}))
+			question.wrong.forEach(answer => answers.push({text: answer, type: "wrong"}))
+
+			console.log(answers)
+			This.setState(
+			{
+				text:question.text,
+				correct:question.correct,
+				wrong:question.wrong,
+				answers: answers,
+				numberCorrect:question.correct.length
+			})
 		})
+
+		setTimeout(function()
+		{
+			console.log(This.state)
+		}, 1000)
 	}
-
-
 
 	render()
 	{
@@ -28,38 +49,15 @@ class Question extends Component
 				<div className="row">
 					<div className="col-md-8 questionContainer">
 						<div className="questionText">
-							What type of particles can fit into a foreverly small space?
+							{this.state.text}
 						</div>
 					</div>
 					<div className="col-md-4">
-						<div className="row">
-							<div className="col-md-1">
-							</div>
-							<div className="col-md-11 answerContainer answer1">
-								Here is answer 1
-							</div>
-						</div>
-						<div className="row">
-							<div className="col-md-1">
-							</div>
-							<div className="col-md-11 answerContainer middleAnswer answer2">
-								Here is answer 2
-							</div>
-						</div>
-						<div className="row">
-							<div className="col-md-1">
-							</div>
-							<div className="col-md-11 answerContainer middleAnswer">
-								Here is answer 3
-							</div>
-						</div>
-						<div className="row">
-							<div className="col-md-1">
-							</div>
-							<div className="col-md-11 answerContainer">
-								Here is answer 4
-							</div>
-						</div>
+						{this.state.answers.map((answer, i) =>
+							{
+								return <Answer key={i} text={answer.text}/>
+							})
+						}
 					</div>
 				</div>
 

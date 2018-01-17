@@ -6,11 +6,11 @@ create table questions
 (
     id int(50) not null auto_increment,
     name varchar(255),
-    object nvarchar(8000),
+    question nvarchar(8000),
     primary key(id)
 );
 
-insert into questions(name, object) values
+insert into questions(name, question) values
 (
     "Luke",
     '{
