@@ -25,5 +25,10 @@ export default {
 	getAllSubtopics: function(data)
 	{
 		return axios.get(`/findAllSubtopics/${data}`)
+	},
+
+	getNewQuestion: function(data)
+	{
+		return axios.get(`/getNewQuestion/${data.topic}/${data.subtopic}/${data.userid}`)
 	}
 };

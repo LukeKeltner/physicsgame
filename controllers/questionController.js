@@ -42,5 +42,18 @@ module.exports =
 		{
 			res.send(result)
 		})
+	},
+
+	getNewQuestion: function(req, res)
+	{
+		const topic = req.params.topic;
+		const subtopic = req.params.subtopic;
+		const userid = req.params.userid;
+
+		questionModel.getNewQuestion(topic, subtopic, userid, function(result)
+		{
+			console.log(result)
+			res.send(result)
+		})
 	}
 }

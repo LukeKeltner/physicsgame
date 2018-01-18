@@ -10,6 +10,8 @@ router.route("/findAllTopics").get(questionController.findDistinctTopics)
 
 router.route(`/findAllSubtopics/:topic`).get(questionController.findDistinctSubTopics)
 
+router.route(`/getNewQuestion/:topic/:subtopic/:userid`).get(questionController.getNewQuestion)
+
 router.route("/question").get(function(req, res)
 {
 	connection.query("SELECT * FROM questions", function(err, result)

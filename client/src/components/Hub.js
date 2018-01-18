@@ -17,7 +17,8 @@ class Hub extends Component
 		allSubtopics: [],
 		gambleAmounts: [1, 20, 50],
 		name:"",
-		coins: 0
+		coins: 0,
+		id: 0
 	}
 
 	componentWillMount = () =>
@@ -27,7 +28,7 @@ class Hub extends Component
 		{
 			API.getAllTopics().then(function(result)
 			{
-				This.setState({name: user.data[0].name, coins: user.data[0].coins, allTopics: result.data})
+				This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, allTopics: result.data})
 			})
 		})
 	}
@@ -38,7 +39,7 @@ class Hub extends Component
 		const topic = event.target.innerHTML
 		API.getAllSubtopics(topic).then(function(result)
 		{
-			This.setState({topic: topic, allSubtopics: result.data})
+			This.setState({topic: topic, allSubtopics: result.data, subtopic: ""})
 		})
 	}
 
@@ -50,6 +51,21 @@ class Hub extends Component
 	gambleSelected = event =>
 	{
 		this.setState({gamble: event.target.innerHTML})
+	}
+
+	getNewQuestion = () =>
+	{
+		const data = 
+		{
+			topic: this.state.topic,
+			subtopic: this.state.subtopic,
+			userid: this.state.id
+		}
+
+		API.getNewQuestion(data).then(function(result)
+		{
+			console.log(result)
+		})
 	}
 
 	render()
@@ -102,11 +118,17 @@ class Hub extends Component
 						</div>
 						<div className="col-md-6">
 							<div className="choice-container">
+								<div className="topic-header">
+									Your Choices
+								</div>
 								Topic: {this.state.topic}
 								<br></br>
 								Subtopic: {this.state.subtopic}
 								<br></br>
 								Gamble: {this.state.gamble}
+								{this.state.topic !== "" && this.state.subtopic !== "" && this.state.gamble !== 0
+								?<button type="button" className="btn btn-primary btn-lg btn-block" onClick={this.getNewQuestion}>Go for it!</button>
+								:" "}
 							</div>
 						</div>
 					</div>

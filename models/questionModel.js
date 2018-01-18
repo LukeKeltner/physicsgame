@@ -24,6 +24,14 @@ const question =
 		{
 			cb(result)
 		})
+	},
+
+	getNewQuestion: function(topic, subtopic, userid, cb)
+	{
+		orm.getNewQuestion(topic, subtopic, userid, function(result)
+		{
+			cb(result)
+		})
 	}
 }
 

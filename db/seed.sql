@@ -21,7 +21,7 @@ create table users
     primary key(id)
 );
 
-create table questionlookup
+create table correctlookup
 (
     id int(50) not null auto_increment,
     userid INT(50) not null,
