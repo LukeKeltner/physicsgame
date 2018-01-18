@@ -21,6 +21,19 @@ create table users
     primary key(id)
 );
 
+create table questionlookup
+(
+    id int(50) not null auto_increment,
+    userid INT(50) not null,
+    FOREIGN KEY (userid)
+            REFERENCES users(id)
+            ON DELETE CASCADE,
+    questionid INT(50) not null,
+    foreign key (questionid)
+            references questions(id)
+            on delete cascade
+);
+
 insert into questions(topic, subtopic, question) values
 (
     "1D Kinematics",
@@ -94,7 +107,7 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Momentum",
-    "Basics",
+    "Advanced",
     '{
         "text":"This is the first question",
         "correct":["Correct 1", "Correct 2", "Correct 3"],
@@ -107,6 +120,6 @@ insert into users(name) values
     "Luke"
 );
 
-select distinct topic, subtopic from questions
+select distinct subtopic from questions where topic = "1D Kinematics";
 
 
