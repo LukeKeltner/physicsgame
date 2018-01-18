@@ -31,7 +31,7 @@ const orm =
 
 	getNewQuestion: function(topic, subtopic, userid, cb)
 	{
-		connection.query(`SELECT * FROM questions WHERE topic=? and subtopic=? and questions.id not in (select questionid from correctlookup where userid=?) order by rand() limit 1;`, [topic, subtopic, userid], function(err, result)
+		connection.query(`SELECT * FROM questions WHERE topic=? and subtopic=? and questions.id not in (select questionid from correctlookup where userid=?) and questions.id not in (select questionid from wronglookup where userid=?) order by rand() limit 1;`, [topic, subtopic, userid, userid], function(err, result)
 		{
 			if(err){throw err}
 			cb(result)

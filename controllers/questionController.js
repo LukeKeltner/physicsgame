@@ -37,7 +37,6 @@ module.exports =
 	findDistinctSubTopics: function(req, res)
 	{
 		const topic = req.params.topic;
-		console.log(topic)
 		questionModel.findDistinctWhere("subtopic", "topic", topic, function(result)
 		{
 			res.send(result)
@@ -52,7 +51,6 @@ module.exports =
 
 		questionModel.getNewQuestion(topic, subtopic, userid, function(result)
 		{
-			console.log(result)
 			res.send(result)
 		})
 	}
