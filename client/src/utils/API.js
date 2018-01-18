@@ -15,5 +15,15 @@ export default {
 	getUser: function()
 	{
 		return axios.get(`/user`)
+	},
+
+	getAllTopics: function()
+	{
+		return axios.get(`/findAllTopics`)
+	},
+
+	getAllSubtopics: function(data)
+	{
+		return axios.get(`/findAllSubtopics/${data}`)
 	}
 };

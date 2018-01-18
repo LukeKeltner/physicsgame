@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../assets/header.css'
+import '../assets/styles//header.css'
 import API from "../utils/API";
 //import coin from '../assets/images/coin.png'
 

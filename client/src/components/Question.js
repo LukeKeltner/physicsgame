@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import '../assets/question.css'
+import '../assets/styles/question.css'
 import API from "../utils/API";
 import Answer from './Answer'
+import Header from './Header'
 
 class Question extends Component 
 {
@@ -96,6 +97,7 @@ class Question extends Component
 		return(
 
 			<div>
+				<Header />
 				<div className="container">
 					<div className="row">
 						<div className="col-md-8 questionContainer">

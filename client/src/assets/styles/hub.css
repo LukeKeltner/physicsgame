@@ -1,0 +1,25 @@
+.choice-container
+{
+	border: 1px solid #d6d6d6;
+	margin-bottom: 20px;
+	background-color: white;
+	padding:20px;
+	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	font-size: 20px;
+}
+
+.topic-container
+{
+	border: 1px solid #d6d6d6;
+	margin-bottom: 20px;
+	background-color: white;
+	padding:20px;
+	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	font-size: 20px;
+}
+
+.topic-header
+{
+	font-size: 30px;
+	border-bottom: 1px solid #d6d6d6;
+}
