@@ -22,7 +22,7 @@ class Question extends Component
 		const This = this;
 		API.getQuestion().then(function(result)
 		{
-			const question = JSON.parse(result.data[0].question)
+			const question = JSON.parse(result.data[3].question)
 			const answers = []
 			question.correct.forEach(answer => answers.push({text: answer, type: "correct", selected: false}))
 			question.wrong.forEach(answer => answers.push({text: answer, type: "wrong", selected: false}))

@@ -20,7 +20,7 @@ const question =
 
 	findDistinctWhere: function(field, whereField, whereValue, cb)
 	{
-		orm.findDistinct(field, "questions", whereField, whereValue, function(result)
+		orm.findDistinctWhere(field, "questions", whereField, whereValue, function(result)
 		{
 			cb(result)
 		})

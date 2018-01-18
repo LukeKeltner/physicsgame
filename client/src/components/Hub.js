@@ -3,6 +3,7 @@ import '../assets/styles/hub.css'
 import API from "../utils/API";
 import Header from './Header';
 import Topic from './Topic';
+import GambleAmount from './GambleAmount';
 
 
 class Hub extends Component 
@@ -13,38 +14,55 @@ class Hub extends Component
 		subtopic: "",
 		gamble: 0,
 		allTopics: [],
-		allSubtopics: []
+		allSubtopics: [],
+		gambleAmounts: [1, 20, 50],
+		name:"",
+		coins: 0
 	}
 
-	componentDidMount = () =>
+	componentWillMount = () =>
 	{
 		const This = this;
-		API.getAllTopics().then(function(result)
+		API.getUser().then(function(user)
 		{
-			console.log(result.data)
-			This.setState({allTopics: result.data})
+			API.getAllTopics().then(function(result)
+			{
+				This.setState({name: user.data[0].name, coins: user.data[0].coins, allTopics: result.data})
+			})
 		})
 	}
 
 	topicSelected = event =>
 	{
-		API.getAllSubtopics(event.target.innerHTML).then(function(result)
+		const This = this;
+		const topic = event.target.innerHTML
+		API.getAllSubtopics(topic).then(function(result)
 		{
-			console.log(result)
+			This.setState({topic: topic, allSubtopics: result.data})
 		})
+	}
+
+	subtopicSelected = event =>
+	{
+		this.setState({subtopic: event.target.innerHTML})
+	}
+
+	gambleSelected = event =>
+	{
+		this.setState({gamble: event.target.innerHTML})
 	}
 
 	render()
 	{
 		return(
 			<div>
-				<Header />
+				<Header name={this.state.name} coins={this.state.coins}/>
 				<div className="container">
 					<div className="row">
-						<div className="col-md-5">
+						<div className="col-md-6">
 							<div className="topic-container">
 								<div className="topic-header">
-									Topic
+									Topics
 								</div>
 								{this.state.allTopics.map((topic, i) =>
 									{
@@ -52,18 +70,42 @@ class Hub extends Component
 									})}
 							</div>
 						</div>
-						<div className="col-md-5">
+						<div className="col-md-6">
 							<div className="topic-container">
 								<div className="topic-header">
-									Subtopic
+									Subtopics in  
+									{this.state.topic === "" 
+									? "..."
+									: " "+this.state.topic
+									}
 								</div>
-
+								{this.state.allSubtopics.map((topic, i) =>
+									{
+										return <Topic key={i} name={topic.subtopic} topicSelected={this.subtopicSelected}/>
+									})}
 							</div>
 						</div>
-						<div className="col-md-2">
+					</div>
+					<div className="row">
+						<div className="col-md-6">
+							<div className="gamble-container">
+								<div className="topic-header">
+									Gamble
+								</div>
+								<div className="row">
+								{this.state.gambleAmounts.map((amount, i) =>
+									{
+										return <GambleAmount key={i} amount={amount} gambleSelected={this.gambleSelected}/>
+									})}
+								</div>
+							</div>
+						</div>
+						<div className="col-md-6">
 							<div className="choice-container">
 								Topic: {this.state.topic}
+								<br></br>
 								Subtopic: {this.state.subtopic}
+								<br></br>
 								Gamble: {this.state.gamble}
 							</div>
 						</div>
