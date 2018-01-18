@@ -12,6 +12,7 @@ class Question extends Component
 		correct: [],
 		wrong: [],
 		numberCorrect: 0,
+		result: ""
 
 	}
 
@@ -25,7 +26,6 @@ class Question extends Component
 			question.correct.forEach(answer => answers.push({text: answer, type: "correct", selected: false}))
 			question.wrong.forEach(answer => answers.push({text: answer, type: "wrong", selected: false}))
 			const shuffledAnswers = This.shuffle(answers)
-			console.log(shuffledAnswers)
 
 			This.setState(
 			{
@@ -67,37 +67,64 @@ class Question extends Component
 
 	submit = event =>
 	{
+		let correct = true;
 		console.log(this.state.answers)
+		
+		for (let i=0; i<this.state.answers.length; i++)
+		{
+			console.log()
+			if ((this.state.answers[i].type === "correct" && !this.state.answers[i].selected) || (this.state.answers[i].type === "wrong" && this.state.answers[i].selected))
+			{
+				correct = false;
+				break;
+			}
+		}
+
+		if(correct)
+		{
+			this.setState({result: "Correct!"})
+		}
+
+		else
+		{
+			this.setState({result: "Incorrect!"})
+		}
 	}
 
 	render()
 	{
 		return(
-			<div className="container">
-				<div className="row">
-					<div className="col-md-8 questionContainer">
-						<div className="questionText">
-							{this.state.text}
+
+			<div>
+				<div className="container">
+					<div className="row">
+						<div className="col-md-8 questionContainer">
+							<div className="questionText">
+							{this.state.result === "" 
+							? this.state.text
+							: this.state.result
+							}
+							</div>
+						</div>
+						<div className="col-md-4">
+							{this.state.answers.map((answer, i) =>
+								{
+									return <Answer key={i} text={answer.text} id={i} selected={this.selected} clicked={answer.selected}/>
+								})
+							}
 						</div>
 					</div>
-					<div className="col-md-4">
-						{this.state.answers.map((answer, i) =>
-							{
-								return <Answer key={i} text={answer.text} id={i} selected={this.selected} clicked={answer.selected}/>
-							})
-						}
-					</div>
-				</div>
 
-				<div className="row">
-					<div className="col-md-8">
-					</div>
-					<div className="col-md-4">
-						<div className="row">
-							<div className="col-md-1">
-							</div>
-							<div className="col-md-11">
-								<button type="button" className="btn btn-primary btn-lg btn-block submit" onClick={this.submit}>Submit</button>
+					<div className="row">
+						<div className="col-md-8">
+						</div>
+						<div className="col-md-4">
+							<div className="row">
+								<div className="col-md-1">
+								</div>
+								<div className="col-md-11">
+									<button type="button" className="btn btn-primary btn-lg btn-block submit" onClick={this.submit}>Submit</button>
+								</div>
 							</div>
 						</div>
 					</div>

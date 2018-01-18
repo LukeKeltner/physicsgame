@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
 import '../assets/header.css'
 import API from "../utils/API";
+//import coin from '../assets/images/coin.png'
 
 class Header extends Component 
 {
 	state =
 	{
+		name: "",
+		coins: 0
+	}
 
+	componentDidMount = () =>
+	{
+		const This = this;
+		API.getUser().then(function(result)
+		{
+			This.setState({name: result.data[0].name, coins: result.data[0].coins})
+		})
 	}
 
 	render()
@@ -16,17 +27,15 @@ class Header extends Component
 				<div className="row">
 					<div className="col-md-4">
 						<div className="logo">
-							What Do You Know?
+							Welcome {this.state.name}
 						</div>
 					</div>
-					<div className="col-md-4 text-center">
-						<div className="coins">
-							1,345,567
-						</div>
+					<div className="col-md-4 coins text-center">
+						{this.state.coins}
 					</div>
 					<div className="col-md-4">
-						<div>
-
+						<div className="status-button text-center float-right">
+							Status
 						</div>
 					</div>
 				</div>

@@ -24,12 +24,6 @@
 	background-color: white;
 }
 
-/* .answerContainer:hover
-{
-	border: 1px solid #84d8cb;
-	background-color: #8cffed;
-}
- */
 .answerContainer:active { 
     transform: translateY(5px);
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.19);
@@ -60,7 +54,8 @@
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-@media screen and (max-width: 500px)
+
+@media screen and (max-width: 760px)
 {
 	.questionContainer
 	{

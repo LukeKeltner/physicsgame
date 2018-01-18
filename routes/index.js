@@ -14,6 +14,15 @@ router.route("/question").get(function(req, res)
 	})
 })
 
+router.route("/user").get(function(req, res)
+{
+	connection.query("SELECT * FROM users", function(err, result)
+	{
+		if(err){throw err}
+		res.send(result)
+	})	
+})
+
 router.use(function(req, res) 
 {
   	res.sendFile(path.join(__dirname, "../client/build/index.html"));

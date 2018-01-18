@@ -10,5 +10,10 @@ export default {
 	getQuestion: function()
 	{
 		return axios.get(`/question`);
+	},
+
+	getUser: function()
+	{
+		return axios.get(`/user`)
 	}
 };
