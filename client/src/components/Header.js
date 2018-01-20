@@ -10,6 +10,11 @@ class Header extends Component
 		coins: this.props.coins
 	}
 
+	toStatus = () =>
+	{
+		window.location="/status"
+	}
+
 	render()
 	{
 		return(
@@ -24,7 +29,7 @@ class Header extends Component
 						{this.props.coins}
 					</div>
 					<div className="col-md-4">
-						<div className="status-button text-center float-right">
+						<div className="status-button text-center float-right" onClick={this.toStatus}>
 							Status
 						</div>
 					</div>

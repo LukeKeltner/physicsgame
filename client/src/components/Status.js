@@ -12,7 +12,8 @@ class Status extends Component
 		allTopics: [],
 		name:"",
 		coins: 0,
-		id: 0
+		id: 0,
+		testArray: [1,2,3,4,5]
 	}
 
 	componentWillMount = () =>
@@ -26,17 +27,23 @@ class Status extends Component
 				{
 					API.getAllSubtopics(result.data[i].topic).then(function(result2)
 					{
-						result.data[i].subtopics = result2.data
-						This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, allTopics: result.data})
+						const subtopics = []
+
+						result2.data.forEach(element =>
+						{
+							subtopics.push(element.subtopic)
+						})
+
+						result.data[i].subtopics = subtopics
+
+						setTimeout(function()
+						{
+							This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, allTopics: result.data})
+						}, 1000)
 					})
 				}
 			})
 		})
-	}
-
-	test = event =>
-	{
-		console.log(this.state.allTopics[0].subtopics)
 	}
 
 	render()
@@ -47,18 +54,9 @@ class Status extends Component
 				<div className="container">
 					{this.state.allTopics.map((topic, i) =>
 						{
-							const subtopics = []
-
-							topic.subtopics.forEach(element =>
-							{
-								subtopics.push(element.subtopic)
-							})
-							console.log(topic.subtopics)
-							return <Report key={i} topic={topic.topic}/>
+							return <Report key={i} topic={topic.topic} subtopics={topic.subtopics}/>
 						})}
 				</div>
-
-				<p onClick={this.test}>Boop</p>
 			</div>
 
 		)

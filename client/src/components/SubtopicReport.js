@@ -12,13 +12,15 @@ class Report extends Component
 		return(
 
 			<div className="row">
-				<div className="col-md-2">
+				<div className="col-md-1">
 				</div>
-				<div className="col-md-10">
+				<div className="col-md-10 subtopic">
 					{this.props.name}
 					<div className="float-right">
-						grade
+						90%
 					</div>
+				</div>
+				<div className="col-md-1">
 				</div>
 			</div>
 		)

@@ -10,19 +10,19 @@ class Report extends Component
 	render()
 	{
 		return(
-
-			<div className="row">
-				<div className="col-md-12 topic">
-					{this.props.topic}
-					<div className="float-right">
-						grade
+			<div>
+				<div className="row">
+					<div className="col-md-12 topic">
+						{this.props.topic}
+						<div className="float-right">
+							85%
+						</div>
 					</div>
-					{this.props.subtopics}
 				</div>
-{/*				{this.props.subtopics.map((subtopic,i) =>
+				{this.props.subtopics.map((subtopic,i) =>
 					{
-						return <SubtopicReport name={subtopic.subtopic} />
-					})}*/}
+						return <SubtopicReport key={i} name={subtopic} />
+					})}
 			</div>
 		)
 	}
