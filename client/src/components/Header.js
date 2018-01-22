@@ -22,7 +22,7 @@ class Header extends Component
 
 	logout = () =>
 	{
-		
+
 	}
 
 	render()
@@ -40,7 +40,7 @@ class Header extends Component
 					</div>
 					<div className="col-md-4">
 						<div className="header-button text-center float-right" onClick={this.logout}>
-							Logout
+							Log out
 						</div>
 						<div className="header-button text-center float-right" onClick={this.toStatus}>
 							Status

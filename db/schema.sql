@@ -37,6 +37,20 @@ create table correctlookup
     primary key(id)
 );
 
+create table wronglookup
+(
+    id int(50) not null auto_increment,
+    userid INT(50) not null,
+    FOREIGN KEY (userid)
+            REFERENCES users(id)
+            ON DELETE CASCADE,
+    questionid INT(50) not null,
+    foreign key (questionid)
+            references questions(id)
+            on delete cascade,
+    primary key(id)
+);
+
 insert into questions(topic, subtopic, question) values
 (
     "1D Kinematics",
@@ -110,6 +124,16 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Momentum",
+    "Basics",
+    '{
+        "text":"This is another basic momnentum question",
+        "correct":["Correct 1", "Correct 2", "Correct 3"],
+        "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
+    }'
+),
+
+(
+    "Momentum",
     "Advanced",
     '{
         "text":"This is the first question",
@@ -125,9 +149,13 @@ insert into users(name) values
 
 insert into correctlookup(userid, questionid) values
 (1, 1),
-(1, 7);
+(1, 7),
+(1, 3);
 
-select * from questions where topic="1D Kinematics" and subtopic="Scalar and Vectors" and questions.id not in (select questionid from correctlookup where userid=1);
+insert into wronglookup(userid, questionid) values
+(1, 2),
+(1, 6);
 
-select questionid from correctlookup where userid=1;
+select * from questions where topic="1D Kinematics" and subtopic="Scalar and Vectors" and questions.id not in (select questionid from correctlookup where userid=1) and questions.id not in (select questionid from wronglookup where userid=1);
+
 
