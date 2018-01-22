@@ -12,10 +12,10 @@ const question =
 
 	findAllWhere: function(table, whereField, whereValue, cb)
 	{
-		orm.findAllWhere(table, whereField, whereValue, cb)
+		orm.findAllWhere(table, whereField, whereValue, function(result)
 		{
 			cb(result)
-		}
+		})
 	},
 
 	findDistinct: function(field, cb)

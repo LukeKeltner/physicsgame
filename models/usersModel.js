@@ -9,6 +9,14 @@ const user =
 			cb(result)
 		});
 	},
+
+	findAllWhere: function(table, whereField, whereValue, cb)
+	{
+		orm.findAllWhere(table, whereField, whereValue, function(result)
+		{
+			cb(result)
+		})
+	}
 }
 
 

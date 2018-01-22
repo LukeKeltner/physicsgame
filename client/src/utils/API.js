@@ -34,6 +34,11 @@ export default {
 
 	findAllQuestions: function(data)
 	{
-		return axios.get(`/findAllQuestions/${data.subtopic}/${data.userid}/${data.id}`)
+		return axios.get(`/findAllQuestions/${data}`)
+	},
+
+	findAnsweredQuestions: function(data)
+	{
+		return axios.get(`/findAnsweredQuestions/${data.table}/${data.id}`)
 	}
 };

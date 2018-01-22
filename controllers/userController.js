@@ -24,5 +24,13 @@ module.exports =
 		{
 			console.log(result)
 		})
+	},
+
+	findAnsweredQuestions: function(req, res)
+	{
+		usersModel.findAllWhere(req.params.table, "userid", req.params.id, function(result)
+		{
+			res.send(result)
+		})
 	}
 }

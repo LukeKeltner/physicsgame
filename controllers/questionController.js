@@ -28,7 +28,7 @@ module.exports =
 
 	findAllQuestions: function(req, res)
 	{
-		questionModel.findAllWhere(req.params.subtopic, "userid", req.params.id, function(result)
+		questionModel.findAllWhere("questions", "subtopic", req.params.subtopic, function(result)
 		{
 			res.send(result)
 		})

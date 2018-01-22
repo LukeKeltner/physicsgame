@@ -6,7 +6,6 @@ import SubtopicReport from './SubtopicReport';
 
 class Report extends Component 
 {
-
 	render()
 	{
 		return(
@@ -21,7 +20,7 @@ class Report extends Component
 				</div>
 				{this.props.subtopics.map((subtopic,i) =>
 					{
-						return <SubtopicReport key={i} name={subtopic} />
+						return <SubtopicReport key={i} name={subtopic[0]} amount={subtopic[1]} />
 					})}
 			</div>
 		)

@@ -12,7 +12,9 @@ router.route(`/findAllSubtopics/:topic`).get(questionController.findDistinctSubT
 
 router.route(`/getNewQuestion/:topic/:subtopic/:userid`).get(questionController.getNewQuestion)
 
-//router.route(`/findAllQuestions/:subtopic/:userid/:id`).get(questionController.findAllWhere)
+router.route(`/findAllQuestions/:subtopic`).get(questionController.findAllQuestions)
+
+router.route(`/findAnsweredQuestions/:table/:id`).get(userController.findAnsweredQuestions)
 
 router.route("/question").get(function(req, res)
 {
