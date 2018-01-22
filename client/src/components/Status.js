@@ -35,13 +35,13 @@ class Status extends Component
 						})
 
 						result.data[i].subtopics = subtopics
-
-						setTimeout(function()
-						{
-							This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, allTopics: result.data})
-						}, 1000)
 					})
 				}
+
+				setTimeout(function()
+				{
+					This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, allTopics: result.data})
+				}, 1000)
 			})
 		})
 	}

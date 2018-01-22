@@ -30,5 +30,10 @@ export default {
 	getNewQuestion: function(data)
 	{
 		return axios.get(`/getNewQuestion/${data.topic}/${data.subtopic}/${data.userid}`)
+	},
+
+	findAllQuestions: function(data)
+	{
+		return axios.get(`/findAllQuestions/${data.subtopic}/${data.userid}/${data.id}`)
 	}
 };

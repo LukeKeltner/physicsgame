@@ -5,6 +5,8 @@
 	padding:20px;
 	margin-top:10px;
 	background-color: white;
+	font-size: 20px;
+	font-weight: bold;
 }
 
 .subtopic
@@ -15,7 +17,7 @@
 	background-color: white;
 }
 
-.topic:hover, .subtopic:hover
+.subtopic:hover
 {
 	background-color: #e8e8e8;
 }

@@ -11,6 +11,15 @@ const orm =
 		})
 	},
 
+	findAllWhere: function(table, whereField, whereValue, cb)
+	{
+		connection.query(`SELECT * FROM ${table} WHERE ${whereField} = ?`, [whereValue], function(err, result)
+		{
+			if(err){throw err}
+			cb(result)
+		})
+	},
+
 	findDistinct: function(field, table, cb)
 	{
 		connection.query(`SELECT DISTINCT ${field} FROM ${table}`, function(err, result)

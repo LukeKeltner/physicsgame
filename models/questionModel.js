@@ -10,6 +10,14 @@ const question =
 		});
 	},
 
+	findAllWhere: function(table, whereField, whereValue, cb)
+	{
+		orm.findAllWhere(table, whereField, whereValue, cb)
+		{
+			cb(result)
+		}
+	},
+
 	findDistinct: function(field, cb)
 	{
 		orm.findDistinct(field, "questions", function(result)

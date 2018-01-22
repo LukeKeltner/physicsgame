@@ -12,6 +12,8 @@ router.route(`/findAllSubtopics/:topic`).get(questionController.findDistinctSubT
 
 router.route(`/getNewQuestion/:topic/:subtopic/:userid`).get(questionController.getNewQuestion)
 
+//router.route(`/findAllQuestions/:subtopic/:userid/:id`).get(questionController.findAllWhere)
+
 router.route("/question").get(function(req, res)
 {
 	connection.query("SELECT * FROM questions", function(err, result)

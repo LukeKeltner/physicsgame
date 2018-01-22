@@ -26,6 +26,14 @@ module.exports =
 		})
 	},
 
+	findAllQuestions: function(req, res)
+	{
+		questionModel.findAllWhere(req.params.subtopic, "userid", req.params.id, function(result)
+		{
+			res.send(result)
+		})
+	},
+
 	findDistinctTopics: function(req, res)
 	{
 		questionModel.findDistinct("topic", function(result)
