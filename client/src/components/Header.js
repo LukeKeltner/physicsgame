@@ -15,6 +15,11 @@ class Header extends Component
 		window.location="/status"
 	}
 
+	toHub = () =>
+	{
+		window.location="/hub"
+	}
+
 	render()
 	{
 		return(
@@ -29,8 +34,11 @@ class Header extends Component
 						{this.props.coins}
 					</div>
 					<div className="col-md-4">
-						<div className="status-button text-center float-right" onClick={this.toStatus}>
+						<div className="header-button text-center float-right" onClick={this.toStatus}>
 							Status
+						</div>
+						<div className="header-button text-center float-right" onClick={this.toHub}>
+							New Question
 						</div>
 					</div>
 				</div>

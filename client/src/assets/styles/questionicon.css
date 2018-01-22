@@ -1,4 +1,14 @@
 .fas
 {
 	margin-right:5px;
+	color: #c6c6c6;
+}
+.correct
+{
+	color:#00c10c;
+}
+
+.wrong
+{
+	color:#d80000;
 }

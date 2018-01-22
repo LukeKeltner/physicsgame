@@ -59,8 +59,6 @@ class Status extends Component
 										subtopic.push(element.subtopic)
 										subtopic.push(allQuestions.data.length)
 
-										console.log("-------------------------------")
-										console.log(allQuestions.data)
 										allQuestions.data.forEach(question =>
 										{
 											let correctBoolean = false;
@@ -68,11 +66,9 @@ class Status extends Component
 											
 											for (let j=0; j<corrects.data.length; j++)
 											{
-												console.log("Looking to see if question #"+question.id+" is the same as as the correctsloopup id of "+corrects.data[j].questionid)
 												if (corrects.data[j].questionid === question.id)
 												{
 													correctBoolean = true;
-													console.log("Question number "+question.id+" is correct!")
 													break;	
 												}										
 											}
@@ -81,14 +77,10 @@ class Status extends Component
 											{
 												for (let j=0; j<wrongs.data.length; j++)
 												{
-													console.log("Looking to see if question #"+question.id+" is the same as as the wrongsloopup id of "+corrects.data[j].questionid)
-
 													if (wrongs.data[j].questionid === question.id)
 													{
 														wrongBoolean = true;
-														console.log("Question number "+question.id+" is wrong!")
-														break;
-														
+														break;	
 													}								
 												}
 											}
@@ -129,7 +121,6 @@ class Status extends Component
 
 			setTimeout(function()
 			{
-				console.log(topicsToFill)
 				This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, allTopics: topicsToFill})
 			}, 3000)
 		})
@@ -143,7 +134,7 @@ class Status extends Component
 				<div className="container">
 					{this.state.allTopics.map((topic, i) =>
 						{
-							return <Report key={i} topic={topic.topic} subtopics={topic.subtopics}/>
+							return <Report key={i} userid={this.state.id} topic={topic.topic} subtopics={topic.subtopics}/>
 						})}
 				</div>
 			</div>

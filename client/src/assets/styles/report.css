@@ -21,3 +21,16 @@
 {
 	background-color: #e8e8e8;
 }
+.reset
+{
+	border: 1px solid #d6d6d6;
+	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	padding:10px;
+	margin-top:10px;
+	background-color: white;
+}
+
+.reset:active { 
+    transform: translateY(5px);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.19);
+}

@@ -28,7 +28,7 @@ body
 	width:10%;
 }
 
-.status-button
+.header-button
 {
 	font-size:20px;
 	border: 1px solid #d6d6d6;
@@ -37,7 +37,7 @@ body
 	width:50%;
 }
 
-.status-button:active { 
+.header-button:active { 
     transform: translateY(5px);
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.19);
 }
