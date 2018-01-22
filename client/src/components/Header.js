@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../assets/styles//header.css'
+import '../assets/styles/header.css'
 //import coin from '../assets/images/coin.png'
 
 class Header extends Component 
@@ -20,6 +20,11 @@ class Header extends Component
 		window.location="/hub"
 	}
 
+	logout = () =>
+	{
+		
+	}
+
 	render()
 	{
 		return(
@@ -34,6 +39,9 @@ class Header extends Component
 						{this.props.coins}
 					</div>
 					<div className="col-md-4">
+						<div className="header-button text-center float-right" onClick={this.logout}>
+							Logout
+						</div>
 						<div className="header-button text-center float-right" onClick={this.toStatus}>
 							Status
 						</div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 //import logo from './logo.svg';
 import './App.css';
+import Login from './components/Login'
 import Hub from './components/Hub'
 import Question from './components/Question'
 import Status from './components/Status'
@@ -14,6 +15,7 @@ class App extends Component {
 			<div>
 			    <Router>
 			        <Switch>
+			        	<Route exact path="/" component={Login} />
 			            <Route exact path="/hub" component={Hub} />
 			            <Route exact path="/question" component={Question} />
 			            <Route exact path="/status" component={Status} />
