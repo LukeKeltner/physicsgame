@@ -12,33 +12,67 @@ class Login extends Component
 		registerEmail: "",
 		registerPassword1: "",
 		registerPassword2: "",
-		badName: false
+		leaderboard: "",
+		badName: false,
+		badRegisterEmail: false,
+		badLoginEmail: false
 	}
 
 	handleChange = event =>
 	{
-		const badNames = ["fuck", "ass", "shit", "pussy", "vagina", "penis", "head", "cum", "jizz", "bitch", "nipple", "cunt", "sick", "dick", "cock", "balls", "slut", "whore", "suck", "anal", "blow", "tit", "diarrhea", "boob", "stain", "moist", "hairy", "fag", "gay", "lesbian", "trans", "homo", "nigg", "dyke", "dike", "jew", "kike", "diddle", "sac"]
-		this.setState({badName: false})
-		badNames.forEach(word =>
+
+		if ([event.target.id][0] === "registerName")
 		{
-			const programmingReg = new RegExp(word)
-			if (programmingReg.test([event.target.value][0].toLowerCase()) && [event.target.id][0] === 'registerName')
+			const badNames = ["fuck", "ass", "shit", "pussy", "vagina", "penis", "head", "cum", "jizz", "bitch", "nipple", "cunt", "sick", "dick", "cock", "balls", "slut", "whore", "suck", "anal", "blow", "tit", "diarrhea", "boob", "stain", "moist", "hairy", "fag", "gay", "lesbian", "trans", "homo", "nigg", "dyke", "dike", "jew", "kike", "diddle", "sac", "sex", "hump"]
+
+			this.setState({badName: false})
+			badNames.forEach(word =>
 			{
-				this.setState({badName: true})
+				const programmingReg = new RegExp(word)
+				if ((programmingReg.test([event.target.value][0].toLowerCase()) || !(/^[a-zA-Z ]+$/).test([event.target.value][0].toLowerCase())) && [event.target.id][0] === 'registerName')
+				{
+					this.setState({badName: true})
+				}
+			})
+		}
+
+		else if ([event.target.id][0] === "registerEmail")
+		{
+			this.setState({badRegisterEmail: false})
+			if (!(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test([event.target.value][0].toLowerCase()) && [event.target.id][0] === 'registerEmail')
+			{
+				this.setState({badRegisterEmail: true})
 			}
-		})
+		}
+
+		else if ([event.target.id][0] === "loginEmail")
+		{
+			this.setState({badLoginEmail: false})
+			if (!(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test([event.target.value][0].toLowerCase()) && [event.target.id][0] === 'loginEmail')
+			{
+				this.setState({badLoginEmail: true})
+			}
+		}
+
 		this.setState({[event.target.id]: event.target.value})
-		console.log(this.state.badName)
 	}
 
 	register = event =>
 	{
 		event.preventDefault()
-		console.log("hit!")
-		const string = "motherfucker fucking"
-		const check = "fucking"
-		const programmingReg = new RegExp(check)
-		console.log(programmingReg.test(string))
+		if (!this.state.badName && !this.state.badRegisterEmail && this.state.registerPassword1 === this.state.registerPassword2 && this.state.registerName !== "" && this.state.registerEmail !== "" && this.state.registerPassword1 !== "")
+		{
+			const leaderboard = document.getElementById("leaderboard").value
+			const newUser =
+			{
+				name: this.state.registerName,
+				email: this.state.registerEmail.toLowerCase(),
+				password: this.state.registerPassword1,
+				leaderboard: leaderboard
+			}
+
+			console.log(newUser)
+		}
 	}
 
 	render()
@@ -84,24 +118,50 @@ class Login extends Component
 						<form>
 							<div className="form-group">
 								<label htmlFor="registerName">Name</label>
-								{!this.state.badName
+								{!this.state.badName || this.state.registerName === ""
 								?	<input type="test" className="form-control" id="registerName" placeholder="Enter your name" required onChange={this.handleChange}></input>
-								:   <input type="test" className="form-control is-invalid" id="registerName" placeholder="Enter your name" required onChange={this.handleChange}></input>
+								:   <div><input type="test" className="form-control is-invalid" id="registerName" placeholder="Enter your name" required onChange={this.handleChange}></input>
+									<div className="invalid-feedback">
+          								Certain words and characters are blocked
+        							</div></div>
 								}
 								<small id="emailHelp" className="form-text text-muted">This name will appear on the Leaderboard if you choose.</small>
 							</div>
-							<div className="form-group">
-								<label htmlFor="registerEmail">Email address</label>
-								<input type="email" className="form-control" id="registerEmail" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.handleChange}></input>
-							</div>
-							<div className="form-group">
-								<label htmlFor="registerPassword1">Password</label>
-								<input type="password" className="form-control" id="registerPassword1" placeholder="Password" onChange={this.handleChange}></input>
-							</div>
-							<div className="form-group">
-								<label htmlFor="registerPassword2">Re-enter Password</label>
-								<input type="password" className="form-control is-invalid" id="registerPassword2" placeholder="Password" onChange={this.handleChange}></input>
-							</div>
+							{!this.state.badRegisterEmail
+							?
+								<div className="form-group">
+									<label htmlFor="registerEmail">Email address</label>
+									<input type="email" className="form-control" id="registerEmail" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.handleChange}></input>
+								</div>
+							:
+								<div className="form-group">
+									<label htmlFor="registerEmail">Email address</label>
+									<input type="email" className="form-control is-invalid" id="registerEmail" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.handleChange}></input>
+								</div>
+
+							}
+							{this.state.registerPassword1 === this.state.registerPassword2
+							?	<div><div className="form-group">
+									<label htmlFor="registerPassword1">Password</label>
+									<input type="password" className="form-control" id="registerPassword1" placeholder="Enter Password" onChange={this.handleChange}></input>
+								</div>
+								<div className="form-group">
+									<label htmlFor="registerPassword2">Re-enter Password</label>
+									<input type="password" className="form-control" id="registerPassword2" placeholder="Re-enter Password" onChange={this.handleChange}></input>
+								</div></div>
+							:
+								<div><div className="form-group">
+									<label htmlFor="registerPassword1">Password</label>
+									<input type="password" className="form-control is-invalid" id="registerPassword1" placeholder="Enter Password" onChange={this.handleChange}></input>
+								</div>
+								<div className="form-group">
+									<label htmlFor="registerPassword2">Re-enter Password</label>
+									<input type="password" className="form-control is-invalid" id="registerPassword2" placeholder="Re-enter Password" onChange={this.handleChange}></input>
+									<div className="invalid-feedback">
+	          								Passwords do not match
+	        						</div>
+								</div></div>
+							}
 							<label htmlFor="leaderboard">Would you like to be visable on the Leaderboard?</label>
 								<select className="form-control" id="leaderboard">
 									<option>Yes</option>
