@@ -16,6 +16,14 @@ const user =
 		{
 			cb(result)
 		})
+	},
+
+	registerNewUser: function(name, email, password, token, leaderboard, cb)
+	{
+		orm.registerNewUser(name, email, password, token, leaderboard, function(result)
+		{
+			cb(result)
+		})
 	}
 }
 

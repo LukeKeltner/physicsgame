@@ -1,5 +1,6 @@
 const express = require('express');
 const usersModel = require('../models/usersModel.js');
+const bcrypt = require('bcrypt');
 
 const createToken = function()
 {
@@ -31,6 +32,45 @@ module.exports =
 		usersModel.findAllWhere(req.params.table, "userid", req.params.id, function(result)
 		{
 			res.send(result)
+		})
+	},
+
+	registerNewUser: function(req, res)
+	{
+		const name = req.body.name
+		const email = req.body.email
+		const password = req.body.password
+		const token = createToken()
+		let leaderboard = 0;
+
+		if (req.body.leaderboard === "Yes")
+		{
+			leaderboard = 1
+		}
+
+		usersModel.findAll(function(allUsers)
+		{
+			console.log(allUsers)
+
+			allUsers.forEach(user =>
+			{
+				if (user.email === email)
+				{
+					res.send("email duplicate")
+				}
+			})
+
+			const saltRounds = 10;
+			bcrypt.hash(password, saltRounds, function(err, hash)
+			{
+				console.log("hashed password = "+hash)
+			});
+		})
+
+
+		usersModel.registerNewUser(name, email, password, token, leaderboard, function(result)
+		{
+			res.send("done")
 		})
 	}
 }

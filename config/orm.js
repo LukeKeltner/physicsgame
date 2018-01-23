@@ -45,6 +45,15 @@ const orm =
 			if(err){throw err}
 			cb(result)
 		})
+	},
+
+	registerNewUser: function(name, email, password, token, leaderboard, cb)
+	{
+		connection.query(`INSERT INTO users(name, email, password, token, leaderboard) VALUES (?, ?, ?, ?, ?);`, [name, email, password, token, leaderboard], function(err, result)
+		{
+			if(err){throw err}
+			cb(result)
+		})
 	}
 }
 

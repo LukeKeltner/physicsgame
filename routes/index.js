@@ -4,6 +4,7 @@ const userController = require("../controllers/userController")
 const questionController = require("../controllers/questionController")
 const connection = require('../config/connection.js');
 
+
 router.route("/findall").get(userController.findAll)
 
 router.route("/findAllTopics").get(questionController.findDistinctTopics)
@@ -15,6 +16,8 @@ router.route(`/getNewQuestion/:topic/:subtopic/:userid`).get(questionController.
 router.route(`/findAllQuestions/:subtopic`).get(questionController.findAllQuestions)
 
 router.route(`/findAnsweredQuestions/:table/:id`).get(userController.findAnsweredQuestions)
+
+router.route(`/register`).post(userController.registerNewUser)
 
 router.route("/question").get(function(req, res)
 {

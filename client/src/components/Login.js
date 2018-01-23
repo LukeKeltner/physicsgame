@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../assets/styles/login.css'
 import coin from '../assets/images/coin.png'
+import API from "../utils/API";
 
 class Login extends Component 
 {
@@ -71,7 +72,10 @@ class Login extends Component
 				leaderboard: leaderboard
 			}
 
-			console.log(newUser)
+			API.register(newUser).then(function(result)
+			{
+				console.log(result)
+			})
 		}
 	}
 
