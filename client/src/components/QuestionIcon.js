@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../assets/styles/questionicon.css'
-import API from "../utils/API";
 
 class Report extends Component 
 {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../assets/styles/report.css'
-import API from "../utils/API";
 import SubtopicReport from './SubtopicReport';
 
 
