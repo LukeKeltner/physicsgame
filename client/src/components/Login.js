@@ -23,7 +23,7 @@ class Login extends Component
 
 		if ([event.target.id][0] === "registerName")
 		{
-			const badNames = ["fuck", "ass", "shit", "pussy", "vagina", "penis", "head", "cum", "jizz", "bitch", "nipple", "cunt", "sick", "dick", "cock", "balls", "slut", "whore", "suck", "anal", "blow", "tit", "diarrhea", "boob", "stain", "moist", "hairy", "fag", "gay", "lesbian", "trans", "homo", "nigg", "dyke", "dike", "jew", "kike", "diddle", "sac", "sex", "hump"]
+			const badNames = ["fuck", "ass", "shit", "pussy", "vagina", "penis", "head", "cum", "jizz", "bitch", "nipple", "cunt", "sick", "dick", "cock", "balls", "slut", "whore", "suck", "anal", "blow", "tit", "diarrhea", "boob", "stain", "moist", "hairy", "fag", "gay", "lesbian", "trans", "homo", "nigg", "dyke", "dike", "jew", "kike", "diddle", "sac", "sex", "hump", "butt", "munch", "dumb", "stupid"]
 
 			this.setState({badName: false})
 			badNames.forEach(word =>
