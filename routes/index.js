@@ -25,6 +25,8 @@ router.route(`/register`).post(userController.registerNewUser)
 
 router.route(`/login/:email/:password`).get(userController.login)
 
+router.route(`/insertLookup`).post(questionController.insertLookup)
+
 /*router.route(`/getQuestion`).get(function(req, res)
 {
 	connection.query("SELECT * FROM questions", function(err, result)

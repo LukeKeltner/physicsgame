@@ -81,6 +81,15 @@ const orm =
 			if(err){throw err}
 			cb(result)
 		})
+	},
+
+	insert: function(table, column1, column2, value1, value2, cb)
+	{
+		connection.query(`INSERT INTO ${table} (${column1}, ${column2}) VALUES (?, ?)`, [value1, value2], function(err, result)
+		{
+			if(err){throw err}
+			cb(result)
+		})
 	}
 }
 

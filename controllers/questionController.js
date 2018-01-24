@@ -69,5 +69,13 @@ module.exports =
 		{
 			res.send(result)
 		})
+	},
+
+	insertLookup: function(req, res)
+	{
+		questionModel.insert(req.body.table, req.body.column1, req.body.column2, req.body.value1, req.body.value2, function(result)
+		{
+			res.send(result)
+		})
 	}
 }

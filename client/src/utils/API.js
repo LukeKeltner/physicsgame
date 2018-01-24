@@ -50,5 +50,10 @@ export default {
 	login: function(data)
 	{
 		return axios.get(`/login/${data.email}/${data.password}`)
+	},
+
+	insertLookup: function(data)
+	{
+		return axios.post(`/insertLookup`, data)
 	}
 };

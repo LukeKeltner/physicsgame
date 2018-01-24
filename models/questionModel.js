@@ -48,6 +48,14 @@ const question =
 		{
 			cb(result)
 		})
+	},
+
+	insert: function(table, column1, column2, value1, value2, cb)
+	{
+		orm.insert(table, column1, column2, value1, value2, function(result)
+		{
+			cb(result)
+		})
 	}
 }
 

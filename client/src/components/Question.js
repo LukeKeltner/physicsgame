@@ -103,6 +103,7 @@ class Question extends Component
 	submit = event =>
 	{
 		let correct = true;
+		const This = this;
 		
 		for (let i=0; i<this.state.answers.length; i++)
 		{
@@ -115,12 +116,92 @@ class Question extends Component
 
 		if (correct)
 		{
-			this.setState({result: "Correct!"})
+			const data = 
+			{
+				table: "correctlookup",
+				column1: "userid",
+				column2: "questionid",
+				value1: parseInt(this.state.id),
+				value2: parseInt(this.state.currentquestion)
+			}
+
+			API.insertLookup(data).then(result =>
+			{
+				this.setState({result: "Correct!"})	
+
+				const data2 =
+				{
+					column: "currentquestion",
+					value: 0,
+					whereField: "id",
+					whereValue: This.state.id
+				}
+
+				API.updateUser(data2).then(result2 =>
+				{
+					const newCoins = this.state.coins + this.state.currentgamble
+					const data3 =
+					{
+						column: "coins",
+						value: newCoins,
+						whereField: "id",
+						whereValue: This.state.id
+					}
+
+					API.updateUser(data3).then(result3 =>
+					{
+						setTimeout(() =>
+						{
+							window.location = "/hub"
+						}, 1000)
+					})					
+				})
+			})
 		}
 
 		else
 		{
-			this.setState({result: "Incorrect!"})
+			const data = 
+			{
+				table: "wronglookup",
+				column1: "userid",
+				column2: "questionid",
+				value1: parseInt(this.state.id),
+				value2: parseInt(this.state.currentquestion)
+			}
+
+			API.insertLookup(data).then(result =>
+			{
+				this.setState({result: "Inorrect!"})	
+
+				const data2 =
+				{
+					column: "currentquestion",
+					value: 0,
+					whereField: "id",
+					whereValue: This.state.id
+				}
+
+				API.updateUser(data2).then(result2 =>
+				{
+					const newCoins = this.state.coins - this.state.currentgamble
+					const data3 =
+					{
+						column: "coins",
+						value: newCoins,
+						whereField: "id",
+						whereValue: This.state.id
+					}
+
+					API.updateUser(data3).then(result3 =>
+					{
+						setTimeout(() =>
+						{
+							window.location = "/hub"
+						}, 1000)
+					})					
+				})
+			})
 		}
 	}
 

@@ -34,7 +34,7 @@ class Hub extends Component
 				window.location = "/"
 			}
 
-			else if (user.data[0].currentgamble !== 0)
+			else if (user.data[0].currentquestion !== 0)
 			{
 				alert("You haven't answered a question, go answer it!")
 				window.location = "/question"
@@ -82,34 +82,44 @@ class Hub extends Component
 
 		API.getNewQuestion(data).then(function(result)
 		{
+			console.log("Here's the question!")
 			console.log(result)
 
-			const data2 =
+			if (result.data.length === 0)
 			{
-				column: "currentgamble",
-				value: parseInt(This.state.gamble),
-				whereField: "id",
-				whereValue: This.state.id
+				alert("You've already answered all quesiton in this Subtopic!")
+				window.location.reload()
 			}
 
-			console.log(data2)
-
-			API.updateUser(data2).then(function(result2)
+			else
 			{
-
-				const data3 =
+				const data2 =
 				{
-					column: "currentquestion",
-					value: result.data[0].id,
+					column: "currentgamble",
+					value: parseInt(This.state.gamble),
 					whereField: "id",
 					whereValue: This.state.id
 				}
-				
-				API.updateUser(data3).then(function(result3)
+
+				console.log(data2)
+
+				API.updateUser(data2).then(function(result2)
 				{
-					window.location="/question"
+
+					const data3 =
+					{
+						column: "currentquestion",
+						value: result.data[0].id,
+						whereField: "id",
+						whereValue: This.state.id
+					}
+					
+					API.updateUser(data3).then(function(result3)
+					{
+						window.location="/question"
+					})
 				})
-			})
+			}
 		})
 	}
 
