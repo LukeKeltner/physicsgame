@@ -5,7 +5,9 @@ const questionController = require("../controllers/questionController")
 const connection = require('../config/connection.js');
 
 
-router.route("/findall").get(userController.findAll)
+router.route("/user/:token").get(userController.getUser)
+
+router.route(`/updateUser`).post(userController.updateUser)
 
 router.route("/findAllTopics").get(questionController.findDistinctTopics)
 
@@ -30,14 +32,14 @@ router.route("/question").get(function(req, res)
 	})
 })
 
-router.route("/user").get(function(req, res)
+/*router.route("/user/:token").get(function(req, res)
 {
 	connection.query("SELECT * FROM users", function(err, result)
 	{
 		if(err){throw err}
 		res.send(result)
 	})	
-})
+})*/
 
 router.use(function(req, res) 
 {

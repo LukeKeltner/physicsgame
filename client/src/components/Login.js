@@ -84,7 +84,8 @@ class Login extends Component
 
 				else
 				{
-					sessionStorage.setItem('key', result.data);
+					sessionStorage.setItem('token', result.data);
+					window.location = "/hub"
 				}
 			})
 		}
@@ -119,7 +120,8 @@ class Login extends Component
 
 			else
 			{
-				sessionStorage.setItem('key', result.data);
+				sessionStorage.setItem('token', result.data);
+				window.location = "/hub"
 			}
 		})
 	}

@@ -19,11 +19,11 @@ const createToken = function()
 
 module.exports = 
 {
-	findAll: function(req, res)
+	updateUser: function(req, res)
 	{
-		usersModel.findAll(function(result)
+		usersModel.updateUser(req.body.column, req.body.value, req.body.whereField, req.body.whereValue, function(result)
 		{
-			console.log(result)
+			res.end()
 		})
 	},
 
@@ -31,6 +31,16 @@ module.exports =
 	{
 		usersModel.findAllWhere(req.params.table, "userid", req.params.id, function(result)
 		{
+			res.send(result)
+		})
+	},
+
+	getUser: function(req, res)
+	{
+		console.log(req.params.token)
+		usersModel.getUser(req.params.token, function(result)
+		{
+			console.log(result)
 			res.send(result)
 		})
 	},
@@ -50,7 +60,6 @@ module.exports =
 
 		usersModel.findAll(function(allUsers)
 		{
-			console.log(allUsers)
 			let okay = true;
 
 			allUsers.forEach(user =>

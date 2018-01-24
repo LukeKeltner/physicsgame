@@ -19,110 +19,121 @@ class Status extends Component
 	componentWillMount = () =>
 	{
 		const This = this;
+		const token = sessionStorage.getItem('token');
 		const topicsToFill = []
-		API.getUser().then(function(user)
+
+		API.getUser(token).then(function(user)
 		{
-			const correctdata = 
+			if (user.data.length === 0)
 			{
-				table: "correctlookup",
-				id: user.data[0].id
+				alert("Please log back in")
+				window.location = "/"
 			}
 
-			API.findAnsweredQuestions(correctdata).then(function(corrects)
+			else
 			{
-				const wrongdata = 
+				const correctdata = 
 				{
-					table: "wronglookup",
+					table: "correctlookup",
 					id: user.data[0].id
 				}
 
-				API.findAnsweredQuestions(wrongdata).then(function(wrongs)
+				API.findAnsweredQuestions(correctdata).then(function(corrects)
 				{
-					console.log(corrects.data)
-					console.log(wrongs.data)
-
-					API.getAllTopics().then(function(result)
+					const wrongdata = 
 					{
-						for (let i=0; i<result.data.length; i++)
+						table: "wronglookup",
+						id: user.data[0].id
+					}
+
+					API.findAnsweredQuestions(wrongdata).then(function(wrongs)
+					{
+						console.log(corrects.data)
+						console.log(wrongs.data)
+
+						API.getAllTopics().then(function(result)
 						{
-							API.getAllSubtopics(result.data[i].topic).then(function(result2)
+							for (let i=0; i<result.data.length; i++)
 							{
-								const subtopics = []
-
-								result2.data.forEach(element =>
+								API.getAllSubtopics(result.data[i].topic).then(function(result2)
 								{
-									API.findAllQuestions(element.subtopic).then(function(allQuestions)
+									const subtopics = []
+
+									result2.data.forEach(element =>
 									{
-										const subtopic = []
-										const correctsArray = []
-										const wrongsArray = []
-										subtopic.push(element.subtopic)
-										subtopic.push(allQuestions.data.length)
-
-										allQuestions.data.forEach(question =>
+										API.findAllQuestions(element.subtopic).then(function(allQuestions)
 										{
-											let correctBoolean = false;
-											let wrongBoolean = false;
-											
-											for (let j=0; j<corrects.data.length; j++)
-											{
-												if (corrects.data[j].questionid === question.id)
-												{
-													correctBoolean = true;
-													break;	
-												}										
-											}
+											const subtopic = []
+											const correctsArray = []
+											const wrongsArray = []
+											subtopic.push(element.subtopic)
+											subtopic.push(allQuestions.data.length)
 
-											if (!correctBoolean)
+											allQuestions.data.forEach(question =>
 											{
-												for (let j=0; j<wrongs.data.length; j++)
+												let correctBoolean = false;
+												let wrongBoolean = false;
+												
+												for (let j=0; j<corrects.data.length; j++)
 												{
-													if (wrongs.data[j].questionid === question.id)
+													if (corrects.data[j].questionid === question.id)
 													{
-														wrongBoolean = true;
+														correctBoolean = true;
 														break;	
-													}								
+													}										
 												}
-											}
 
-											if (correctBoolean)
-											{
-												correctsArray.push(1)
-												wrongsArray.push(0)
-											}
+												if (!correctBoolean)
+												{
+													for (let j=0; j<wrongs.data.length; j++)
+													{
+														if (wrongs.data[j].questionid === question.id)
+														{
+															wrongBoolean = true;
+															break;	
+														}								
+													}
+												}
 
-											else if (wrongBoolean)
-											{
-												correctsArray.push(0)
-												wrongsArray.push(1)
-											}
+												if (correctBoolean)
+												{
+													correctsArray.push(1)
+													wrongsArray.push(0)
+												}
 
-											else
-											{
-												correctsArray.push(0)
-												wrongsArray.push(0)																						
-											}
-											//console.log(question.id)
+												else if (wrongBoolean)
+												{
+													correctsArray.push(0)
+													wrongsArray.push(1)
+												}
+
+												else
+												{
+													correctsArray.push(0)
+													wrongsArray.push(0)																						
+												}
+												//console.log(question.id)
+											})
+											subtopic.push(correctsArray)
+											subtopic.push(wrongsArray)
+
+											subtopics.push(subtopic)
 										})
-										subtopic.push(correctsArray)
-										subtopic.push(wrongsArray)
-
-										subtopics.push(subtopic)
 									})
-								})
 
-								result.data[i].subtopics = subtopics
-								topicsToFill.push(result.data[i])
-							})
-						}
+									result.data[i].subtopics = subtopics
+									topicsToFill.push(result.data[i])
+								})
+							}
+						})
 					})
 				})
-			})
 
-			setTimeout(function()
-			{
-				This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, allTopics: topicsToFill})
-			}, 3000)
+				setTimeout(function()
+				{
+					This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, allTopics: topicsToFill})
+				}, 3000)
+			}
 		})
 	}
 

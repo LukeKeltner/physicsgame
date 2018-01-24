@@ -24,12 +24,23 @@ class Hub extends Component
 	componentWillMount = () =>
 	{
 		const This = this;
-		API.getUser().then(function(user)
+		const token = sessionStorage.getItem('token');
+
+		API.getUser(token).then(function(user)
 		{
-			API.getAllTopics().then(function(result)
+			if (user.data.length === 0)
 			{
-				This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, allTopics: result.data})
-			})
+				alert("Please log back in")
+				window.location = "/"
+			}
+
+			else
+			{
+				API.getAllTopics().then(function(result)
+				{
+					This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, allTopics: result.data})
+				})
+			}
 		})
 	}
 
@@ -55,6 +66,7 @@ class Hub extends Component
 
 	getNewQuestion = () =>
 	{
+		const This = this;
 		const data = 
 		{
 			topic: this.state.topic,
@@ -65,6 +77,22 @@ class Hub extends Component
 		API.getNewQuestion(data).then(function(result)
 		{
 			console.log(result)
+
+			const data2 =
+			{
+				column: "currentgamble",
+				value: parseInt(This.state.gamble),
+				whereField: "id",
+				whereValue: This.state.id
+			}
+
+			console.log("DATA2")
+			console.log(data2)
+
+			API.updateUser(data2).then(function(result2)
+			{
+				console.log(result2)
+			})
 		})
 	}
 

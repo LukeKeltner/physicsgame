@@ -10,6 +10,14 @@ const user =
 		});
 	},
 
+	getUser: function(token, cb)
+	{
+		orm.findOne("users", "token", token, function(result)
+		{
+			cb(result)
+		})
+	},
+
 	findAllWhere: function(table, whereField, whereValue, cb)
 	{
 		orm.findAllWhere(table, whereField, whereValue, function(result)

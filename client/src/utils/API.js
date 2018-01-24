@@ -7,9 +7,14 @@ export default {
 		return axios.get(`/question`);
 	},
 
-	getUser: function()
+	getUser: function(token)
 	{
-		return axios.get(`/user`)
+		return axios.get(`/user/${token}`)
+	},
+
+	updateUser: function(data)
+	{
+		return axios.post(`/updateUser`, data)
 	},
 
 	getAllTopics: function()
