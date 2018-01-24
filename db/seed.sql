@@ -16,8 +16,14 @@ create table questions
 create table users
 (
     id int(50) not null auto_increment,
-    name varchar(255),
+    name varchar(255) not null,
+    email varchar(255) not null,
+    password varchar(255) not null,
+    token varchar(255),
+    leaderboard bit not null,
     coins int(50) default 100,
+    currentquestion int(50) default 0,
+    currentgamble int(50) default 0,
     primary key(id)
 );
 
@@ -31,7 +37,22 @@ create table correctlookup
     questionid INT(50) not null,
     foreign key (questionid)
             references questions(id)
-            on delete cascade
+            on delete cascade,
+    primary key(id)
+);
+
+create table wronglookup
+(
+    id int(50) not null auto_increment,
+    userid INT(50) not null,
+    FOREIGN KEY (userid)
+            REFERENCES users(id)
+            ON DELETE CASCADE,
+    questionid INT(50) not null,
+    foreign key (questionid)
+            references questions(id)
+            on delete cascade,
+    primary key(id)
 );
 
 insert into questions(topic, subtopic, question) values
@@ -87,7 +108,7 @@ insert into questions(topic, subtopic, question) values
 
 (
     "1D Kinematics",
-    "Distance and Displacement",
+    "General Relativity",
     '{
         "text":"This is the first question",
         "correct":["Correct 1", "Correct 2", "Correct 3"],
@@ -107,6 +128,16 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Momentum",
+    "Basics",
+    '{
+        "text":"This is another basic momnentum question",
+        "correct":["Correct 1", "Correct 2", "Correct 3"],
+        "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
+    }'
+),
+
+(
+    "Momentum",
     "Advanced",
     '{
         "text":"This is the first question",
@@ -115,11 +146,22 @@ insert into questions(topic, subtopic, question) values
     }'
 );
 
-insert into users(name) values
+insert into users(name, email, password, leaderboard) values
 (
-    "Luke"
+    "Luke",
+    "lkeltner87@gmail,com",
+    "poop",
+    1
 );
 
-select distinct subtopic from questions where topic = "1D Kinematics";
+insert into correctlookup(userid, questionid) values
+(1, 1),
+(1, 7),
+(1, 3);
 
+insert into wronglookup(userid, questionid) values
+(1, 2),
+(1, 6);
+
+select * from users;
 
