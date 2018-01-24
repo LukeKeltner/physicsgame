@@ -16,7 +16,11 @@ create table questions
 create table users
 (
     id int(50) not null auto_increment,
-    name varchar(255),
+    name varchar(255) not null,
+    email varchar(255) not null,
+    password varchar(255) not null,
+    token varchar(255),
+    leaderboard bit not null,
     coins int(50) default 100,
     currentquestion int(50) default 0,
     currentgamble int(50) default 0,
@@ -50,112 +54,3 @@ create table wronglookup
             on delete cascade,
     primary key(id)
 );
-
-insert into questions(topic, subtopic, question) values
-(
-    "1D Kinematics",
-    "Scalar and Vectors",
-    '{
-        "text":"This is the first question",
-        "correct":["Correct 1"],
-        "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
-    }'
-),
-
-(
-    "1D Kinematics",
-    "Scalar and Vectors",
-    '{
-        "text":"This is the second question",
-        "correct":["Correct 1", "Correct 2"],
-        "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
-    }'
-),
-
-(
-    "1D Kinematics",
-    "Scalar and Vectors",
-    '{
-        "text":"This is the first question",
-        "correct":["Correct 1"],
-        "wrong":["Wrong 1", "Wrong 2", "Wrong 3", "Wrong 4"]
-    }'
-),
-
-(
-    "1D Kinematics",
-    "Distance and Displacement",
-    '{
-        "text":"This is the first question",
-        "correct":["Correct 1", "Correct 2", "Correct 3"],
-        "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
-    }'
-),
-
-(
-    "1D Kinematics",
-    "Distance and Displacement",
-    '{
-        "text":"This is the first question",
-        "correct":["Correct 1", "Correct 2", "Correct 3"],
-        "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
-    }'
-),
-
-(
-    "1D Kinematics",
-    "General Relativity",
-    '{
-        "text":"This is the first question",
-        "correct":["Correct 1", "Correct 2", "Correct 3"],
-        "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
-    }'
-),
-
-(
-    "Momentum",
-    "Basics",
-    '{
-        "text":"This is the first question",
-        "correct":["Correct 1", "Correct 2", "Correct 3"],
-        "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
-    }'
-),
-
-(
-    "Momentum",
-    "Basics",
-    '{
-        "text":"This is another basic momnentum question",
-        "correct":["Correct 1", "Correct 2", "Correct 3"],
-        "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
-    }'
-),
-
-(
-    "Momentum",
-    "Advanced",
-    '{
-        "text":"This is the first question",
-        "correct":["Correct 1", "Correct 2", "Correct 3"],
-        "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
-    }'
-);
-
-insert into users(name) values
-(
-    "Luke"
-);
-
-insert into correctlookup(userid, questionid) values
-(1, 1),
-(1, 7),
-(1, 3);
-
-insert into wronglookup(userid, questionid) values
-(1, 2),
-(1, 6);
-
-select * from questions where topic="1D Kinematics" and subtopic="Scalar and Vectors" and questions.id not in (select questionid from correctlookup where userid=1) and questions.id not in (select questionid from wronglookup where userid=1);
-
-

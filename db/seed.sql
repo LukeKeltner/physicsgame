@@ -1,60 +1,3 @@
-DROP DATABASE IF EXISTS physicsgame;
-CREATE DATABASE physicsgame;
-USE physicsgame;
-
-create table questions
-(
-    id int(50) not null auto_increment,
-    topic varchar(255),
-    subtopic varchar(255),
-    question nvarchar(8000),
-    totalcorrect int (50) default 0,
-    totalwrong int(50) default 0,
-    primary key(id)
-);
-
-create table users
-(
-    id int(50) not null auto_increment,
-    name varchar(255) not null,
-    email varchar(255) not null,
-    password varchar(255) not null,
-    token varchar(255),
-    leaderboard bit not null,
-    coins int(50) default 100,
-    currentquestion int(50) default 0,
-    currentgamble int(50) default 0,
-    primary key(id)
-);
-
-create table correctlookup
-(
-    id int(50) not null auto_increment,
-    userid INT(50) not null,
-    FOREIGN KEY (userid)
-            REFERENCES users(id)
-            ON DELETE CASCADE,
-    questionid INT(50) not null,
-    foreign key (questionid)
-            references questions(id)
-            on delete cascade,
-    primary key(id)
-);
-
-create table wronglookup
-(
-    id int(50) not null auto_increment,
-    userid INT(50) not null,
-    FOREIGN KEY (userid)
-            REFERENCES users(id)
-            ON DELETE CASCADE,
-    questionid INT(50) not null,
-    foreign key (questionid)
-            references questions(id)
-            on delete cascade,
-    primary key(id)
-);
-
 insert into questions(topic, subtopic, question) values
 (
     "1D Kinematics",
@@ -80,7 +23,7 @@ insert into questions(topic, subtopic, question) values
     "1D Kinematics",
     "Scalar and Vectors",
     '{
-        "text":"This is the first question",
+        "text":"This is the third question",
         "correct":["Correct 1"],
         "wrong":["Wrong 1", "Wrong 2", "Wrong 3", "Wrong 4"]
     }'
@@ -90,7 +33,7 @@ insert into questions(topic, subtopic, question) values
     "1D Kinematics",
     "Distance and Displacement",
     '{
-        "text":"This is the first question",
+        "text":"This is the forth question",
         "correct":["Correct 1", "Correct 2", "Correct 3"],
         "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
     }'
@@ -100,7 +43,7 @@ insert into questions(topic, subtopic, question) values
     "1D Kinematics",
     "Distance and Displacement",
     '{
-        "text":"This is the first question",
+        "text":"This is the fifth question",
         "correct":["Correct 1", "Correct 2", "Correct 3"],
         "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
     }'
@@ -110,7 +53,7 @@ insert into questions(topic, subtopic, question) values
     "1D Kinematics",
     "General Relativity",
     '{
-        "text":"This is the first question",
+        "text":"This is the sixth question",
         "correct":["Correct 1", "Correct 2", "Correct 3"],
         "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
     }'
@@ -120,7 +63,7 @@ insert into questions(topic, subtopic, question) values
     "Momentum",
     "Basics",
     '{
-        "text":"This is the first question",
+        "text":"This is the seventh question",
         "correct":["Correct 1", "Correct 2", "Correct 3"],
         "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
     }'
@@ -130,7 +73,7 @@ insert into questions(topic, subtopic, question) values
     "Momentum",
     "Basics",
     '{
-        "text":"This is another basic momnentum question",
+        "text":"This is the eighth question",
         "correct":["Correct 1", "Correct 2", "Correct 3"],
         "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
     }'
@@ -140,28 +83,10 @@ insert into questions(topic, subtopic, question) values
     "Momentum",
     "Advanced",
     '{
-        "text":"This is the first question",
+        "text":"This is the ninth question",
         "correct":["Correct 1", "Correct 2", "Correct 3"],
         "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
     }'
 );
 
-insert into users(name, email, password, leaderboard) values
-(
-    "Luke",
-    "lkeltner87@gmail,com",
-    "poop",
-    1
-);
-
-insert into correctlookup(userid, questionid) values
-(1, 1),
-(1, 7),
-(1, 3);
-
-insert into wronglookup(userid, questionid) values
-(1, 2),
-(1, 6);
-
-select * from users;
 

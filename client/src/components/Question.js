@@ -46,6 +46,7 @@ class Question extends Component
 			{
 				API.getQuestion(user.data[0].currentquestion).then(function(result)
 				{
+					console.log(result.data[0])
 					const question = JSON.parse(result.data[0].question)
 					const answers = []
 					question.correct.forEach(answer => answers.push({text: answer, type: "correct", selected: false}))

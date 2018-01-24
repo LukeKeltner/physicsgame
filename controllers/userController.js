@@ -40,7 +40,6 @@ module.exports =
 		console.log(req.params.token)
 		usersModel.getUser(req.params.token, function(result)
 		{
-			console.log(result)
 			res.send(result)
 		})
 	},
