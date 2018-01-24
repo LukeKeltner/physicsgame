@@ -2,9 +2,9 @@ import axios from "axios";
 
 export default {
 
-	getQuestion: function()
+	getQuestion: function(id)
 	{
-		return axios.get(`/question`);
+		return axios.get(`/getQuestion/${id}`);
 	},
 
 	getUser: function(token)

@@ -10,6 +10,14 @@ const question =
 		});
 	},
 
+	findQuestion: function(id, cb)
+	{
+		orm.findOne("questions", "id", id, function(result)
+		{
+			cb(result)
+		})
+	},
+
 	findAllWhere: function(table, whereField, whereValue, cb)
 	{
 		orm.findAllWhere(table, whereField, whereValue, function(result)

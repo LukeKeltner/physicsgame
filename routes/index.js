@@ -9,6 +9,8 @@ router.route("/user/:token").get(userController.getUser)
 
 router.route(`/updateUser`).post(userController.updateUser)
 
+router.route(`/getQuestion/:id`).get(questionController.getQuestion)
+
 router.route("/findAllTopics").get(questionController.findDistinctTopics)
 
 router.route(`/findAllSubtopics/:topic`).get(questionController.findDistinctSubTopics)
@@ -23,14 +25,14 @@ router.route(`/register`).post(userController.registerNewUser)
 
 router.route(`/login/:email/:password`).get(userController.login)
 
-router.route("/question").get(function(req, res)
+/*router.route(`/getQuestion`).get(function(req, res)
 {
 	connection.query("SELECT * FROM questions", function(err, result)
 	{
 		if(err){throw err}
 		res.send(result)
 	})
-})
+})*/
 
 /*router.route("/user/:token").get(function(req, res)
 {

@@ -34,6 +34,12 @@ class Hub extends Component
 				window.location = "/"
 			}
 
+			else if (user.data[0].currentgamble !== 0)
+			{
+				alert("You haven't answered a question, go answer it!")
+				window.location = "/question"
+			}
+
 			else
 			{
 				API.getAllTopics().then(function(result)
@@ -86,12 +92,23 @@ class Hub extends Component
 				whereValue: This.state.id
 			}
 
-			console.log("DATA2")
 			console.log(data2)
 
 			API.updateUser(data2).then(function(result2)
 			{
-				console.log(result2)
+
+				const data3 =
+				{
+					column: "currentquestion",
+					value: result.data[0].id,
+					whereField: "id",
+					whereValue: This.state.id
+				}
+				
+				API.updateUser(data3).then(function(result3)
+				{
+					window.location="/question"
+				})
 			})
 		})
 	}

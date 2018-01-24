@@ -8,44 +8,78 @@ class Question extends Component
 {
 	state =
 	{
+		name: "",
+		id: 0,
+		coins: 0,
+		currentgamble: 0,
+		currentquestion: 0,
+		topic: "",
+		subtopic: "",
 		text: "",
 		answers:[],
 		correct: [],
 		wrong: [],
 		numberCorrect: 0,
 		result: ""
-
 	}
 
 	componentDidMount = () =>
 	{
 		const This = this;
-		API.getQuestion().then(function(result)
-		{
-			const question = JSON.parse(result.data[3].question)
-			const answers = []
-			question.correct.forEach(answer => answers.push({text: answer, type: "correct", selected: false}))
-			question.wrong.forEach(answer => answers.push({text: answer, type: "wrong", selected: false}))
-			const shuffledAnswers = This.shuffle(answers)
+		const token = sessionStorage.getItem('token');
 
-			This.setState(
+		API.getUser(token).then(function(user)
+		{
+			if (user.data.length === 0)
 			{
-				text:question.text,
-				correct:question.correct,
-				wrong:question.wrong,
-				answers: shuffledAnswers,
-				numberCorrect:question.correct.length
-			})
+				alert("Please log back in")
+				window.location = "/"
+			}
+
+			else if (user.data.currentquestion === 0)
+			{
+				alert("Please select a question")
+				window.location = "/hub"
+			}
+
+			else
+			{
+				API.getQuestion(user.data[0].currentquestion).then(function(result)
+				{
+					const question = JSON.parse(result.data[0].question)
+					const answers = []
+					question.correct.forEach(answer => answers.push({text: answer, type: "correct", selected: false}))
+					question.wrong.forEach(answer => answers.push({text: answer, type: "wrong", selected: false}))
+					const shuffledAnswers = This.shuffle(answers)
+
+					This.setState(
+					{
+						id: user.data[0].id,
+						name: user.data[0].name,
+						coins: user.data[0].coins,
+						currentgamble: user.data[0].currentgamble,
+						currentquestion: user.data[0].currentquestion,
+						topic:result.data[0].topic,
+						subtopic:result.data[0].subtopic,
+						text:question.text,
+						correct:question.correct,
+						wrong:question.wrong,
+						answers: shuffledAnswers,
+						numberCorrect:question.correct.length
+					})
+				})
+			}
 		})
 	}
 
 	shuffle = array =>
 	{
-			for (let i = array.length - 1; i > 0; i--)
-			{
-		        const j = Math.floor(Math.random() * (i + 1));
-		        [array[i], array[j]] = [array[j], array[i]];
-	    	}
+		for (let i = array.length - 1; i > 0; i--)
+		{
+		    const j = Math.floor(Math.random() * (i + 1));
+		    [array[i], array[j]] = [array[j], array[i]];
+	    }
+
 	    return array;
 	}
 
@@ -69,11 +103,9 @@ class Question extends Component
 	submit = event =>
 	{
 		let correct = true;
-		console.log(this.state.answers)
 		
 		for (let i=0; i<this.state.answers.length; i++)
 		{
-			console.log()
 			if ((this.state.answers[i].type === "correct" && !this.state.answers[i].selected) || (this.state.answers[i].type === "wrong" && this.state.answers[i].selected))
 			{
 				correct = false;
@@ -81,7 +113,7 @@ class Question extends Component
 			}
 		}
 
-		if(correct)
+		if (correct)
 		{
 			this.setState({result: "Correct!"})
 		}
@@ -97,10 +129,11 @@ class Question extends Component
 		return(
 
 			<div>
-				<Header />
+				<Header name={this.state.name} coins={this.state.coins}/>
 				<div className="container">
 					<div className="row">
 						<div className="col-md-8 questionContainer">
+							<div className="float-right">You're gambling {this.state.currentgamble} coins!</div>
 							<div className="questionText">
 							{this.state.result === "" 
 							? this.state.text
@@ -119,6 +152,9 @@ class Question extends Component
 
 					<div className="row">
 						<div className="col-md-8">
+							<div>
+								{this.state.topic}, {this.state.subtopic}
+							</div>
 						</div>
 						<div className="col-md-4">
 							<div className="row">

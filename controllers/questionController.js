@@ -61,5 +61,13 @@ module.exports =
 		{
 			res.send(result)
 		})
+	},
+
+	getQuestion: function(req, res)
+	{
+		questionModel.findQuestion(req.params.id, function(result)
+		{
+			res.send(result)
+		})
 	}
 }
