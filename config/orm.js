@@ -54,6 +54,24 @@ const orm =
 			if(err){throw err}
 			cb(result)
 		})
+	},
+
+	login: function(email, cb)
+	{
+		connection.query(`SELECT * FROM users WHERE email = ?`, [email], function(err, result)
+		{
+			if(err){throw err}
+			cb(result)
+		})
+	},
+
+	update: function(table, column, value, whereField, whereValue, cb)
+	{
+		connection.query(`UPDATE ${table} SET ${column} = ? WHERE ${whereField} = ?`, [value, whereValue], function(err, result)
+		{
+			if(err){throw err}
+			cb(result)
+		})
 	}
 }
 

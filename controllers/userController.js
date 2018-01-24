@@ -51,26 +51,67 @@ module.exports =
 		usersModel.findAll(function(allUsers)
 		{
 			console.log(allUsers)
+			let okay = true;
 
 			allUsers.forEach(user =>
 			{
+				console.log(user.email+" and "+email)
 				if (user.email === email)
 				{
-					res.send("email duplicate")
+					okay = false
 				}
 			})
 
-			const saltRounds = 10;
-			bcrypt.hash(password, saltRounds, function(err, hash)
+			if (okay)
 			{
-				console.log("hashed password = "+hash)
-			});
+				const saltRounds = 10;
+				bcrypt.hash(password, saltRounds, function(err, hash)
+				{
+					usersModel.registerNewUser(name, email, hash, token, leaderboard, function(result)
+					{
+						res.send(token)
+					})
+				});
+			}
+
+			else
+			{
+				res.send("duplicate email")
+			}
 		})
+	},
 
+	login: function(req, res)
+	{
+		const email = req.params.email.toLowerCase()
+		const password = req.params.password
 
-		usersModel.registerNewUser(name, email, password, token, leaderboard, function(result)
+		usersModel.login(email, function(result)
 		{
-			res.send("done")
+			if (result.length === 0)
+			{
+				res.send("no email")
+			}
+
+			else
+			{
+				bcrypt.compare(password, result[0].password, function(err, result2)
+				{
+					if (result2)
+					{
+						const token = createToken();
+						usersModel.updateUser("token", token, "id", result[0].id, function(result3)
+						{
+							res.send(token)
+						})
+					}
+
+					else
+					{
+						res.send("wrong password")
+					}
+				})
+			}
 		})
 	}
 }

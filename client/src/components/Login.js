@@ -16,7 +16,9 @@ class Login extends Component
 		leaderboard: "",
 		badName: false,
 		badRegisterEmail: false,
-		badLoginEmail: false
+		badLoginEmail: false,
+		loginError: "",
+		registerError: ""
 	}
 
 	handleChange = event =>
@@ -24,7 +26,7 @@ class Login extends Component
 
 		if ([event.target.id][0] === "registerName")
 		{
-			const badNames = ["fuck", "ass", "shit", "pussy", "vagina", "penis", "head", "cum", "jizz", "bitch", "nipple", "cunt", "sick", "dick", "cock", "balls", "slut", "whore", "suck", "anal", "blow", "tit", "diarrhea", "boob", "stain", "moist", "hairy", "fag", "gay", "lesbian", "trans", "homo", "nigg", "dyke", "dike", "jew", "kike", "diddle", "sac", "sex", "hump", "butt", "munch", "dumb", "stupid"]
+			const badNames = ["fuck", "ass", "shit", "pussy", "vagina", "penis", "head", "cum", "jizz", "bitch", "nipple", "cunt", "sick", "dick", "cock", "ball", "slut", "whore", "suck", "anal", "blow", "tit", "diarrhea", "boob", "stain", "moist", "hairy", "fag", "gay", "lesbian", "trans", "homo", "nigg", "dyke", "dike", "jew", "kike", "diddle", "sac", "sex", "hump", "butt", "munch", "dumb", "stupid", "god", "damn", "dammit"]
 
 			this.setState({badName: false})
 			badNames.forEach(word =>
@@ -60,6 +62,7 @@ class Login extends Component
 
 	register = event =>
 	{
+		const This = this;
 		event.preventDefault()
 		if (!this.state.badName && !this.state.badRegisterEmail && this.state.registerPassword1 === this.state.registerPassword2 && this.state.registerName !== "" && this.state.registerEmail !== "" && this.state.registerPassword1 !== "")
 		{
@@ -74,9 +77,51 @@ class Login extends Component
 
 			API.register(newUser).then(function(result)
 			{
-				console.log(result)
+				if (result.data === "duplicate email")
+				{
+					This.setState({registerError: "This email is already in use"})
+				}
+
+				else
+				{
+					sessionStorage.setItem('key', result.data);
+				}
 			})
 		}
+	}
+
+	login = event =>
+	{
+		const This = this;
+		event.preventDefault()
+
+		const data = 
+		{
+			email: this.state.loginEmail,
+			password: this.state.loginPassword
+		}
+
+		console.log(data)
+
+		API.login(data).then(function(result)
+		{
+			console.log(result)
+
+			if (result.data === "no email")
+			{
+				This.setState({loginError: "We don't have this email in our system"})
+			}
+
+			else if (result.data === "wrong password")
+			{
+				This.setState({loginError: "Wrong password"})
+			}
+
+			else
+			{
+				sessionStorage.setItem('key', result.data);
+			}
+		})
 	}
 
 	render()
@@ -114,7 +159,13 @@ class Login extends Component
 								<label htmlFor="loginPassword">Password</label>
 								<input type="password" className="form-control" id="loginPassword" placeholder="Password" onChange={this.handleChange}></input>
 							</div>
-							<button type="submit" className="btn btn-primary">Welcome back!</button>
+							{this.state.loginError === ""
+							?	<div></div>
+							:	<div className="alert alert-danger" role="alert">
+  									<strong>Oops!</strong> {this.state.loginError}
+								</div>
+							}
+							<button type="submit" className="btn btn-primary" onClick={this.login}>Welcome back!</button>
 						</form>
 					</div>
 					<div className="col-md-6">
@@ -172,6 +223,12 @@ class Login extends Component
 									<option>No</option>
 								</select>
 							<br></br>
+							{this.state.registerError === ""
+							?	<div></div>
+							:	<div className="alert alert-danger" role="alert">
+  									<strong>Oops!</strong> {this.state.registerError}
+								</div>
+							}
 							<button type="submit" className="btn btn-primary" onClick={this.register}>Submit</button>
 						</form>
 					</div>

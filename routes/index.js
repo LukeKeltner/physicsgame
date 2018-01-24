@@ -19,6 +19,8 @@ router.route(`/findAnsweredQuestions/:table/:id`).get(userController.findAnswere
 
 router.route(`/register`).post(userController.registerNewUser)
 
+router.route(`/login/:email/:password`).get(userController.login)
+
 router.route("/question").get(function(req, res)
 {
 	connection.query("SELECT * FROM questions", function(err, result)

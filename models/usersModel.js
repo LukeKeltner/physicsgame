@@ -24,6 +24,22 @@ const user =
 		{
 			cb(result)
 		})
+	},
+
+	login: function(email, cb)
+	{
+		orm.login(email, function(result)
+		{
+			cb(result)
+		})
+	},
+
+	updateUser: function(column, value, whereField, whereValue, cb)
+	{
+		orm.update("users", column, value, whereField, whereValue, function(result)
+		{
+			cb(result)
+		})
 	}
 }
 
