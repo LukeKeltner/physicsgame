@@ -20,7 +20,8 @@ class Question extends Component
 		correct: [],
 		wrong: [],
 		numberCorrect: 0,
-		result: ""
+		result: "",
+		img: ""
 	}
 
 	componentDidMount = () =>
@@ -53,6 +54,11 @@ class Question extends Component
 					question.wrong.forEach(answer => answers.push({text: answer, type: "wrong", selected: false}))
 					const shuffledAnswers = This.shuffle(answers)
 
+					if (question.img)
+					{
+						This.setState({img: require("../assets/images/"+question.img)})
+					}
+
 					This.setState(
 					{
 						id: user.data[0].id,
@@ -66,7 +72,7 @@ class Question extends Component
 						correct:question.correct,
 						wrong:question.wrong,
 						answers: shuffledAnswers,
-						numberCorrect:question.correct.length
+						numberCorrect:question.correct.length,
 					})
 				})
 			}
@@ -209,19 +215,48 @@ class Question extends Component
 	render()
 	{
 		return(
-
 			<div>
 				<div className="container">
 					<div className="row">
-						<div className="col-md-8 questionContainer">
-							<div className="float-right">You're gambling {this.state.currentgamble} coins!</div>
-							<div className="questionText">
 							{this.state.result === "" 
-							? this.state.text
-							: this.state.result
+
+							? 
+
+								this.state.img !== ""
+
+								?
+								<div className="col-md-8 questionContainer-image">
+									<div className="float-right">You're gambling {this.state.currentgamble} coins!</div>
+									<div className="questionText-image">
+										<div>
+											{this.state.text}
+											<br></br>
+											<img className="question-pic" src={this.state.img} />
+										</div>
+									</div>
+								</div>
+
+								:
+								<div className="col-md-8 questionContainer">
+									<div className="float-right">You're gambling {this.state.currentgamble} coins!</div>
+									<div className="questionText">
+										<div>
+											{this.state.text}
+										</div>
+									</div>
+								</div>
+
+							: 
+								<div className="col-md-8 questionContainer">
+									<div className="float-right">You're gambling {this.state.currentgamble} coins!</div>
+									<div className="questionText">
+										<div>
+											{this.state.result}
+										</div>
+									</div>
+								</div>
 							}
-							</div>
-						</div>
+
 						<div className="col-md-4">
 							{this.state.answers.map((answer, i) =>
 								{

@@ -8,7 +8,7 @@ class Report extends Component
 	render()
 	{
 		return(
-			<div>
+			<div className="complete-topic">
 				<div className="row">
 					<div className="col-md-12 topic">
 						{this.props.topic}

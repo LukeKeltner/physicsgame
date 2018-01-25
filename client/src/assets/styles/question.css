@@ -4,13 +4,27 @@
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	position: relative;
 	background-color: white;
+	padding:20px;
 }
 
 .questionText
 {
-	position: absolute;
+ 	position: absolute;
 	top:50%;
-	transform: translateY(-50%);
+	transform: translateY(-50%); 
+	font-size: 40px;
+}
+
+.questionContainer-image
+{
+	border: 1px solid #d6d6d6;
+	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	background-color: white;
+	padding:20px;
+}
+
+.questionText-image
+{
 	font-size: 40px;
 }
 
@@ -22,6 +36,7 @@
 	margin-top:10px;
 	margin-bottom: 10px;
 	background-color: white;
+	cursor: pointer;
 }
 
 .answerContainer:active { 
@@ -52,6 +67,12 @@
 {
 	margin-top:20px;
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.question-pic
+{
+	width:100%;
+	overflow:hidden;
 }
 
 

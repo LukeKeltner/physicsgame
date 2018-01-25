@@ -13,6 +13,17 @@ insert into questions(topic, subtopic, question) values
     "1D Kinematics",
     "Scalar and Vectors",
     '{
+        "text":"GARFIELD",
+        "correct":["Correct 1"],
+        "wrong":["Wrong 1", "Wrong 2", "Wrong 3"],
+        "img":"garfield.png"
+    }'
+),
+
+(
+    "1D Kinematics",
+    "Scalar and Vectors",
+    '{
         "text":"This is the second question",
         "correct":["Correct 1", "Correct 2"],
         "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
