@@ -36,3 +36,8 @@
 	font-size: 30px;
 	border-bottom: 1px solid #d6d6d6;
 }
+
+.hand-selected
+{
+	color:#00db06 !important;
+}

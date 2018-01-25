@@ -10,6 +10,7 @@ class Status extends Component
 	state =
 	{
 		allTopics: [],
+		totalScore: [],
 		name:"",
 		coins: 0,
 		id: 0
@@ -122,17 +123,32 @@ class Status extends Component
 											subtopic.push(correctsArray)
 											subtopic.push(wrongsArray)
 											subtopics.push(subtopic)
-											console.log("Adding 1 to finished 2")
 											finished2.push(i)
-
-											console.log("FIRST FOR LOOP")
-											console.log(finished1.length+" and "+result.data.length)
-											console.log("SECOND FOR LOOP")
-											console.log(finished2.length+" and "+totalSubtopics)
 
 
 											if (finished1.length === result.data.length && finished2.length === totalSubtopics)
 											{
+
+												//Finding total percentage in each topic
+												topicsToFill.forEach(element =>
+												{
+													let rights = 0;
+													let total = 0;
+													element.subtopics.forEach(subtopic =>
+													{
+														subtopic[2].forEach(question =>
+														{
+															rights = rights + question;
+															total = total + 1;
+														})
+													})
+
+													const totalPercent = (100*rights/total).toFixed(0)
+													element.totalPercent = totalPercent;
+												})
+
+												console.log(topicsToFill)
+
 												This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, allTopics: topicsToFill})		
 											}
 										})
@@ -140,7 +156,6 @@ class Status extends Component
 
 									result.data[i].subtopics = subtopics
 									topicsToFill.push(result.data[i])
-									console.log("Adding 1 to finished 1")
 									finished1.push(i)
 								})
 							}
@@ -158,11 +173,10 @@ class Status extends Component
 				<div className="container">
 					{this.state.allTopics.map((topic, i) =>
 						{
-							return <Report key={i} userid={this.state.id} topic={topic.topic} subtopics={topic.subtopics}/>
+							return <Report key={i} userid={this.state.id} topic={topic.topic} subtopics={topic.subtopics} totalPercent={topic.totalPercent}/>
 						})}
 				</div>
 			</div>
-
 		)
 	}
 }

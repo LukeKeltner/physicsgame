@@ -128,11 +128,16 @@ class Hub extends Component
 		return(
 			<div>
 				<div className="container">
+
 					<div className="row">
 						<div className="col-md-4">
 							<div className="topic-container">
 								<div className="topic-header">
 									Topics
+									{this.state.topic === ""
+										? <i class="fas fa-check fa-1x float-right"></i>
+										: <i class="fas fa-check fa-1x hand-selected float-right"></i>
+									}
 								</div>
 								{this.state.allTopics.map((topic, i) =>
 									{
@@ -148,6 +153,10 @@ class Hub extends Component
 									? "..."
 									: " "+this.state.topic
 									}
+									{this.state.subtopic === ""
+										? <i class="fas fa-check fa-1x float-right"></i>
+										: <i class="fas fa-check fa-1x hand-selected float-right"></i>
+									}
 								</div>
 								{this.state.allSubtopics.map((topic, i) =>
 									{
@@ -156,33 +165,41 @@ class Hub extends Component
 							</div>
 						</div>
 						<div className="col-md-4">
-							<div className="gamble-container">
-								<div className="topic-header">
-									Gamble
-								</div>
-								<div className="row">
-								{this.state.gambleAmounts.map((amount, i) =>
-									{
-										return <GambleAmount key={i} amount={amount} gambleSelected={this.gambleSelected}/>
-									})}
+							<div className="row">
+								<div className="col-md-12">
+									<div className="gamble-container">
+										<div className="topic-header">
+											Gamble
+											{this.state.gamble === 0
+												? <i class="fas fa-check fa-1x float-right"></i>
+												: <i class="fas fa-check fa-1x hand-selected float-right"></i>
+											}
+										</div>
+										<div className="row">
+										{this.state.gambleAmounts.map((amount, i) =>
+											{
+												return <GambleAmount key={i} amount={amount} gambleSelected={this.gambleSelected}/>
+											})}
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-					<div className="row">
-						<div className="col-md-12">
-							<div className="choice-container">
-								<div className="topic-header">
-									Your Choices
+							<div className="row">
+								<div className="col-md-12">
+									<div className="choice-container">
+										<div className="topic-header">
+											Your Choices
+										</div>
+										Topic: {this.state.topic}
+										<br></br>
+										Subtopic: {this.state.subtopic}
+										<br></br>
+										Gamble: {this.state.gamble}
+										{this.state.topic !== "" && this.state.subtopic !== "" && this.state.gamble !== 0
+										?<button type="button" className="btn btn-primary btn-lg btn-block" onClick={this.getNewQuestion}>Go for it!</button>
+										:" "}
+									</div>
 								</div>
-								Topic: {this.state.topic}
-								<br></br>
-								Subtopic: {this.state.subtopic}
-								<br></br>
-								Gamble: {this.state.gamble}
-								{this.state.topic !== "" && this.state.subtopic !== "" && this.state.gamble !== 0
-								?<button type="button" className="btn btn-primary btn-lg btn-block" onClick={this.getNewQuestion}>Go for it!</button>
-								:" "}
 							</div>
 						</div>
 					</div>

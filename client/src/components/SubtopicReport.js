@@ -99,7 +99,9 @@ class Report extends Component
 						</div>
 					</div>
 					<div className="col-md-1">
-						<div className="reset float-right" userid={this.props.userid} topic={this.props.topic} subtopic={this.props.name} onClick={this.reset}>
+						<div className="text-center float-right">
+							<i className="fas fa-trash-alt fa-2x reset" userid={this.props.userid} topic={this.props.topic} subtopic={this.props.name} onClick={this.reset}></i>
+							<br></br>
 							Reset
 						</div>
 					</div>

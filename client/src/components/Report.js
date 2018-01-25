@@ -13,7 +13,7 @@ class Report extends Component
 					<div className="col-md-12 topic">
 						{this.props.topic}
 						<div className="float-right">
-							85%
+							{this.props.totalPercent}%
 						</div>
 					</div>
 				</div>
