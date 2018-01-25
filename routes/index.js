@@ -27,23 +27,8 @@ router.route(`/login/:email/:password`).get(userController.login)
 
 router.route(`/insertLookup`).post(questionController.insertLookup)
 
-/*router.route(`/getQuestion`).get(function(req, res)
-{
-	connection.query("SELECT * FROM questions", function(err, result)
-	{
-		if(err){throw err}
-		res.send(result)
-	})
-})*/
+router.route(`/resetSubtopic/`).post(questionController.deleteAnswers)
 
-/*router.route("/user/:token").get(function(req, res)
-{
-	connection.query("SELECT * FROM users", function(err, result)
-	{
-		if(err){throw err}
-		res.send(result)
-	})	
-})*/
 
 router.use(function(req, res) 
 {

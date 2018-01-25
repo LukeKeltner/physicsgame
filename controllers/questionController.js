@@ -77,5 +77,13 @@ module.exports =
 		{
 			res.send(result)
 		})
+	},
+
+	deleteAnswers: function(req, res)
+	{
+		questionModel.deleteAnswers(req.body.table, req.body.userid, req.body.topic, req.body.subtopic, function(result)
+		{
+			res.send(result)
+		})
 	}
 }

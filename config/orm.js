@@ -90,6 +90,15 @@ const orm =
 			if(err){throw err}
 			cb(result)
 		})
+	},
+
+	deleteAnswers: function(table, userid, topic, subtopic, cb)
+	{
+		connection.query(`DELETE FROM ${table} WHERE userid = ? and questionid in (select id from questions where topic = ? and subtopic = ?)`, [userid, topic, subtopic], function(err, result)
+		{
+			if(err){throw err}
+			cb(result)
+		})
 	}
 }
 

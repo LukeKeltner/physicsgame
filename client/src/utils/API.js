@@ -55,5 +55,10 @@ export default {
 	insertLookup: function(data)
 	{
 		return axios.post(`/insertLookup`, data)
+	},
+
+	resetSubtopic: function(data)
+	{
+		return axios.post(`/resetSubtopic`, data)
 	}
 };

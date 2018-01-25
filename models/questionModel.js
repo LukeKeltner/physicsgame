@@ -56,6 +56,14 @@ const question =
 		{
 			cb(result)
 		})
+	},
+
+	deleteAnswers: function(table, userid, topic, subtopic, cb)
+	{
+		orm.deleteAnswers(table, userid, topic, subtopic, function(result)
+		{
+			cb(result)
+		})
 	}
 }
 

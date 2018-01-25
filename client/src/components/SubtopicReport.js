@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../assets/styles/report.css'
 import QuestionIcon from './QuestionIcon';
+import API from "../utils/API";
 
 
 
@@ -47,9 +48,33 @@ class Report extends Component
 	reset = event =>
 	{
 		console.log("----------------------")
-		console.log(event.target.getAttribute("userid"))
-		console.log(event.target.getAttribute("topic"))
-		console.log(event.target.getAttribute("subtopic"))
+		const userid = event.target.getAttribute("userid")
+		const topic = event.target.getAttribute("topic")
+		const subtopic = event.target.getAttribute("subtopic")
+
+		const data = 
+		{
+			table: "correctlookup",
+			userid: userid,
+			topic: topic, 
+			subtopic: subtopic
+		}
+
+		API.resetSubtopic(data).then(result =>
+		{
+			const data2 = 
+			{
+				table: "wronglookup",
+				userid: userid,
+				topic: topic, 
+				subtopic: subtopic
+			}
+
+			API.resetSubtopic(data2).then(result =>
+			{
+				window.location.reload()
+			})
+		})
 	}
 
 	render()

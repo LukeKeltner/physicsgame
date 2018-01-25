@@ -129,7 +129,7 @@ class Hub extends Component
 			<div>
 				<div className="container">
 					<div className="row">
-						<div className="col-md-6">
+						<div className="col-md-4">
 							<div className="topic-container">
 								<div className="topic-header">
 									Topics
@@ -140,7 +140,7 @@ class Hub extends Component
 									})}
 							</div>
 						</div>
-						<div className="col-md-6">
+						<div className="col-md-4">
 							<div className="topic-container">
 								<div className="topic-header">
 									Subtopics in  
@@ -155,9 +155,7 @@ class Hub extends Component
 									})}
 							</div>
 						</div>
-					</div>
-					<div className="row">
-						<div className="col-md-6">
+						<div className="col-md-4">
 							<div className="gamble-container">
 								<div className="topic-header">
 									Gamble
@@ -170,7 +168,9 @@ class Hub extends Component
 								</div>
 							</div>
 						</div>
-						<div className="col-md-6">
+					</div>
+					<div className="row">
+						<div className="col-md-12">
 							<div className="choice-container">
 								<div className="topic-header">
 									Your Choices
