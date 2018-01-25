@@ -37,7 +37,6 @@ module.exports =
 
 	getUser: function(req, res)
 	{
-		console.log(req.params.token)
 		usersModel.getUser(req.params.token, function(result)
 		{
 			res.send(result)

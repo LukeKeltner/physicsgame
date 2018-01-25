@@ -22,7 +22,8 @@ class Header extends Component
 
 	logout = () =>
 	{
-
+		sessionStorage.removeItem('token');
+		window.location = "/"
 	}
 
 	render()
@@ -32,21 +33,29 @@ class Header extends Component
 				<div className="row">
 					<div className="col-md-4">
 						<div className="logo">
-							Welcome {this.props.name}
+							<i class="fas fa-user"></i>Hi {this.props.name}!
 						</div>
 					</div>
 					<div className="col-md-4 coins text-center">
 						{this.props.coins}
 					</div>
 					<div className="col-md-4">
-						<div className="header-button text-center float-right" onClick={this.logout}>
-							Log out
-						</div>
-						<div className="header-button text-center float-right" onClick={this.toStatus}>
-							Status
-						</div>
-						<div className="header-button text-center float-right" onClick={this.toHub}>
-							New Question
+						<div className="row">
+							<div className="col-md-4 text-center">
+								<i class="fas fa-question-circle fa-3x header-button" onClick={this.toHub}></i>
+								<br></br>
+								New Question
+							</div>
+							<div className="col-md-4 text-center">
+								<i class="fas fa-list-alt fa-3x header-button" onClick={this.toStatus}></i>
+								<br></br>
+								Status
+							</div>
+							<div className="col-md-4 text-center">
+								<i class="fas fa-arrow-alt-circle-right fa-3x header-button" onClick={this.logout}></i>
+								<br></br>
+								Logout
+							</div>
 						</div>
 					</div>
 				</div>

@@ -155,7 +155,6 @@ class Status extends Component
 	{
 		return(
 			<div>
-				<Header name={this.state.name} coins={this.state.coins}/>
 				<div className="container">
 					{this.state.allTopics.map((topic, i) =>
 						{
