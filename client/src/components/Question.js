@@ -125,90 +125,109 @@ class Question extends Component
 		if (correct)
 		{
 			this.state.correctSound.play()
-			const data = 
+
+			const updateQuestionData = 
 			{
-				table: "correctlookup",
-				column1: "userid",
-				column2: "questionid",
-				value1: parseInt(this.state.id),
-				value2: parseInt(this.state.currentquestion)
+				expression: 'totalcorrect = totalcorrect + 1',
+				id: this.state.currentquestion
 			}
 
-			API.insertLookup(data).then(result =>
+			API.updateQuestion(updateQuestionData).then(result =>
 			{
-				this.setState({result: `Correct!  +${this.state.currentgamble}`})	
-
-				const data2 =
+				const data = 
 				{
-					column: "currentquestion",
-					value: 0,
-					whereField: "id",
-					whereValue: This.state.id
+					table: "correctlookup",
+					column1: "userid",
+					column2: "questionid",
+					value1: parseInt(this.state.id),
+					value2: parseInt(this.state.currentquestion)
 				}
 
-				API.updateUser(data2).then(result2 =>
+				API.insertLookup(data).then(result =>
 				{
-					const newCoins = this.state.coins + this.state.currentgamble
-					const data3 =
+					this.setState({result: `Correct!  +${this.state.currentgamble}`})	
+
+					const data2 =
 					{
-						column: "coins",
-						value: newCoins,
+						column: "currentquestion",
+						value: 0,
 						whereField: "id",
 						whereValue: This.state.id
 					}
 
-					API.updateUser(data3).then(result3 =>
+					API.updateUser(data2).then(result2 =>
 					{
-						setTimeout(() =>
+						const newCoins = this.state.coins + this.state.currentgamble
+						const data3 =
 						{
-							window.location = "/hub"
-						}, 1000)
-					})					
+							column: "coins",
+							value: newCoins,
+							whereField: "id",
+							whereValue: This.state.id
+						}
+
+						API.updateUser(data3).then(result3 =>
+						{
+							setTimeout(() =>
+							{
+								window.location = "/hub"
+							}, 1000)
+						})					
+					})
 				})
 			})
 		}
 
 		else
 		{
-			const data = 
+			const updateQuestionData = 
 			{
-				table: "wronglookup",
-				column1: "userid",
-				column2: "questionid",
-				value1: parseInt(this.state.id),
-				value2: parseInt(this.state.currentquestion)
+				expression: 'totalwrong = totalwrong + 1',
+				id: this.state.currentquestion
 			}
 
-			API.insertLookup(data).then(result =>
+			API.updateQuestion(updateQuestionData).then(result =>
 			{
-				this.setState({result: `Incorrect!  -${this.state.currentgamble}`})	
-
-				const data2 =
+				const data = 
 				{
-					column: "currentquestion",
-					value: 0,
-					whereField: "id",
-					whereValue: This.state.id
+					table: "wronglookup",
+					column1: "userid",
+					column2: "questionid",
+					value1: parseInt(this.state.id),
+					value2: parseInt(this.state.currentquestion)
 				}
 
-				API.updateUser(data2).then(result2 =>
+				API.insertLookup(data).then(result =>
 				{
-					const newCoins = this.state.coins - this.state.currentgamble
-					const data3 =
+					this.setState({result: `Incorrect!  -${this.state.currentgamble}`})	
+
+					const data2 =
 					{
-						column: "coins",
-						value: newCoins,
+						column: "currentquestion",
+						value: 0,
 						whereField: "id",
 						whereValue: This.state.id
 					}
 
-					API.updateUser(data3).then(result3 =>
+					API.updateUser(data2).then(result2 =>
 					{
-						setTimeout(() =>
+						const newCoins = this.state.coins - this.state.currentgamble
+						const data3 =
 						{
-							window.location = "/hub"
-						}, 1000)
-					})					
+							column: "coins",
+							value: newCoins,
+							whereField: "id",
+							whereValue: This.state.id
+						}
+
+						API.updateUser(data3).then(result3 =>
+						{
+							setTimeout(() =>
+							{
+								window.location = "/hub"
+							}, 1000)
+						})					
+					})
 				})
 			})
 		}
@@ -223,14 +242,20 @@ class Question extends Component
 							{this.state.result === "" 
 
 							? 
-
 								this.state.img !== ""
 
 								?
 								<div className="col-md-8 questionContainer-image">
-									<div className="float-right">You're gambling {this.state.currentgamble} coins!</div>
-									<div className="questionText-image">
-										<div>
+									<div className="row">
+										<div classname="col-md-6 text-center">
+											You're gambling {this.state.currentgamble} coins!
+										</div>
+										<div classname="col-md-6 text-center">
+											You're gambling {this.state.currentgamble} coins!
+										</div>
+									</div>
+									<div className="row questionText-image">
+										<div className="col-md-12">
 											{this.state.text}
 											<br></br>
 											<img className="question-pic" src={this.state.img} />
@@ -240,19 +265,32 @@ class Question extends Component
 
 								:
 								<div className="col-md-8 questionContainer">
-									<div className="float-right">You're gambling {this.state.currentgamble} coins!</div>
-									<div className="questionText">
-										<div>
+									<div className="row">
+										<div classname="col-md-6 text-center">
+											You're gambling {this.state.currentgamble} coins!
+										</div>
+										<div classname="col-md-6 text-center">
+											You're gambling {this.state.currentgamble} coins!
+										</div>
+									</div>
+									<div className="row questionText">
+										<div className="col-md-12">
 											{this.state.text}
 										</div>
 									</div>
 								</div>
-
 							: 
 								<div className="col-md-8 questionContainer">
-									<div className="float-right">You're gambling {this.state.currentgamble} coins!</div>
-									<div className="questionText">
-										<div>
+									<div className="row">
+										<div classname="col-md-6 text-center">
+											You're gambling {this.state.currentgamble} coins!
+										</div>
+										<div classname="col-md-6 text-center">
+											You're gambling {this.state.currentgamble} coins!
+										</div>
+									</div>
+									<div className="row questionText">
+										<div className="col-md-12">
 											{this.state.result}
 										</div>
 									</div>

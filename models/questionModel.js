@@ -64,6 +64,14 @@ const question =
 		{
 			cb(result)
 		})
+	},
+
+	updateQuestion: function(expression, id, cb)
+	{
+		orm.updateQuestion("questions", expression, "id", id, function(result)
+		{
+			cb(result)
+		})
 	}
 }
 

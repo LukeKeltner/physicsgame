@@ -85,5 +85,13 @@ module.exports =
 		{
 			res.send(result)
 		})
+	},
+
+	updateQuestion: function(req, res)
+	{
+		questionModel.updateQuestion(req.body.expression, req.body.id, function(result)
+		{
+			res.end()
+		})
 	}
 }

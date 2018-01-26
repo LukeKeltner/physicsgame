@@ -31,6 +31,8 @@ router.route(`/resetSubtopic/`).post(questionController.deleteAnswers)
 
 router.route(`/getLeaderboard`).get(userController.getLeaderboard)
 
+router.route(`/updateQuestion`).post(questionController.updateQuestion)
+
 
 router.use(function(req, res) 
 {

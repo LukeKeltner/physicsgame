@@ -13,10 +13,10 @@ class Report extends Component
 		return(
 			<span>
 			{this.props.correct 
-				? <i className="fas fa-check-circle fa-2x correct"></i>
+				? <i className="fas fa-check-circle correct"></i>
 				: this.props.wrong
-				? <i className="fas fa-times-circle fa-2x wrong"></i>
-				: <i className="fas fa-circle fa-2x"></i>
+				? <i className="fas fa-times-circle wrong"></i>
+				: <i className="fas fa-circle"></i>
 			}
 			</span>
 		)

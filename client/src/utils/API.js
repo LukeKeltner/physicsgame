@@ -65,5 +65,10 @@ export default {
 	getLeaderboard: function()
 	{
 		return axios.get(`/getLeaderboard`)
+	},
+
+	updateQuestion: function(data)
+	{
+		return axios.post(`updateQuestion`, data)
 	}
 };
