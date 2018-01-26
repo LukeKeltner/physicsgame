@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../assets/styles/header.css'
-//import coin from '../assets/images/coin.png'
+import coin from '../assets/images/coin.png'
 
 
 class Header extends Component 
@@ -21,6 +21,11 @@ class Header extends Component
 		window.location="/hub"
 	}
 
+	toLeaderboard = () =>
+	{
+		window.location="/leaderboard"
+	}
+
 	logout = () =>
 	{
 		sessionStorage.removeItem('token');
@@ -35,25 +40,30 @@ class Header extends Component
 				<div className="row">
 					<div className="col-md-4">
 						<div className="logo">
-							<i className="fas fa-user"></i>Hi {this.props.name}!
+							<i className="fas fa-user avatar"></i>Hi {this.props.name}!
 						</div>
 					</div>
 					<div className="col-md-4 coins text-center">
-						{this.props.coins}
+						<img className="coin" alt="coins" src={coin} />{this.props.coins.toLocaleString()}
 					</div>
 					<div className="col-md-4">
 						<div className="row">
-							<div className="col-md-4 text-center">
+							<div className="col-md-3 text-center">
 								<i className="fas fa-question-circle fa-3x header-button" onClick={this.toHub}></i>
 								<br></br>
-								New Question
+								Get coins!
 							</div>
-							<div className="col-md-4 text-center">
+							<div className="col-md-3 text-center">
 								<i className="fas fa-list-alt fa-3x header-button" onClick={this.toStatus}></i>
 								<br></br>
 								Status
 							</div>
-							<div className="col-md-4 text-center">
+							<div className="col-md-3 text-center">
+								<i className="fas fa-trophy fa-3x header-button" onClick={this.toLeaderboard}></i>
+								<br></br>
+								Leaderboard
+							</div>
+							<div className="col-md-3 text-center">
 								<i className="fas fa-arrow-alt-circle-right fa-3x header-button" onClick={this.logout}></i>
 								<br></br>
 								Logout

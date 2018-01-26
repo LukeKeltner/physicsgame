@@ -8,6 +8,7 @@ import Login from './components/Login'
 import Hub from './components/Hub'
 import Question from './components/Question'
 import Status from './components/Status'
+import Leaderboard from './components/Leaderboard'
 import NoMatch from './components/NoMatch'
 
 class App extends Component 
@@ -56,6 +57,7 @@ class App extends Component
 			            <Route exact path="/hub" component={Hub} />
 			            <Route exact path="/question" component={Question} />
 			            <Route exact path="/status" component={Status} />
+			            <Route exact path="/leaderboard" component={Leaderboard} />
 			            <Route component={NoMatch} />
 			        </Switch>
 			    </Router>

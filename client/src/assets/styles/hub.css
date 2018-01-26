@@ -18,6 +18,10 @@
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	font-size: 20px;
 	cursor:default;
+	background-color:  #2a3132;
+	color:white;
+	border:2px solid #171b1c;
+	box-shadow: 0 10px 4px 0 rgba(0, 0, 0, 0.5), 0 6px 30px 0 rgba(0, 0, 0, 0.5);
 }
 
 .gamble-container
@@ -29,6 +33,10 @@
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	font-size: 20px;
 	cursor:default;
+	background-color:  #2a3132;
+	color:white;
+	border:2px solid #171b1c;
+	box-shadow: 0 10px 4px 0 rgba(0, 0, 0, 0.5), 0 6px 30px 0 rgba(0, 0, 0, 0.5);
 }
 
 .topic-header

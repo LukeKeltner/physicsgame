@@ -48,6 +48,14 @@ const user =
 		{
 			cb(result)
 		})
+	},
+
+	getLeaderboard: function(cb)
+	{
+		orm.getLeaderboard(function(result)
+		{
+			cb(result)
+		})
 	}
 }
 

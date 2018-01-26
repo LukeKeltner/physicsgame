@@ -60,5 +60,10 @@ export default {
 	resetSubtopic: function(data)
 	{
 		return axios.post(`/resetSubtopic`, data)
+	},
+
+	getLeaderboard: function()
+	{
+		return axios.get(`/getLeaderboard`)
 	}
 };

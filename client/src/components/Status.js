@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../assets/styles/hub.css'
 import API from "../utils/API";
-import Header from './Header';
 import Report from './Report';
 
 

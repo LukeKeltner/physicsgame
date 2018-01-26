@@ -120,5 +120,13 @@ module.exports =
 				})
 			}
 		})
+	},
+
+	getLeaderboard: function(req, res)
+	{
+		usersModel.getLeaderboard(function(result)
+		{
+			res.send(result)
+		})
 	}
 }

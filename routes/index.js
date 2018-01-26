@@ -29,6 +29,8 @@ router.route(`/insertLookup`).post(questionController.insertLookup)
 
 router.route(`/resetSubtopic/`).post(questionController.deleteAnswers)
 
+router.route(`/getLeaderboard`).get(userController.getLeaderboard)
+
 
 router.use(function(req, res) 
 {

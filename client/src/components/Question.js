@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../assets/styles/question.css'
 import API from "../utils/API";
 import Answer from './Answer'
-import Header from './Header'
+import correctSound from '../assets/sounds/correct.mp3'
 
 class Question extends Component 
 {
@@ -21,7 +21,8 @@ class Question extends Component
 		wrong: [],
 		numberCorrect: 0,
 		result: "",
-		img: ""
+		img: "",
+		correctSound: new Audio(correctSound)
 	}
 
 	componentDidMount = () =>
@@ -123,6 +124,7 @@ class Question extends Component
 
 		if (correct)
 		{
+			this.state.correctSound.play()
 			const data = 
 			{
 				table: "correctlookup",
@@ -134,7 +136,7 @@ class Question extends Component
 
 			API.insertLookup(data).then(result =>
 			{
-				this.setState({result: "Correct!"})	
+				this.setState({result: `Correct!  +${this.state.currentgamble}`})	
 
 				const data2 =
 				{
@@ -179,7 +181,7 @@ class Question extends Component
 
 			API.insertLookup(data).then(result =>
 			{
-				this.setState({result: "Inorrect!"})	
+				this.setState({result: `Incorrect!  -${this.state.currentgamble}`})	
 
 				const data2 =
 				{
@@ -263,21 +265,12 @@ class Question extends Component
 									return <Answer key={i} text={answer.text} id={i} selected={this.selected} clicked={answer.selected}/>
 								})
 							}
-						</div>
-					</div>
-
-					<div className="row">
-						<div className="col-md-8">
-							<div>
-								{this.state.topic}, {this.state.subtopic}
-							</div>
-						</div>
-						<div className="col-md-4">
 							<div className="row">
 								<div className="col-md-1">
+									
 								</div>
 								<div className="col-md-11">
-									<button type="button" className="btn btn-primary btn-lg btn-block submit" onClick={this.submit}>Submit</button>
+									<button type="button" className="btn btn-primary btn-lg btn-block submit float-right" onClick={this.submit}>Submit</button>
 								</div>
 							</div>
 						</div>

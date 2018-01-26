@@ -99,6 +99,15 @@ const orm =
 			if(err){throw err}
 			cb(result)
 		})
+	},
+
+	getLeaderboard: function(cb)
+	{
+		connection.query(`select id,name,coins,leaderboard from users order by coins desc;`, function(err, result)
+		{
+			if(err){throw err}
+			cb(result)
+		})
 	}
 }
 

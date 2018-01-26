@@ -1,6 +1,6 @@
 body
 {
-	background-color:#dddddd;
+	background-color: white;
 	font-family: 'Quicksand', sans-serif;
 }
 
@@ -8,8 +8,8 @@ body
 {
 	border-bottom: 1px solid #005c84;
 	margin-bottom: 20px;
-	background-color: #9ee1ff;
-	color:black;
+	background-color: #2a3132;
+	color:white;
 	padding:20px;
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -24,6 +24,11 @@ body
 	font-size: 40px;
 }
 
+.coin
+{
+	width:10%;
+}
+
 .header-button
 {
 	color:white !important;
@@ -32,11 +37,16 @@ body
 .header-button:hover
 {
 	cursor: pointer;
-	color:#ed8c72 !important;;
+	color:#90afc5 !important;;
     text-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.19);
 }
 
 .header-button:active
 {
 	transform: translateY(2px);
+}
+
+.avatar
+{
+	color:white !important;
 }

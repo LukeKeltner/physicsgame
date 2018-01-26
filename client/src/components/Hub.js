@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import '../assets/styles/hub.css'
 import API from "../utils/API";
-import Header from './Header';
 import Topic from './Topic';
 import GambleAmount from './GambleAmount';
+import coin from '../assets/images/coin.png'
 
 
 class Hub extends Component 
@@ -135,8 +135,8 @@ class Hub extends Component
 								<div className="topic-header">
 									Topics
 									{this.state.topic === ""
-										? <i class="fas fa-check fa-1x float-right"></i>
-										: <i class="fas fa-check fa-1x hand-selected float-right"></i>
+										? <i className="fas fa-check fa-1x float-right"></i>
+										: <i className="fas fa-check fa-1x hand-selected float-right"></i>
 									}
 								</div>
 								{this.state.allTopics.map((topic, i) =>
@@ -154,8 +154,8 @@ class Hub extends Component
 									: " "+this.state.topic
 									}
 									{this.state.subtopic === ""
-										? <i class="fas fa-check fa-1x float-right"></i>
-										: <i class="fas fa-check fa-1x hand-selected float-right"></i>
+										? <i className="fas fa-check fa-1x float-right"></i>
+										: <i className="fas fa-check fa-1x hand-selected float-right"></i>
 									}
 								</div>
 								{this.state.allSubtopics.map((topic, i) =>
@@ -169,10 +169,10 @@ class Hub extends Component
 								<div className="col-md-12">
 									<div className="gamble-container">
 										<div className="topic-header">
-											Gamble
+											Gamble <img className="coin" alt="coins" src={coin} />
 											{this.state.gamble === 0
-												? <i class="fas fa-check fa-1x float-right"></i>
-												: <i class="fas fa-check fa-1x hand-selected float-right"></i>
+												? <i className="fas fa-check fa-1x float-right"></i>
+												: <i className="fas fa-check fa-1x hand-selected float-right"></i>
 											}
 										</div>
 										<div className="row">
