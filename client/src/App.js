@@ -36,7 +36,16 @@ class App extends Component
 
 			API.getUser(token).then(function(user)
 			{
-				This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins})
+				if (user.data.length === 0)
+				{
+					alert("Please log back in")
+					window.location = "/"
+				}
+
+				else
+				{
+					This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins})
+				}
 			})				
 		}
 	}
