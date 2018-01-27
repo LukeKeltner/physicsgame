@@ -1,103 +1,166 @@
 insert into questions(topic, subtopic, question) values
 (
-    "1D Kinematics",
-    "Scalar and Vectors",
+    "Fictional Characters",
+    "Harry Potter",
     '{
-        "text":"This is the first question",
-        "correct":["Correct 1"],
-        "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
+        "text":"Who is this character?",
+        "correct":["Harry Potter"],
+        "wrong":["Hermione Granger", "Ron Weasley", "Professor Snape", "Dolores Umbridge"],
+        "img":"harrypotter.jpg"
     }'
 ),
 
 (
-    "1D Kinematics",
-    "Scalar and Vectors",
+    "Fictional Characters",
+    "Harry Potter",
     '{
-        "text":"GARFIELD",
-        "correct":["Correct 1"],
-        "wrong":["Wrong 1", "Wrong 2", "Wrong 3"],
-        "img":"garfield.png"
+        "text":"Who is this character?",
+        "correct":["Ron Weasley"],
+        "wrong":["Hermione Granger", "Harry Potter", "Professor Snape", "Dolores Umbridge"],
+        "img":"ron.jpg"
     }'
 ),
 
 (
-    "1D Kinematics",
-    "Scalar and Vectors",
+    "Fictional Characters",
+    "Harry Potter",
     '{
-        "text":"This is the second question",
-        "correct":["Correct 1", "Correct 2"],
-        "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
+        "text":"Who is this character?",
+        "correct":["Hermione Granger"],
+        "wrong":["Ron Weasley", "Harry Potter", "Professor Snape", "Dolores Umbridge"],
+        "img":"hermione.jpg"
     }'
 ),
 
 (
-    "1D Kinematics",
-    "Scalar and Vectors",
+    "Fictional Characters",
+    "Harry Potter",
     '{
-        "text":"This is the third question",
-        "correct":["Correct 1"],
-        "wrong":["Wrong 1", "Wrong 2", "Wrong 3", "Wrong 4"]
+        "text":"Who is this character?",
+        "correct":["Dolores Umbridge"],
+        "wrong":["Ron Weasley", "Harry Potter", "Professor Snape", "Hermione Granger"],
+        "img":"dolores.jpg"
     }'
 ),
 
 (
-    "1D Kinematics",
-    "Distance and Displacement",
+    "Fictional Characters",
+    "Harry Potter",
     '{
-        "text":"This is the forth question",
-        "correct":["Correct 1", "Correct 2", "Correct 3"],
-        "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
+        "text":"Who is this character?",
+        "correct":["Professor Snape"],
+        "wrong":["Hermione Granger", "Ron Weasley", "Harry Potter", "Dolores Umbridge"],
+        "img":"snape.jpg"
     }'
 ),
 
 (
-    "1D Kinematics",
-    "Distance and Displacement",
+    "Fictional Characters",
+    "Disney",
     '{
-        "text":"This is the fifth question",
-        "correct":["Correct 1", "Correct 2", "Correct 3"],
-        "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
+        "text":"In Beauty and the Beast, Mrs. Potts is the mother of which personified household object?",
+        "correct":["A teacup named Chip"],
+        "wrong":["A candlestick named Lumiere", "A clock named Cogsworth", "A footstool named Sultan"],
     }'
 ),
 
 (
-    "1D Kinematics",
-    "General Relativity",
+    "Fictional Characters",
+    "Disney",
     '{
-        "text":"This is the sixth question",
-        "correct":["Correct 1", "Correct 2", "Correct 3"],
-        "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
+        "text":"Which of the following Disney characters were born into royalty?",
+        "correct":["Hercules", "Simba", "Ariel"],
+        "wrong":["Aladdin", "Belle"],
     }'
 ),
 
 (
-    "Momentum",
-    "Basics",
+    "Fictional Characters",
+    "Disney",
     '{
-        "text":"This is the seventh question",
-        "correct":["Correct 1", "Correct 2", "Correct 3"],
-        "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
+        "text":"Which Disney Princess owned a pet tiger named Raja?",
+        "correct":["Jasmine"],
+        "wrong":["Snow White", "Cinderella", "Nala", "Ariel"],
+        "img":"raja.jpg"
     }'
 ),
 
 (
-    "Momentum",
-    "Basics",
+    "Math",
+    "Addition",
     '{
-        "text":"This is the eighth question",
-        "correct":["Correct 1", "Correct 2", "Correct 3"],
-        "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
+        "text":"What is 2+2?",
+        "correct":["4"],
+        "wrong":["1", "2", "3", "5"],
     }'
 ),
 
 (
-    "Momentum",
-    "Advanced",
+    "Math",
+    "Addition",
     '{
-        "text":"This is the ninth question",
-        "correct":["Correct 1", "Correct 2", "Correct 3"],
-        "wrong":["Wrong 1", "Wrong 2", "Wrong 3"]
+        "text":"What is 14+6?",
+        "correct":["20"],
+        "wrong":["10", "20", "30", "40"],
+    }'
+),
+
+(
+    "Math",
+    "Addition",
+    '{
+        "text":"What is 300+14?",
+        "correct":["314"],
+        "wrong":["315", "209", "340", "460"],
+    }'
+),
+
+(
+    "Math",
+    "Addition",
+    '{
+        "text":"What is 3+3?",
+        "correct":["6"],
+        "wrong":["7", "8", "9", "5"],
+    }'
+),
+
+(
+    "Math",
+    "Addition",
+    '{
+        "text":"What is 2+6?",
+        "correct":["8"],
+        "wrong":["13", "29", "11", "10"],
+    }'
+),
+
+(
+    "Math",
+    "Multiplication",
+    '{
+        "text":"What is 2x6?",
+        "correct":["12"],
+        "wrong":["13", "29", "11", "10"],
+    }'
+),
+
+(
+    "Math",
+    "Multiplication",
+    '{
+        "text":"What is 4x6?",
+        "correct":["24"],
+        "wrong":["23", "29", "21", "20"],
+    }'
+),
+
+(
+    "Math",
+    "Multiplication",
+    '{
+        "text":"x squared equals 4, what is x?",
+        "correct":["+2", "-2"],
+        "wrong":["+4", "-4", "+1", "-1", "0"],
     }'
 );
-
-
