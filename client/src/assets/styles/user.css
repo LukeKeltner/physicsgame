@@ -6,7 +6,7 @@
 	background-color: white;
 }
 
-.user:hover
+.user:hover, .hidden:hover
 {
 	background-color: #f2f2f2;
 }

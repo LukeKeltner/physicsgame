@@ -57,7 +57,10 @@ class User extends Component
 				:
 
 				<div className="row hidden">
-					<div className="col-md-12 text-center">
+					<div className="col-md-2 text-center">
+						{this.props.place+1}
+					</div>
+					<div className="col-md-10 text-center">
 						This person chose not to be seen
 					</div>
 				</div>

@@ -7,6 +7,25 @@
 	padding:20px;
 }
 
+.stats
+{
+	border: 1px solid #d6d6d6;
+	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	position: relative;
+	background-color: white;
+	padding:20px;	
+}
+
+.stats-topic
+{
+	font-weight: bold;
+}
+
+.stats-value
+{
+	font-size: 15px;
+}
+
 .questionText
 {
  	position: absolute;
@@ -74,6 +93,16 @@
 {
 	width:100%;
 	overflow:hidden;
+}
+
+.test
+{
+	border:1px solid red;
+}
+
+.test2
+{
+	border:1px solid blue;
 }
 
 

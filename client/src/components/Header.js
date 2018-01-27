@@ -49,22 +49,22 @@ class Header extends Component
 					<div className="col-md-4">
 						<div className="row">
 							<div className="col-md-3 text-center">
-								<i className="fas fa-question-circle fa-3x header-button" onClick={this.toHub}></i>
+								<i className="fas fa-question-circle fa-2x header-button" onClick={this.toHub}></i>
 								<br></br>
 								Get coins!
 							</div>
 							<div className="col-md-3 text-center">
-								<i className="fas fa-list-alt fa-3x header-button" onClick={this.toStatus}></i>
+								<i className="fas fa-list-alt fa-2x header-button" onClick={this.toStatus}></i>
 								<br></br>
 								Status
 							</div>
 							<div className="col-md-3 text-center">
-								<i className="fas fa-trophy fa-3x header-button" onClick={this.toLeaderboard}></i>
+								<i className="fas fa-trophy fa-2x header-button" onClick={this.toLeaderboard}></i>
 								<br></br>
 								Leaderboard
 							</div>
 							<div className="col-md-3 text-center">
-								<i className="fas fa-arrow-alt-circle-right fa-3x header-button" onClick={this.logout}></i>
+								<i className="fas fa-arrow-alt-circle-right fa-2x header-button" onClick={this.logout}></i>
 								<br></br>
 								Logout
 							</div>

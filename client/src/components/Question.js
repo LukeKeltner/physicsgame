@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import '../assets/styles/question.css'
 import API from "../utils/API";
 import Answer from './Answer'
-import correctSound from '../assets/sounds/correct.mp3'
+import correctSound from '../assets/sounds/correct.mp3';
+import wrongSound from '../assets/sounds/wrong.mp3';
 
 class Question extends Component 
 {
@@ -22,7 +23,9 @@ class Question extends Component
 		numberCorrect: 0,
 		result: "",
 		img: "",
-		correctSound: new Audio(correctSound)
+		successRate: 0,
+		correctSound: new Audio(correctSound),
+		wrongSound: new Audio(wrongSound)
 	}
 
 	componentDidMount = () =>
@@ -58,6 +61,17 @@ class Question extends Component
 					if (question.img)
 					{
 						This.setState({img: require("../assets/images/"+question.img)})
+					}
+
+					if (result.data[0].totalcorrect === 0 && result.data[0].totalwrong === 0)
+					{
+						This.setState({successRate: "You're the first to try this question!"})
+					}
+
+					else
+					{
+						const rate = (result.data[0].totalcorrect/(result.data[0].totalcorrect+result.data[0].totalwrong)*100).toFixed(0)
+						This.setState({successRate: rate+"%"})
 					}
 
 					This.setState(
@@ -180,6 +194,7 @@ class Question extends Component
 
 		else
 		{
+			this.state.wrongSound.play()
 			const updateQuestionData = 
 			{
 				expression: 'totalwrong = totalwrong + 1',
@@ -239,21 +254,32 @@ class Question extends Component
 			<div>
 				<div className="container">
 					<div className="row">
+
+						<div className="col-md-2 stats">
+							<div className="stats-topic">Topic: </div>
+								<div className="stats-value float-right">{this.state.topic}</div>
+							<br></br>
+							<div className="stats-topic">Subtopic: </div>
+								<div className="stats-value float-right">{this.state.subtopic}</div>
+							<br></br>
+							<div className="stats-topic">Gambling: </div>
+								<div className="stats-value float-right">{this.state.currentgamble} coins</div>
+							<br></br>
+							<div className="stats-topic">Success Rate: </div>
+								<div className="stats-value float-right">{this.state.successRate}</div>
+							<br></br>
+							<div className="stats-topic">Number of Correct Answers:</div>
+								<div className="stats-value float-right">{this.state.correct.length}</div>
+							<br></br>
+
+						</div>
 							{this.state.result === "" 
 
 							? 
 								this.state.img !== ""
 
 								?
-								<div className="col-md-8 questionContainer-image">
-									<div className="row">
-										<div classname="col-md-6 text-center">
-											You're gambling {this.state.currentgamble} coins!
-										</div>
-										<div classname="col-md-6 text-center">
-											You're gambling {this.state.currentgamble} coins!
-										</div>
-									</div>
+								<div className="col-md-6 questionContainer-image">
 									<div className="row questionText-image">
 										<div className="col-md-12">
 											{this.state.text}
@@ -264,15 +290,7 @@ class Question extends Component
 								</div>
 
 								:
-								<div className="col-md-8 questionContainer">
-									<div className="row">
-										<div classname="col-md-6 text-center">
-											You're gambling {this.state.currentgamble} coins!
-										</div>
-										<div classname="col-md-6 text-center">
-											You're gambling {this.state.currentgamble} coins!
-										</div>
-									</div>
+								<div className="col-md-6 questionContainer">
 									<div className="row questionText">
 										<div className="col-md-12">
 											{this.state.text}
@@ -280,15 +298,7 @@ class Question extends Component
 									</div>
 								</div>
 							: 
-								<div className="col-md-8 questionContainer">
-									<div className="row">
-										<div classname="col-md-6 text-center">
-											You're gambling {this.state.currentgamble} coins!
-										</div>
-										<div classname="col-md-6 text-center">
-											You're gambling {this.state.currentgamble} coins!
-										</div>
-									</div>
+								<div className="col-md-6 questionContainer">
 									<div className="row questionText">
 										<div className="col-md-12">
 											{this.state.result}
