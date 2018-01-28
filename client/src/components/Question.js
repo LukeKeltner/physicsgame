@@ -35,13 +35,7 @@ class Question extends Component
 
 		API.getUser(token).then(function(user)
 		{
-			if (user.data.length === 0)
-			{
-				alert("Please log back in")
-				window.location = "/"
-			}
-
-			else if (user.data.currentquestion === 0)
+			if (user.data[0].currentquestion === 0)
 			{
 				alert("Please select a question")
 				window.location = "/hub"
@@ -185,7 +179,7 @@ class Question extends Component
 							setTimeout(() =>
 							{
 								window.location = "/hub"
-							}, 1000)
+							}, 1500)
 						})					
 					})
 				})
@@ -240,7 +234,7 @@ class Question extends Component
 							setTimeout(() =>
 							{
 								window.location = "/hub"
-							}, 1000)
+							}, 1500)
 						})					
 					})
 				})

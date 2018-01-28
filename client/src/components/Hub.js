@@ -28,13 +28,7 @@ class Hub extends Component
 
 		API.getUser(token).then(function(user)
 		{
-			if (user.data.length === 0)
-			{
-				alert("Please log back in")
-				window.location = "/"
-			}
-
-			else if (user.data[0].currentquestion !== 0)
+			if (user.data[0].currentquestion !== 0)
 			{
 				alert("You haven't answered a question, go answer it!")
 				window.location = "/question"

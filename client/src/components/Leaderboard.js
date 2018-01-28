@@ -20,19 +20,10 @@ class Leaderboard extends Component
 
 		API.getUser(token).then(function(user)
 		{
-			if (user.data.length === 0)
+			API.getLeaderboard().then(users =>
 			{
-				alert("Please log back in")
-				window.location = "/"
-			}
-
-			else
-			{
-				API.getLeaderboard().then(users =>
-				{
-					This.setState({users: users.data, userid: user.data[0].id})
-				})
-			}
+				This.setState({users: users.data, userid: user.data[0].id})
+			})
 		})
 	}
 
