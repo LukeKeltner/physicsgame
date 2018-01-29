@@ -47,33 +47,21 @@ class Report extends Component
 
 	reset = event =>
 	{
-		console.log("----------------------")
 		const userid = event.target.getAttribute("userid")
 		const topic = event.target.getAttribute("topic")
 		const subtopic = event.target.getAttribute("subtopic")
 
 		const data = 
 		{
-			table: "correctlookup",
 			userid: userid,
+			coins: this.props.coins,
 			topic: topic, 
 			subtopic: subtopic
 		}
 
 		API.resetSubtopic(data).then(result =>
 		{
-			const data2 = 
-			{
-				table: "wronglookup",
-				userid: userid,
-				topic: topic, 
-				subtopic: subtopic
-			}
-
-			API.resetSubtopic(data2).then(result =>
-			{
-				window.location.reload()
-			})
+			window.location.reload()
 		})
 	}
 

@@ -120,137 +120,19 @@ class Question extends Component
 			{
 				This.state.correctSound.play()
 				This.setState({result: `Correct!  +${This.state.currentgamble}`})
-				setTimeout(() =>
-				{
-					window.location = "/hub"
-				}, 1500)
 			}
 
 			else
 			{
 				This.state.wrongSound.play()
 				This.setState({result: `Incorrect!  -${This.state.currentgamble}`})
-				setTimeout(() =>
-				{
-					window.location = "/hub"
-				}, 1500)
 			}
+
+			setTimeout(() =>
+			{
+				window.location = "/hub"
+			}, 1500)
 		})
-
-		/*if (correct)
-		{
-			this.state.correctSound.play()
-
-			const updateQuestionData = 
-			{
-				expression: 'totalcorrect = totalcorrect + 1',
-				id: this.state.currentquestion
-			}
-
-			API.updateQuestion(updateQuestionData).then(result =>
-			{
-				const data = 
-				{
-					table: "correctlookup",
-					column1: "userid",
-					column2: "questionid",
-					column3: "coins",
-					value1: parseInt(this.state.id),
-					value2: parseInt(this.state.currentquestion),
-					value3: parseInt(this.state.currentgamble)
-				}
-
-				API.insertLookup(data).then(result =>
-				{
-					this.setState({result: `Correct!  +${this.state.currentgamble}`})	
-
-					const data2 =
-					{
-						column: "currentquestion",
-						value: 0,
-						whereField: "id",
-						whereValue: This.state.id
-					}
-
-					API.updateUser(data2).then(result2 =>
-					{
-						const newCoins = this.state.coins + this.state.currentgamble
-						const data3 =
-						{
-							column: "coins",
-							value: newCoins,
-							whereField: "id",
-							whereValue: This.state.id
-						}
-
-						API.updateUser(data3).then(result3 =>
-						{
-							setTimeout(() =>
-							{
-								window.location = "/hub"
-							}, 1500)
-						})					
-					})
-				})
-			})
-		}
-
-		else
-		{
-			this.state.wrongSound.play()
-			const updateQuestionData = 
-			{
-				expression: 'totalwrong = totalwrong + 1',
-				id: this.state.currentquestion
-			}
-
-			API.updateQuestion(updateQuestionData).then(result =>
-			{
-				const data = 
-				{
-					table: "wronglookup",
-					column1: "userid",
-					column2: "questionid",
-					column3: "coins",
-					value1: parseInt(this.state.id),
-					value2: parseInt(this.state.currentquestion),
-					value3: parseInt(this.state.currentgamble)
-				}
-
-				API.insertLookup(data).then(result =>
-				{
-					this.setState({result: `Incorrect!  -${this.state.currentgamble}`})	
-
-					const data2 =
-					{
-						column: "currentquestion",
-						value: 0,
-						whereField: "id",
-						whereValue: This.state.id
-					}
-
-					API.updateUser(data2).then(result2 =>
-					{
-						const newCoins = this.state.coins - this.state.currentgamble
-						const data3 =
-						{
-							column: "coins",
-							value: newCoins,
-							whereField: "id",
-							whereValue: This.state.id
-						}
-
-						API.updateUser(data3).then(result3 =>
-						{
-							setTimeout(() =>
-							{
-								window.location = "/hub"
-							}, 1500)
-						})					
-					})
-				})
-			})
-		}*/
 	}
 
 	render()

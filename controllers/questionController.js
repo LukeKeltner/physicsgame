@@ -1,5 +1,6 @@
 const express = require('express');
 const questionModel = require('../models/questionModel.js');
+const usersModel = require('../models/usersModel.js');
 
 const createToken = function()
 {
@@ -100,9 +101,24 @@ module.exports =
 
 	deleteAnswers: function(req, res)
 	{
-		questionModel.deleteAnswers(req.body.table, req.body.userid, req.body.topic, req.body.subtopic, function(result)
+		questionModel.getCoinsFromLookup("correctlookup", req.body.userid, function(correctcoins)
 		{
-			res.send(result)
+			console.log("Total coins correct from here = "+correctcoins[0].totalcoins)
+			questionModel.getCoinsFromLookup("wronglookup", req.body.userid, function(wrongcoins)
+			{
+				console.log("Total coins incorrect from here = "+wrongcoins[0].totalcoins)
+				questionModel.deleteAnswers("correctlookup", req.body.userid, req.body.topic, req.body.subtopic, function(result)
+				{
+					questionModel.deleteAnswers("wronglookup", req.body.userid, req.body.topic, req.body.subtopic, function(result3)
+					{
+						const newCoins = req.body.coins - correctcoins[0].totalcoins + wrongcoins[0].totalcoins;
+						usersModel.updateUser("coins", newCoins, "id", req.body.userid, function(result3)
+						{
+							res.send("done")
+						})
+					})
+				})
+			})
 		})
 	},
 
@@ -113,9 +129,4 @@ module.exports =
 			res.end()
 		})
 	},
-
-	getCoinsFromLookup: function(req, res)
-	{
-
-	}
 }

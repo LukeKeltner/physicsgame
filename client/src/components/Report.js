@@ -19,7 +19,7 @@ class Report extends Component
 				</div>
 				{this.props.subtopics.map((subtopic,i) =>
 					{
-						return <SubtopicReport key={i} userid={this.props.userid} topic={this.props.topic} name={subtopic[0]} amount={subtopic[1]} corrects={subtopic[2]} wrongs={subtopic[3]} />
+						return <SubtopicReport key={i} userid={this.props.userid} coins={this.props.coins} topic={this.props.topic} name={subtopic[0]} amount={subtopic[1]} corrects={subtopic[2]} wrongs={subtopic[3]} />
 					})}
 			</div>
 		)

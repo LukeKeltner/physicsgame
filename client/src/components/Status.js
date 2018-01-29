@@ -49,6 +49,7 @@ class Status extends Component
 						const finished1 = []
 						const finished2 = []
 						let totalSubtopics = 0;
+
 						for (let i=0; i<result.data.length; i++)
 						{
 							API.getAllSubtopics(result.data[i].topic).then(result2 =>
@@ -163,7 +164,7 @@ class Status extends Component
 				<div className="container">
 					{this.state.allTopics.map((topic, i) =>
 						{
-							return <Report key={i} userid={this.state.id} topic={topic.topic} subtopics={topic.subtopics} totalPercent={topic.totalPercent}/>
+							return <Report key={i} userid={this.state.id} coins={this.state.coins} topic={topic.topic} subtopics={topic.subtopics} totalPercent={topic.totalPercent}/>
 						})}
 				</div>
 			</div>
