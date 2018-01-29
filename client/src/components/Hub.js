@@ -163,7 +163,7 @@ class Hub extends Component
 								<div className="col-md-12">
 									<div className="gamble-container">
 										<div className="topic-header">
-											Gamble <img className="coin" alt="coins" src={coin} />
+											Wager <img className="coin" alt="coins" src={coin} />
 											{this.state.gamble === 0
 												? <i className="fas fa-check fa-1x float-right"></i>
 												: <i className="fas fa-check fa-1x hand-selected float-right"></i>

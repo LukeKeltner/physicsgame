@@ -1,5 +1,6 @@
 const express = require('express');
 const usersModel = require('../models/usersModel.js');
+const questionModel = require('../models/questionModel.js');
 const bcrypt = require('bcrypt');
 
 const createToken = function()
@@ -128,5 +129,109 @@ module.exports =
 		{
 			res.send(result)
 		})
+	},
+
+	determineResult: function(req, res)
+	{
+		let correct = true;
+		const userid = req.body.userid;
+		const questionid = req.body.questionid;
+		const currentgamble = req.body.currentgamble;
+		const coins = req.body.coins;
+
+		for (let i=0; i<req.body.answers.length; i++)
+		{
+			if ((req.body.answers[i].type === "correct" && !req.body.answers[i].selected) || (req.body.answers[i].type === "wrong" && req.body.answers[i].selected))
+			{
+				correct = false;
+				break;
+			}
+		}
+
+		if (correct)
+		{
+			const expression = 'totalcorrect = totalcorrect + 1';
+
+			questionModel.updateQuestion(expression, userid, function(result)
+			{
+				questionModel.insert("correctlookup", "userid", "questionid", "coins", userid, questionid, currentgamble, function(result2)
+				{
+					usersModel.updateUser("currentquestion", 0, "id", userid, function(result3)
+					{
+						const newCoins = coins+currentgamble
+						usersModel.updateUser("coins", newCoins, "id", userid, function(result4)
+						{
+							res.send("correct")
+						})
+					})
+				})
+			})
+		}
+
+		else
+		{
+			const expression = 'totalwrong = totalwrong + 1';
+
+			questionModel.updateQuestion(expression, userid, function(result)
+			{
+				questionModel.insert("wronglookup", "userid", "questionid", "coins", userid, questionid, currentgamble, function(result2)
+				{
+					usersModel.updateUser("currentquestion", 0, "id", userid, function(result3)
+					{
+						const newCoins = coins-currentgamble
+						usersModel.updateUser("coins", newCoins, "id", userid, function(result4)
+						{
+							res.send("incorrect")
+						})
+					})
+				})
+			})
+		}
+
+			//API.updateQuestion(updateQuestionData).then(result =>
+			//{
+/*				const data = 
+				{
+					table: "correctlookup",
+					column1: "userid",
+					column2: "questionid",
+					column3: "coins",
+					value1: parseInt(this.state.id),
+					value2: parseInt(this.state.currentquestion),
+					value3: parseInt(this.state.currentgamble)
+				}*/
+
+/*				API.insertLookup(data).then(result =>
+				{
+					this.setState({result: `Correct!  +${this.state.currentgamble}`})	
+
+					const data2 =
+					{
+						column: "currentquestion",
+						value: 0,
+						whereField: "id",
+						whereValue: This.state.id
+					}
+*/
+/*					API.updateUser(data2).then(result2 =>
+					{
+						const newCoins = this.state.coins + this.state.currentgamble
+						const data3 =
+						{
+							column: "coins",
+							value: newCoins,
+							whereField: "id",
+							whereValue: This.state.id
+						}
+
+						API.updateUser(data3).then(result3 =>
+						{
+							setTimeout(() =>
+							{
+								window.location = "/hub"
+							}, 1500)
+						})					
+					})*/
+
 	}
 }

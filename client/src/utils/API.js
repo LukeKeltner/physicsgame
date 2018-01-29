@@ -69,6 +69,11 @@ export default {
 
 	updateQuestion: function(data)
 	{
-		return axios.post(`updateQuestion`, data)
+		return axios.post(`/updateQuestion`, data)
+	},
+
+	determineResult: function(data)
+	{
+		return axios.post(`/determineResult`, data)
 	}
 };

@@ -50,9 +50,9 @@ const question =
 		})
 	},
 
-	insert: function(table, column1, column2, value1, value2, cb)
+	insert: function(table, column1, column2, column3, value1, value2, value3, cb)
 	{
-		orm.insert(table, column1, column2, value1, value2, function(result)
+		orm.insert(table, column1, column2, column3, value1, value2, value3, function(result)
 		{
 			cb(result)
 		})
@@ -69,6 +69,14 @@ const question =
 	updateQuestion: function(expression, id, cb)
 	{
 		orm.updateQuestion("questions", expression, "id", id, function(result)
+		{
+			cb(result)
+		})
+	},
+
+	getCoinsFromLookup: function(table, userid, cb)
+	{
+		orm.getCoinsFromLookup(table, userid, function(result)
 		{
 			cb(result)
 		})

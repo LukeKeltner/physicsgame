@@ -92,9 +92,9 @@ const orm =
 		})
 	},
 
-	insert: function(table, column1, column2, value1, value2, cb)
+	insert: function(table, column1, column2, column3, value1, value2, value3, cb)
 	{
-		connection.query(`INSERT INTO ${table} (${column1}, ${column2}) VALUES (?, ?)`, [value1, value2], function(err, result)
+		connection.query(`INSERT INTO ${table} (${column1}, ${column2}, ${column3}) VALUES (?, ?, ?)`, [value1, value2, value3], function(err, result)
 		{
 			if(err){throw err}
 			cb(result)
@@ -113,6 +113,15 @@ const orm =
 	getLeaderboard: function(cb)
 	{
 		connection.query(`select id,name,coins,leaderboard from users order by coins desc;`, function(err, result)
+		{
+			if(err){throw err}
+			cb(result)
+		})
+	},
+
+	getCoinsFromLookup: function(table, userid)
+	{
+		connection.query(`select sum(coins) from ${table} where userid = ?`, [userid], function(err, result)
 		{
 			if(err){throw err}
 			cb(result)

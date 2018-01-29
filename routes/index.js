@@ -33,6 +33,8 @@ router.route(`/getLeaderboard`).get(userController.getLeaderboard)
 
 router.route(`/updateQuestion`).post(questionController.updateQuestion)
 
+router.route(`/determineResult`).post(userController.determineResult)
+
 
 router.use(function(req, res) 
 {

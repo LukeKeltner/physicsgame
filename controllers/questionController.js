@@ -16,6 +16,17 @@ const createToken = function()
 	return token+date
 }
 
+const shuffle = array =>
+{
+	for (let i = array.length - 1; i > 0; i--)
+	{
+		const j = Math.floor(Math.random() * (i + 1));
+		[array[i], array[j]] = [array[j], array[i]];
+	}
+
+	return array;
+}
+
 module.exports = 
 {
 	findAll: function(req, res)
@@ -67,13 +78,21 @@ module.exports =
 	{
 		questionModel.findQuestion(req.params.id, function(result)
 		{
-			res.send(result)
+			const response = result[0]
+			const question = JSON.parse(response.question)
+			const answers = []
+			question.correct.forEach(answer => answers.push({text: answer, type: "correct", selected: false}))
+			question.wrong.forEach(answer => answers.push({text: answer, type: "wrong", selected: false}))
+			const shuffledAnswers = shuffle(answers)
+			response.question = question;
+			response.shuffledAnswers = shuffledAnswers
+			res.send(response)
 		})
 	},
 
 	insertLookup: function(req, res)
 	{
-		questionModel.insert(req.body.table, req.body.column1, req.body.column2, req.body.value1, req.body.value2, function(result)
+		questionModel.insert(req.body.table, req.body.column1, req.body.column2, req.body.column3, req.body.value1, req.body.value2, req.body.value3, function(result)
 		{
 			res.send(result)
 		})
@@ -93,5 +112,10 @@ module.exports =
 		{
 			res.end()
 		})
+	},
+
+	getCoinsFromLookup: function(req, res)
+	{
+
 	}
 }

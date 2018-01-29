@@ -35,6 +35,7 @@ class Question extends Component
 
 		API.getUser(token).then(function(user)
 		{
+			console.log(user.data[0])
 			if (user.data[0].currentquestion === 0)
 			{
 				alert("Please select a question")
@@ -45,26 +46,19 @@ class Question extends Component
 			{
 				API.getQuestion(user.data[0].currentquestion).then(function(result)
 				{
-					console.log(result.data[0])
-					const question = JSON.parse(result.data[0].question)
-					const answers = []
-					question.correct.forEach(answer => answers.push({text: answer, type: "correct", selected: false}))
-					question.wrong.forEach(answer => answers.push({text: answer, type: "wrong", selected: false}))
-					const shuffledAnswers = This.shuffle(answers)
-
-					if (question.img)
+					if (result.data.question.img)
 					{
-						This.setState({img: require("../assets/images/"+question.img)})
+						This.setState({img: require("../assets/images/"+result.data.question.img)})
 					}
 
-					if (result.data[0].totalcorrect === 0 && result.data[0].totalwrong === 0)
+					if (result.data.totalcorrect === 0 && result.data.totalwrong === 0)
 					{
 						This.setState({successRate: "You're the first to try this question!"})
 					}
 
 					else
 					{
-						const rate = (result.data[0].totalcorrect/(result.data[0].totalcorrect+result.data[0].totalwrong)*100).toFixed(0)
+						const rate = (result.data.totalcorrect/(result.data.totalcorrect+result.data.totalwrong)*100).toFixed(0)
 						This.setState({successRate: rate+"%"})
 					}
 
@@ -75,28 +69,17 @@ class Question extends Component
 						coins: user.data[0].coins,
 						currentgamble: user.data[0].currentgamble,
 						currentquestion: user.data[0].currentquestion,
-						topic:result.data[0].topic,
-						subtopic:result.data[0].subtopic,
-						text:question.text,
-						correct:question.correct,
-						wrong:question.wrong,
-						answers: shuffledAnswers,
-						numberCorrect:question.correct.length,
+						topic:result.data.topic,
+						subtopic:result.data.subtopic,
+						text:result.data.question.text,
+						correct:result.data.question.correct,
+						wrong:result.data.question.wrong,
+						answers:result.data.shuffledAnswers,
+						numberCorrect:result.data.question.correct.length,
 					})
 				})
 			}
 		})
-	}
-
-	shuffle = array =>
-	{
-		for (let i = array.length - 1; i > 0; i--)
-		{
-		    const j = Math.floor(Math.random() * (i + 1));
-		    [array[i], array[j]] = [array[j], array[i]];
-	    }
-
-	    return array;
 	}
 
 	selected = event =>
@@ -113,24 +96,48 @@ class Question extends Component
 			tempAnswers[event.target.id].selected = true;
 		}
 
+		console.log(tempAnswers)
+
 		this.setState({answers:tempAnswers})
 	}
 
 	submit = event =>
 	{
-		let correct = true;
 		const This = this;
-		
-		for (let i=0; i<this.state.answers.length; i++)
+
+		const datatest =
 		{
-			if ((this.state.answers[i].type === "correct" && !this.state.answers[i].selected) || (this.state.answers[i].type === "wrong" && this.state.answers[i].selected))
-			{
-				correct = false;
-				break;
-			}
+			answers: this.state.answers,
+			userid: this.state.id,
+			questionid: this.state.currentquestion,
+			currentgamble: this.state.currentgamble,
+			coins: this.state.coins
 		}
 
-		if (correct)
+		API.determineResult(datatest).then(result =>
+		{
+			if (result.data === "correct")
+			{
+				This.state.correctSound.play()
+				This.setState({result: `Correct!  +${This.state.currentgamble}`})
+				setTimeout(() =>
+				{
+					window.location = "/hub"
+				}, 1500)
+			}
+
+			else
+			{
+				This.state.wrongSound.play()
+				This.setState({result: `Incorrect!  -${This.state.currentgamble}`})
+				setTimeout(() =>
+				{
+					window.location = "/hub"
+				}, 1500)
+			}
+		})
+
+		/*if (correct)
 		{
 			this.state.correctSound.play()
 
@@ -147,8 +154,10 @@ class Question extends Component
 					table: "correctlookup",
 					column1: "userid",
 					column2: "questionid",
+					column3: "coins",
 					value1: parseInt(this.state.id),
-					value2: parseInt(this.state.currentquestion)
+					value2: parseInt(this.state.currentquestion),
+					value3: parseInt(this.state.currentgamble)
 				}
 
 				API.insertLookup(data).then(result =>
@@ -202,8 +211,10 @@ class Question extends Component
 					table: "wronglookup",
 					column1: "userid",
 					column2: "questionid",
+					column3: "coins",
 					value1: parseInt(this.state.id),
-					value2: parseInt(this.state.currentquestion)
+					value2: parseInt(this.state.currentquestion),
+					value3: parseInt(this.state.currentgamble)
 				}
 
 				API.insertLookup(data).then(result =>
@@ -239,7 +250,7 @@ class Question extends Component
 					})
 				})
 			})
-		}
+		}*/
 	}
 
 	render()
@@ -256,7 +267,7 @@ class Question extends Component
 							<div className="stats-topic">Subtopic: </div>
 								<div className="stats-value float-right">{this.state.subtopic}</div>
 							<br></br>
-							<div className="stats-topic">Gambling: </div>
+							<div className="stats-topic">Wager: </div>
 								<div className="stats-value float-right">{this.state.currentgamble} coins</div>
 							<br></br>
 							<div className="stats-topic">Success Rate: </div>
