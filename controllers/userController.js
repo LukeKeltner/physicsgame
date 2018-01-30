@@ -152,7 +152,7 @@ module.exports =
 		{
 			const expression = 'totalcorrect = totalcorrect + 1';
 
-			questionModel.updateQuestion(expression, userid, function(result)
+			questionModel.updateQuestion(expression, questionid, function(result)
 			{
 				questionModel.insert("correctlookup", "userid", "questionid", "coins", userid, questionid, currentgamble, function(result2)
 				{
@@ -172,7 +172,7 @@ module.exports =
 		{
 			const expression = 'totalwrong = totalwrong + 1';
 
-			questionModel.updateQuestion(expression, userid, function(result)
+			questionModel.updateQuestion(expression, questionid, function(result)
 			{
 				questionModel.insert("wronglookup", "userid", "questionid", "coins", userid, questionid, currentgamble, function(result2)
 				{
