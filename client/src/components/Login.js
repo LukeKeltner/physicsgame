@@ -141,9 +141,9 @@ class Login extends Component
 					<div className="col-md-6">
 						<h3>Pick a topic, bet some coins, get coins for all questions you get right!</h3>
 						<br></br>
-						<hr></hr>
+						<hr className="hr-white"></hr>
 						<br></br>
-						<h3 className="text-right">What out though, you'll lose coins if you get the question wrong!</h3>
+						<h3 className="text-right">Watch out though, you'll lose coins if you get the question wrong!</h3>
 					</div>
 					<div className="col-md-6 text-center">
 						<img alt="Hey!" src={coin}/>

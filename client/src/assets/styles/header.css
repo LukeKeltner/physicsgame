@@ -8,7 +8,7 @@ body
 {
 	border-bottom: 1px solid #005c84;
 	margin-bottom: 20px;
-	background-color: #2a3132;
+	background-color: #6400a8;
 	color:white;
 	padding:20px;
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -37,7 +37,7 @@ body
 .header-button:hover
 {
 	cursor: pointer;
-	color:#90afc5 !important;;
+	color:#ffeb59 !important;;
     text-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.19);
 }
 

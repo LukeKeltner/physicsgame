@@ -7,6 +7,13 @@
 .explanation
 {
 	padding:100px;
+	background-color: #6400a8;
+	color: white;
+}
+
+.hr-white
+{
+	border:.5px solid white;
 }
 
 .what-coins-do

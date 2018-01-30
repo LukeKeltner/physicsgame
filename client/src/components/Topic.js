@@ -13,12 +13,10 @@ class Topic extends Component
 	{
 		return(
 			<div className="row">
-				<div className="col-md-1">
-				</div>
-				<div className="col-md-10 topicContainer" onClick={this.props.topicSelected}>
-					{this.props.name}
-				</div>
-				<div className="col-md-1">
+				<div className="col-md-12">
+					<div className="topicContainer" onClick={this.props.topicSelected}>
+						{this.props.name}
+					</div>
 				</div>
 			</div>
 		)

@@ -38,6 +38,7 @@ create table correctlookup
     foreign key (questionid)
             references questions(id)
             on delete cascade,
+    coins int(50) not null,
     primary key(id)
 );
 
@@ -52,5 +53,6 @@ create table wronglookup
     foreign key (questionid)
             references questions(id)
             on delete cascade,
+    coins int(50) not null,
     primary key(id)
 );

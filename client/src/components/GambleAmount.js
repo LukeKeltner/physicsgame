@@ -6,9 +6,11 @@ class Topic extends Component
 	render()
 	{
 		return(
-			<div className="col-md-4">
-				<div className="gambleAmount-container text-center" onClick={this.props.gambleSelected}>
-					{this.props.amount}
+			<div className="row">
+				<div className="col-md-12">
+					<div className="topicContainer text-center" onClick={this.props.gambleSelected}>
+						{this.props.amount}
+					</div>
 				</div>
 			</div>
 		)

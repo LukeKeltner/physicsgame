@@ -21,9 +21,9 @@
 
 .you
 {
-	border: 1px solid #858989;
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	padding:20px;
-	background-color: #c0c6c6;
+	background-color: #6400a8;
+	color: white;
 	font-weight: bold;
 }

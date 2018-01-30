@@ -74,9 +74,9 @@ const question =
 		})
 	},
 
-	getCoinsFromLookup: function(table, userid, cb)
+	getCoinsFromLookup: function(table, userid, topic, subtopic, cb)
 	{
-		orm.getCoinsFromLookup(table, userid, function(result)
+		orm.getCoinsFromLookup(table, userid, topic, subtopic, function(result)
 		{
 			cb(result)
 		})

@@ -101,10 +101,10 @@ module.exports =
 
 	deleteAnswers: function(req, res)
 	{
-		questionModel.getCoinsFromLookup("correctlookup", req.body.userid, function(correctcoins)
+		questionModel.getCoinsFromLookup("correctlookup", req.body.userid, req.body.topic, req.body.subtopic, function(correctcoins)
 		{
 			console.log("Total coins correct from here = "+correctcoins[0].totalcoins)
-			questionModel.getCoinsFromLookup("wronglookup", req.body.userid, function(wrongcoins)
+			questionModel.getCoinsFromLookup("wronglookup", req.body.userid, req.body.topic, req.body.subtopic, function(wrongcoins)
 			{
 				console.log("Total coins incorrect from here = "+wrongcoins[0].totalcoins)
 				questionModel.deleteAnswers("correctlookup", req.body.userid, req.body.topic, req.body.subtopic, function(result)

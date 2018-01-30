@@ -133,11 +133,12 @@ class Hub extends Component
 										: <i className="fas fa-check fa-1x hand-selected float-right"></i>
 									}
 								</div>
-								{this.state.allTopics.map((topic, i) =>
-									{
-										return <Topic key={i} name={topic.topic} topicSelected={this.topicSelected}/>
-									})}
 							</div>
+							{this.state.allTopics.map((topic, i) =>
+								{
+									return <Topic key={i} name={topic.topic} topicSelected={this.topicSelected}/>
+								})
+							}	
 						</div>
 						<div className="col-md-4">
 							<div className="topic-container">
@@ -152,36 +153,33 @@ class Hub extends Component
 										: <i className="fas fa-check fa-1x hand-selected float-right"></i>
 									}
 								</div>
-								{this.state.allSubtopics.map((topic, i) =>
-									{
-										return <Topic key={i} name={topic.subtopic} topicSelected={this.subtopicSelected}/>
-									})}
 							</div>
+							{this.state.allSubtopics.map((topic, i) =>
+								{
+									return <Topic key={i} name={topic.subtopic} topicSelected={this.subtopicSelected}/>
+								})
+							}
+							
 						</div>
 						<div className="col-md-4">
-							<div className="row">
-								<div className="col-md-12">
-									<div className="gamble-container">
-										<div className="topic-header">
-											Wager <img className="coin" alt="coins" src={coin} />
-											{this.state.gamble === 0
-												? <i className="fas fa-check fa-1x float-right"></i>
-												: <i className="fas fa-check fa-1x hand-selected float-right"></i>
-											}
-										</div>
-										<div className="row">
-										{this.state.gambleAmounts.map((amount, i) =>
-											{
-												return <GambleAmount key={i} amount={amount} gambleSelected={this.gambleSelected}/>
-											})}
-										</div>
-									</div>
+							<div className="topic-container">
+								<div className="topic-header">
+									Wager <img className="coin" alt="coins" src={coin} />
+									{this.state.gamble === 0
+											? <i className="fas fa-check fa-1x float-right"></i>
+											: <i className="fas fa-check fa-1x hand-selected float-right"></i>
+										}
 								</div>
 							</div>
+							{this.state.gambleAmounts.map((amount, i) =>
+								{
+									return <GambleAmount key={i} amount={amount} gambleSelected={this.gambleSelected}/>
+								})
+							}
 							<div className="row">
 								<div className="col-md-12">
 									<div className="choice-container">
-										<div className="topic-header">
+										<div className="selection-header">
 											Your Choices
 										</div>
 										Topic: {this.state.topic}

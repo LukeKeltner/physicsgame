@@ -119,9 +119,9 @@ const orm =
 		})
 	},
 
-	getCoinsFromLookup: function(table, userid, cb)
+	getCoinsFromLookup: function(table, userid, topic, subtopic, cb)
 	{
-		connection.query(`select sum(coins) as totalcoins from ${table} where userid = ?`, [userid], function(err, result)
+		connection.query(`select sum(coins) as totalcoins from ${table} where userid = ? and questionid in (select id from questions where topic = ? and subtopic = ?)`, [userid, topic, subtopic], function(err, result)
 		{
 			if(err){throw err}
 			cb(result)
