@@ -219,7 +219,7 @@ class Login extends Component
 	        						</div>
 								</div></div>
 							}
-							<label htmlFor="leaderboard">Would you like to be visable on the Leaderboard?</label>
+							<label htmlFor="leaderboard">Would you like to be visible on the Leaderboard?</label>
 								<select className="form-control" id="leaderboard">
 									<option>Yes</option>
 									<option>No</option>
