@@ -29,13 +29,13 @@ class User extends Component
 					?
 
 						<div className="row you">
-							<div className="col-md-2 text-center">
+							<div className="col-2 text-center">
 								{this.props.place+1}
 							</div>
-							<div className="col-md-5 text-center">
+							<div className="col-5 text-center">
 								{this.props.name}
 							</div>
-							<div className="col-md-5 text-center">
+							<div className="col-5 text-center">
 								{this.props.coins.toLocaleString()}
 							</div>
 						</div>
@@ -43,13 +43,13 @@ class User extends Component
 					:
 
 						<div className="row user">
-							<div className="col-md-2 text-center">
+							<div className="col-2 text-center">
 								{this.props.place+1}
 							</div>
-							<div className="col-md-5 text-center">
+							<div className="col-5 text-center">
 								{this.props.name}
 							</div>
-							<div className="col-md-5 text-center">
+							<div className="col-5 text-center">
 								{this.props.coins.toLocaleString()}
 							</div>
 						</div>
@@ -57,10 +57,10 @@ class User extends Component
 				:
 
 				<div className="row hidden">
-					<div className="col-md-2 text-center">
+					<div className="col-2 text-center">
 						{this.props.place+1}
 					</div>
-					<div className="col-md-10 text-center">
+					<div className="col-10 text-center">
 						This person chose not to be seen
 					</div>
 				</div>

@@ -32,13 +32,13 @@ class Leaderboard extends Component
 		return(
 			<div className="container">
 				<div className="row text-center">
-					<div className="col-md-2 leaderboard-heading">
+					<div className="col-2 leaderboard-heading">
 						Place
 					</div>
-					<div className="col-md-5 leaderboard-heading">
+					<div className="col-5 leaderboard-heading">
 						Name
 					</div>
-					<div className="col-md-5 leaderboard-heading">
+					<div className="col-5 leaderboard-heading">
 						Coins
 					</div>
 

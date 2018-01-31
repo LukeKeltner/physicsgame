@@ -36,7 +36,8 @@ class Header extends Component
 							</div>
 						</div>
 						<div className="col-md-2 coins text-center">
-							<img className="coin" alt="coins" src={coin} />{this.props.coins.toLocaleString()}
+							{/*<img className="coin" alt="coins" src={coin} />*/}
+							{this.props.coins.toLocaleString()}
 						</div>
 						<div className="col-md-5">
 							<div className="row">

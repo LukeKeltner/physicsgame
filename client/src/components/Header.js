@@ -77,34 +77,38 @@ class Header extends Component
 						</div>
 					</div>
 					<div className="col-md-2 coins text-center">
-						<img className="coin" alt="coins" src={coin} />{this.props.coins.toLocaleString()}
+						{/*<img className="coin" alt="coins" src={coin} />*/}
+						{this.props.coins.toLocaleString()}
 					</div>
 					<div className="col-md-5">
 						<div className="row">
-							<div className="col-md-3 text-center">
+							<div className="col-md-2 text-center">
+
+							</div>
+							<div className="col-md-2 text-center">
 								<i className="fas fa-question-circle fa-2x header-button" onClick={this.toHub}></i>
 								<br></br>
-								Get coins!
+								<div className="icon-name">Coins!</div>
 							</div>
 							<div className="col-md-2 text-center">
 								<i className="fas fa-list-alt fa-2x header-button" onClick={this.toStatus}></i>
 								<br></br>
-								Status
+								<div className="icon-name">Status</div>
 							</div>
 							<div className="col-md-2 text-center">
 								<i className="fas fa-shopping-cart fa-2x header-button" onClick={this.toStore}></i>
 								<br></br>
-								Store
+								<div className="icon-name">Store</div>
 							</div>
 							<div className="col-md-2 text-center">
 								<i className="fas fa-trophy fa-2x header-button" onClick={this.toLeaderboard}></i>
 								<br></br>
-								Leaderboard
+								<div className="icon-name">Leaders</div>
 							</div>
 							<div className="col-md-2 text-center">
 								<i className="fas fa-arrow-alt-circle-right fa-2x header-button" onClick={this.logout}></i>
 								<br></br>
-								Logout
+								<div className="icon-name">Logout</div>
 							</div>
 						</div>
 					</div>
