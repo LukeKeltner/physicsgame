@@ -12,20 +12,6 @@ class Header extends Component
 		currentColor: this.props.background
 	}
 
-	componentWillMount = () =>
-	{
-		if (this.props.background !== "")
-		{
-			const newStyles = 
-			{
-				backgroundColor: this.state.currentColor
-			}
-			const array = []
-			array.push(newStyles)
-			this.setState({styles: array})
-		}
-	}
-
 	componentWillReceiveProps  = nextProps =>
 	{
 		const newStyles = 

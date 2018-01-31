@@ -59,8 +59,6 @@ module.exports =
 		if (hawkenCheck === '@hawken.edu')
 		{
 			hawkenUserName = req.body.email.slice(0, -11);
-			console.log("We have a hawken email with userName "+hawkenUserName)
-
 			const studentFullName = `http://sas.hawken.edu/api/student/${hawkenUserName}/fullname`;
 
 			http.get(studentFullName, httpres => 
@@ -83,8 +81,6 @@ module.exports =
 
 				  	else
 				  	{
-				  		console.log("we found this student!")				  		
-					  	console.log("Result of trying to find hawken student "+body)
 					  	const hawkenName = body
 
 						const teacherName = `http://sas.hawken.edu/api/student/${hawkenUserName}/getteacherlastname/Physics_9`;
@@ -103,7 +99,6 @@ module.exports =
 							httpres2.on("end", () => 
 							{
 							  	const teacher = body2
-							  	console.log("Welcome "+hawkenName+" who has teacher "+teacher)
 								const name = hawkenName
 								const email = req.body.email
 								const password = req.body.password
@@ -115,7 +110,6 @@ module.exports =
 
 									allUsers.forEach(user =>
 									{
-										console.log(user.email+" and "+email)
 										if (user.email === email)
 										{
 											okay = false
@@ -160,7 +154,6 @@ module.exports =
 
 				allUsers.forEach(user =>
 				{
-					console.log(user.email+" and "+email)
 					if (user.email === email)
 					{
 						okay = false
@@ -285,51 +278,20 @@ module.exports =
 				})
 			})
 		}
+	},
 
-			//API.updateQuestion(updateQuestionData).then(result =>
-			//{
-/*				const data = 
-				{
-					table: "correctlookup",
-					column1: "userid",
-					column2: "questionid",
-					column3: "coins",
-					value1: parseInt(this.state.id),
-					value2: parseInt(this.state.currentquestion),
-					value3: parseInt(this.state.currentgamble)
-				}*/
+	headerColorChange: function(req, res)
+	{
 
-/*				API.insertLookup(data).then(result =>
-				{
-					this.setState({result: `Correct!  +${this.state.currentgamble}`})	
-
-					const data2 =
-					{
-						column: "currentquestion",
-						value: 0,
-						whereField: "id",
-						whereValue: This.state.id
-					}
-*/
-/*					API.updateUser(data2).then(result2 =>
-					{
-						const newCoins = this.state.coins + this.state.currentgamble
-						const data3 =
-						{
-							column: "coins",
-							value: newCoins,
-							whereField: "id",
-							whereValue: This.state.id
-						}
-
-						API.updateUser(data3).then(result3 =>
-						{
-							setTimeout(() =>
-							{
-								window.location = "/hub"
-							}, 1500)
-						})					
-					})*/
+		const newCoins = req.body.coins - 50;
+		
+		usersModel.updateUser("coins", newCoins, "id", req.body.userid, function(result)
+		{
+			usersModel.updateUser(req.body.headercolor, req.body.color, "id", req.body.userid, function(result)
+			{
+				res.end()
+			})
+		})		
 
 	}
 }

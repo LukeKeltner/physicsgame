@@ -35,6 +35,8 @@ router.route(`/updateQuestion`).post(questionController.updateQuestion)
 
 router.route(`/determineResult`).post(userController.determineResult)
 
+router.route(`/headerColorChange`).post(userController.headerColorChange)
+
 
 router.use(function(req, res) 
 {

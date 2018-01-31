@@ -2,13 +2,6 @@ import React, { Component } from 'react';
 import '../assets/styles/header.css'
 import coin from '../assets/images/coin.png'
 
-let styles =
-{
-	background:
-	{
-		"backgroundColor":"#6400a8"
-	}
-}
 
 class Header extends Component 
 {
@@ -20,25 +13,30 @@ class Header extends Component
 		currentColor: this.props.background
 	}
 
-	componentWillUpdate = () =>
+	componentWillMount = () =>
 	{
 		if (this.props.background !== "")
 		{
-			console.log("Hi!!!")
-
 			const newStyles = 
 			{
-				backgroundColor: this.state.currentColor
+				backgroundColor: this.props.background
 			}
-
-			console.log(newStyles)
 
 			const array = []
 			array.push(newStyles)
-
 			this.setState({styles: array})
-			console.log(this.state)
 		}
+	}
+
+	componentWillReceiveProps  = nextProps =>
+	{
+		const newStyles = 
+		{
+			backgroundColor: nextProps.background
+		}
+		const array = []
+		array.push(newStyles)
+		this.setState({styles: array})
 	}
 
 	toStatus = () =>

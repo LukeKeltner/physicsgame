@@ -46,7 +46,8 @@ class App extends Component
 
 				else
 				{
-					This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins})
+					console.log(user.data[0].headercolor)
+					This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, background: user.data[0].headercolor})
 				}
 			})				
 		}

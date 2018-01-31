@@ -25,8 +25,10 @@ create table users
     currentquestion int(50) default 0,
     currentgamble int(50) default 0,
     teacher varchar(255) not null,
+    headercolor varchar(255) default "#6400a8",
     primary key(id)
 );
+
 
 create table correctlookup
 (

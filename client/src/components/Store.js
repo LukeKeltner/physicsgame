@@ -12,7 +12,7 @@ class Store extends Component
 		id: 0,
 		name: "",
 		coins: "",
-	    background: '#42f480',
+	    background: 'red',
 	}
 
 	componentWillMount = () =>
@@ -30,7 +30,23 @@ class Store extends Component
 	handleChangeComplete = (color) => 
 	{
 		this.setState({ background: color.hex });
-	};
+	}
+
+	buyColor = event =>
+	{
+		const data = 
+		{
+			userid: this.state.id,
+			headercolor: "headercolor",
+			color: this.state.background,
+			coins: this.state.coins
+		}
+
+		API.headerColorChange(data).then(result =>
+		{
+			window.location.reload()
+		})
+	}
 
 
 	render()
@@ -58,7 +74,12 @@ class Store extends Component
 						</div>
 						<div className="row">
 							<div className="col-md-12">
-								<button type="button" class="btn btn-success btn-lg float-right">Buy Color! 50</button>
+								{this.state.coins >= 50
+									?
+										<button type="button" className="btn btn-success btn-lg float-right" onClick={this.buyColor}>Buy Color! 50</button>
+									:
+										<button type="button" className="btn btn-success btn-lg float-right" onClick={this.buyColor} disabled>Buy Color! 50</button>
+								}
 							</div>
 						</div>
 					</div>

@@ -75,5 +75,10 @@ export default {
 	determineResult: function(data)
 	{
 		return axios.post(`/determineResult`, data)
+	},
+
+	headerColorChange: function(data)
+	{
+		return axios.post(`headerColorChange`, data)
 	}
 };
