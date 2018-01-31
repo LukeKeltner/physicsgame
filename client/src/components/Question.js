@@ -171,7 +171,7 @@ class Question extends Component
 										<div className="col-md-12">
 											{this.state.text}
 											<br></br>
-											<img className="question-pic" src={this.state.img} />
+											<img className="question-pic" alt="question-img" src={this.state.img} />
 										</div>
 									</div>
 								</div>

@@ -20,6 +20,7 @@ class App extends Component
 		id: 0,
 		name: "",
 		coins: "",
+		teacher: "",
 		background: ""
 	}
 
@@ -47,7 +48,7 @@ class App extends Component
 				else
 				{
 					console.log(user.data[0].headercolor)
-					This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, background: user.data[0].headercolor})
+					This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, teacher:user.data[0].teacher, background: user.data[0].headercolor})
 				}
 			})				
 		}
@@ -59,7 +60,7 @@ class App extends Component
 			<div>
 				{!this.state.login
 					?
-					<Header name={this.state.name} coins={this.state.coins} background={this.state.background}/>
+					<Header name={this.state.name} coins={this.state.coins} background={this.state.background} teacher={this.state.teacher}/>
 					:
 					<div></div>
 				}

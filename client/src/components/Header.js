@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../assets/styles/header.css'
-import coin from '../assets/images/coin.png'
+//import coin from '../assets/images/coin.png'
 
 
 class Header extends Component 
@@ -75,6 +75,12 @@ class Header extends Component
 						<div className="logo">
 							<i className="fas fa-user avatar"></i>Hi {this.props.name}!
 						</div>
+						{this.props.teacher === "yes"
+							?
+								<button type="button" className="btn btn-info">Check Grades</button>
+							:
+								""
+						}
 					</div>
 					<div className="col-md-2 coins text-center">
 						{/*<img className="coin" alt="coins" src={coin} />*/}

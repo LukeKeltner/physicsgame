@@ -18,7 +18,8 @@ class Hub extends Component
 		gambleAmounts: [1, 20, 50],
 		name:"",
 		coins: 0,
-		id: 0
+		id: 0,
+		teacher: ""
 	}
 
 	componentWillMount = () =>
@@ -39,7 +40,7 @@ class Hub extends Component
 			{
 				API.getAllTopics().then(function(result)
 				{
-					This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, allTopics: result.data})
+					This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, teacher:user.data[0].teacher, allTopics: result.data})
 				})
 			}
 		})
@@ -91,7 +92,7 @@ class Hub extends Component
 				const data2 =
 				{
 					column: "currentgamble",
-					value: parseInt(This.state.gamble),
+					value: parseInt(This.state.gamble, 10),
 					whereField: "id",
 					whereValue: This.state.id
 				}

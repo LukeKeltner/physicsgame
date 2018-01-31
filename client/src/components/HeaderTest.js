@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../assets/styles/header.css'
-import coin from '../assets/images/coin.png'
+//import coin from '../assets/images/coin.png'
 
 class Header extends Component 
 {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../assets/styles/user.css'
-import API from "../utils/API";
 
 
 class User extends Component 

@@ -82,9 +82,9 @@ class Login extends Component
 					This.setState({registerError: "This email is already in use"})
 				}
 
-				else if (result.data === "No Hawken Student")
+				else if (result.data === "No Hawken Account")
 				{
-					This.setState({registerError: "We can't find a Hawken student with this email"})
+					This.setState({registerError: "We can't find a Hawken account with this email"})
 				}
 
 				else
@@ -234,7 +234,7 @@ class Login extends Component
   									<strong>Oops!</strong> {this.state.registerError}
 								</div>
 							}
-							<button type="submit" className="btn btn-primary" onClick={this.register}>Submit</button>
+							<button type="submit" className="btn btn-primary" onClick={this.register}>Register</button>
 						</form>
 					</div>
 				</div>

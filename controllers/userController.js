@@ -76,13 +76,73 @@ module.exports =
 				{
 				  	if (body === "NULL")
 				  	{
-				  		res.send("No Hawken Student")
+				  		const teacherLastName = `http://sas.hawken.edu/api/teacher/${hawkenUserName}/lastname`;
+				  		http.get(teacherLastName, httpres3 =>
+				  		{
+				  			httpres3.setEncoding("utf8");
+
+				  			let body3 = "";
+
+				  			httpres3.on("data", data =>
+				  			{
+				  				body3 += data;
+				  			});
+
+				  			httpres3.on("end", () =>
+				  			{
+
+				  				if (body3 === "NULL")
+				  				{
+				  					console.log("HIT!")
+				  					res.send("No Hawken Account")
+				  				}
+
+				  				else
+				  				{
+				  					const name = body3
+				  					const teacher = "yes"
+				  					const email = req.body.email
+				  					const password = req.body.password
+				  					const token = createToken()
+				  					const section = ""
+
+									usersModel.findAll(function(allUsers)
+									{
+										let okay = true;
+
+										allUsers.forEach(user =>
+										{
+											if (user.email === email)
+											{
+												okay = false
+											}
+										})
+
+										if (okay)
+										{
+											const saltRounds = 10;
+											bcrypt.hash(password, saltRounds, function(err, hash)
+											{
+												usersModel.registerNewUser(name, email, hash, token, leaderboard, teacher, section, function(result)
+												{
+													res.send(token)
+												})
+											});
+										}
+
+										else
+										{
+											res.send("duplicate email")
+										}
+									})
+				  				}
+				  			})
+				  		})
 				  	}
 
 				  	else
 				  	{
-					  	const hawkenName = body
-
+				  		const hawkenName = body
 						const teacherName = `http://sas.hawken.edu/api/student/${hawkenUserName}/getteacherlastname/Physics_9`;
 
 						http.get(teacherName, httpres2 => 
@@ -98,40 +158,59 @@ module.exports =
 
 							httpres2.on("end", () => 
 							{
-							  	const teacher = body2
-								const name = hawkenName
-								const email = req.body.email
-								const password = req.body.password
-								const token = createToken()
 
-								usersModel.findAll(function(allUsers)
+								const getSection = `http://sas.hawken.edu/api/student//${hawkenUserName}/getsection/Physics_9`;
+
+								http.get(getSection, httpres4 =>
 								{
-									let okay = true;
+									httpres4.setEncoding("utf8");
 
-									allUsers.forEach(user =>
+									let body4 = "";
+
+									httpres4.on("data", data =>
 									{
-										if (user.email === email)
-										{
-											okay = false
-										}
+										body4 += data;
 									})
 
-									if (okay)
+									httpres4.on("end", () =>
 									{
-										const saltRounds = 10;
-										bcrypt.hash(password, saltRounds, function(err, hash)
-										{
-											usersModel.registerNewUser(name, email, hash, token, leaderboard, teacher, function(result)
-											{
-												res.send(token)
-											})
-										});
-									}
+									  	const teacher = body2
+										const name = hawkenName
+										const email = req.body.email
+										const password = req.body.password
+										const section = body4
+										const token = createToken()
 
-									else
-									{
-										res.send("duplicate email")
-									}
+										usersModel.findAll(function(allUsers)
+										{
+											let okay = true;
+
+											allUsers.forEach(user =>
+											{
+												if (user.email === email)
+												{
+													okay = false
+												}
+											})
+
+											if (okay)
+											{
+												const saltRounds = 10;
+												bcrypt.hash(password, saltRounds, function(err, hash)
+												{
+													usersModel.registerNewUser(name, email, hash, token, leaderboard, teacher, section, function(result)
+													{
+														res.send(token)
+													})
+												});
+											}
+
+											else
+											{
+												res.send("duplicate email")
+											}
+										})
+									})
 								})
 							});
 						});
@@ -146,6 +225,7 @@ module.exports =
 			const email = req.body.email
 			const password = req.body.password
 			const teacher = ""
+			const section = ""
 			const token = createToken()
 
 			usersModel.findAll(function(allUsers)
@@ -165,7 +245,7 @@ module.exports =
 					const saltRounds = 10;
 					bcrypt.hash(password, saltRounds, function(err, hash)
 					{
-						usersModel.registerNewUser(name, email, hash, token, leaderboard, teacher, function(result)
+						usersModel.registerNewUser(name, email, hash, token, leaderboard, teacher, section, function(result)
 						{
 							res.send(token)
 						})
