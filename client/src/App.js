@@ -9,6 +9,7 @@ import Hub from './components/Hub'
 import Question from './components/Question'
 import Status from './components/Status'
 import Leaderboard from './components/Leaderboard'
+import Store from './components/Store'
 import NoMatch from './components/NoMatch'
 
 class App extends Component 
@@ -18,7 +19,8 @@ class App extends Component
 		login: false,
 		id: 0,
 		name: "",
-		coins: ""
+		coins: "",
+		background: ""
 	}
 
 	componentWillMount = () =>
@@ -56,7 +58,7 @@ class App extends Component
 			<div>
 				{!this.state.login
 					?
-					<Header name={this.state.name} coins={this.state.coins}/>
+					<Header name={this.state.name} coins={this.state.coins} background={this.state.background}/>
 					:
 					<div></div>
 				}
@@ -67,6 +69,7 @@ class App extends Component
 			            <Route exact path="/question" component={Question} />
 			            <Route exact path="/status" component={Status} />
 			            <Route exact path="/leaderboard" component={Leaderboard} />
+			            <Route exact path="/store" component={Store} />
 			            <Route component={NoMatch} />
 			        </Switch>
 			    </Router>

@@ -2,18 +2,53 @@ import React, { Component } from 'react';
 import '../assets/styles/header.css'
 import coin from '../assets/images/coin.png'
 
+let styles =
+{
+	background:
+	{
+		"backgroundColor":"#6400a8"
+	}
+}
 
 class Header extends Component 
 {
 	state =
 	{
 		name: this.props.name,
-		coins: this.props.coins
+		coins: this.props.coins,
+		styles: [],
+		currentColor: this.props.background
+	}
+
+	componentWillUpdate = () =>
+	{
+		if (this.props.background !== "")
+		{
+			console.log("Hi!!!")
+
+			const newStyles = 
+			{
+				backgroundColor: this.state.currentColor
+			}
+
+			console.log(newStyles)
+
+			const array = []
+			array.push(newStyles)
+
+			this.setState({styles: array})
+			console.log(this.state)
+		}
 	}
 
 	toStatus = () =>
 	{
 		window.location="/status"
+	}
+
+	toStore = () =>
+	{
+		window.location="/store"
 	}
 
 	toHub = () =>
@@ -36,7 +71,7 @@ class Header extends Component
 	{
 		return(
 			
-			<div className="container-fluid header-container">
+			<div className="container-fluid header-container" style={this.state.styles[0]}>
 				<div className="row">
 					<div className="col-md-5">
 						<div className="logo">
@@ -53,17 +88,22 @@ class Header extends Component
 								<br></br>
 								Get coins!
 							</div>
-							<div className="col-md-3 text-center">
+							<div className="col-md-2 text-center">
 								<i className="fas fa-list-alt fa-2x header-button" onClick={this.toStatus}></i>
 								<br></br>
 								Status
 							</div>
-							<div className="col-md-3 text-center">
+							<div className="col-md-2 text-center">
+								<i className="fas fa-shopping-cart fa-2x header-button" onClick={this.toStore}></i>
+								<br></br>
+								Store
+							</div>
+							<div className="col-md-2 text-center">
 								<i className="fas fa-trophy fa-2x header-button" onClick={this.toLeaderboard}></i>
 								<br></br>
 								Leaderboard
 							</div>
-							<div className="col-md-3 text-center">
+							<div className="col-md-2 text-center">
 								<i className="fas fa-arrow-alt-circle-right fa-2x header-button" onClick={this.logout}></i>
 								<br></br>
 								Logout

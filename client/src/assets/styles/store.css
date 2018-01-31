@@ -1,0 +1,11 @@
+.item-container
+{
+	border: 1px solid #d6d6d6;;
+	padding:20px;
+	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.item-name
+{
+	font-weight: bold;
+}
