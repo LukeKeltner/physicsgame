@@ -82,6 +82,11 @@ class Login extends Component
 					This.setState({registerError: "This email is already in use"})
 				}
 
+				else if (result.data === "No Hawken Student")
+				{
+					This.setState({registerError: "We can't find a Hawken student with this email"})
+				}
+
 				else
 				{
 					sessionStorage.setItem('token', result.data);
@@ -101,8 +106,6 @@ class Login extends Component
 			email: this.state.loginEmail,
 			password: this.state.loginPassword
 		}
-
-		console.log(data)
 
 		API.login(data).then(function(result)
 		{

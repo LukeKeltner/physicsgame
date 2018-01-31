@@ -23,6 +23,7 @@ class Hub extends Component
 
 	componentWillMount = () =>
 	{
+
 		const This = this;
 		const token = sessionStorage.getItem('token');
 
@@ -186,7 +187,7 @@ class Hub extends Component
 										<br></br>
 										Subtopic: {this.state.subtopic}
 										<br></br>
-										Gamble: {this.state.gamble}
+										Wager: {this.state.gamble}
 										{this.state.topic !== "" && this.state.subtopic !== "" && this.state.gamble !== 0
 										?<button type="button" className="btn btn-primary btn-lg btn-block" onClick={this.getNewQuestion}>Go for it!</button>
 										:" "}

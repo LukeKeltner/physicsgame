@@ -26,9 +26,9 @@ const user =
 		})
 	},
 
-	registerNewUser: function(name, email, password, token, leaderboard, cb)
+	registerNewUser: function(name, email, password, token, leaderboard, teacher, cb)
 	{
-		orm.registerNewUser(name, email, password, token, leaderboard, function(result)
+		orm.registerNewUser(name, email, password, token, leaderboard, teacher, function(result)
 		{
 			cb(result)
 		})

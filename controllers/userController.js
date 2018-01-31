@@ -2,6 +2,7 @@ const express = require('express');
 const usersModel = require('../models/usersModel.js');
 const questionModel = require('../models/questionModel.js');
 const bcrypt = require('bcrypt');
+const http = require("http");
 
 const createToken = function()
 {
@@ -46,10 +47,6 @@ module.exports =
 
 	registerNewUser: function(req, res)
 	{
-		const name = req.body.name
-		const email = req.body.email
-		const password = req.body.password
-		const token = createToken()
 		let leaderboard = 0;
 
 		if (req.body.leaderboard === "Yes")
@@ -57,36 +54,137 @@ module.exports =
 			leaderboard = 1
 		}
 
-		usersModel.findAll(function(allUsers)
-		{
-			let okay = true;
+		const hawkenCheck = req.body.email.substr(req.body.email.length - 11)
 
-			allUsers.forEach(user =>
+		if (hawkenCheck === '@hawken.edu')
+		{
+			hawkenUserName = req.body.email.slice(0, -11);
+			console.log("We have a hawken email with userName "+hawkenUserName)
+
+			const studentFullName = `http://sas.hawken.edu/api/student/${hawkenUserName}/fullname`;
+
+			http.get(studentFullName, httpres => 
 			{
-				console.log(user.email+" and "+email)
-				if (user.email === email)
+				httpres.setEncoding("utf8");
+
+				let body = "";
+
+				httpres.on("data", data => 
 				{
-					okay = false
+				    body += data;
+				});
+
+				httpres.on("end", () => 
+				{
+				  	if (body === "NULL")
+				  	{
+				  		res.send("No Hawken Student")
+				  	}
+
+				  	else
+				  	{
+				  		console.log("we found this student!")				  		
+					  	console.log("Result of trying to find hawken student "+body)
+					  	const hawkenName = body
+
+						const teacherName = `http://sas.hawken.edu/api/student/${hawkenUserName}/getteacherlastname/Physics_9`;
+
+						http.get(teacherName, httpres2 => 
+						{
+							httpres2.setEncoding("utf8");
+
+							let body2 = "";
+
+							httpres2.on("data", data => 
+							{
+							    body2 += data;
+							});
+
+							httpres2.on("end", () => 
+							{
+							  	const teacher = body2
+							  	console.log("Welcome "+hawkenName+" who has teacher "+teacher)
+								const name = hawkenName
+								const email = req.body.email
+								const password = req.body.password
+								const token = createToken()
+
+								usersModel.findAll(function(allUsers)
+								{
+									let okay = true;
+
+									allUsers.forEach(user =>
+									{
+										console.log(user.email+" and "+email)
+										if (user.email === email)
+										{
+											okay = false
+										}
+									})
+
+									if (okay)
+									{
+										const saltRounds = 10;
+										bcrypt.hash(password, saltRounds, function(err, hash)
+										{
+											usersModel.registerNewUser(name, email, hash, token, leaderboard, teacher, function(result)
+											{
+												res.send(token)
+											})
+										});
+									}
+
+									else
+									{
+										res.send("duplicate email")
+									}
+								})
+							});
+						});
+					}
+				});
+			});
+		}
+
+		else
+		{
+			const name = req.body.name
+			const email = req.body.email
+			const password = req.body.password
+			const teacher = ""
+			const token = createToken()
+
+			usersModel.findAll(function(allUsers)
+			{
+				let okay = true;
+
+				allUsers.forEach(user =>
+				{
+					console.log(user.email+" and "+email)
+					if (user.email === email)
+					{
+						okay = false
+					}
+				})
+
+				if (okay)
+				{
+					const saltRounds = 10;
+					bcrypt.hash(password, saltRounds, function(err, hash)
+					{
+						usersModel.registerNewUser(name, email, hash, token, leaderboard, teacher, function(result)
+						{
+							res.send(token)
+						})
+					});
+				}
+
+				else
+				{
+					res.send("duplicate email")
 				}
 			})
-
-			if (okay)
-			{
-				const saltRounds = 10;
-				bcrypt.hash(password, saltRounds, function(err, hash)
-				{
-					usersModel.registerNewUser(name, email, hash, token, leaderboard, function(result)
-					{
-						res.send(token)
-					})
-				});
-			}
-
-			else
-			{
-				res.send("duplicate email")
-			}
-		})
+		}
 	},
 
 	login: function(req, res)

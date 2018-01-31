@@ -38,15 +38,15 @@ class Header extends Component
 			
 			<div className="container-fluid header-container">
 				<div className="row">
-					<div className="col-md-4">
+					<div className="col-md-5">
 						<div className="logo">
 							<i className="fas fa-user avatar"></i>Hi {this.props.name}!
 						</div>
 					</div>
-					<div className="col-md-4 coins text-center">
+					<div className="col-md-2 coins text-center">
 						<img className="coin" alt="coins" src={coin} />{this.props.coins.toLocaleString()}
 					</div>
-					<div className="col-md-4">
+					<div className="col-md-5">
 						<div className="row">
 							<div className="col-md-3 text-center">
 								<i className="fas fa-question-circle fa-2x header-button" onClick={this.toHub}></i>

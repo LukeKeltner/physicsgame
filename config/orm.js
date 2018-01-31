@@ -56,9 +56,9 @@ const orm =
 		})
 	},
 
-	registerNewUser: function(name, email, password, token, leaderboard, cb)
+	registerNewUser: function(name, email, password, token, leaderboard, teacher, cb)
 	{
-		connection.query(`INSERT INTO users(name, email, password, token, leaderboard) VALUES (?, ?, ?, ?, ?);`, [name, email, password, token, leaderboard], function(err, result)
+		connection.query(`INSERT INTO users(name, email, password, token, leaderboard, teacher) VALUES (?, ?, ?, ?, ?, ?);`, [name, email, password, token, leaderboard, teacher], function(err, result)
 		{
 			if(err){throw err}
 			cb(result)
