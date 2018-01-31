@@ -24,6 +24,7 @@ create table users
     coins int(50) default 100,
     currentquestion int(50) default 0,
     currentgamble int(50) default 0,
+    teacher varchar(255) not null,
     primary key(id)
 );
 
