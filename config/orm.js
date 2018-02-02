@@ -56,9 +56,9 @@ const orm =
 		})
 	},
 
-	registerNewUser: function(name, email, password, token, leaderboard, teacher, section, cb)
+	registerNewUser: function(firstname, lastname, email, password, token, leaderboard, teacher, section, cb)
 	{
-		connection.query(`INSERT INTO users(name, email, password, token, leaderboard, teacher, section) VALUES (?, ?, ?, ?, ?, ?, ?);`, [name, email, password, token, leaderboard, teacher, section], function(err, result)
+		connection.query(`INSERT INTO users(firstname, lastname, email, password, token, leaderboard, teacher, section) VALUES (?, ?, ?, ?, ?, ?, ?, ?);`, [firstname, lastname, email, password, token, leaderboard, teacher, section], function(err, result)
 		{
 			if(err){throw err}
 			cb(result)
@@ -112,7 +112,7 @@ const orm =
 
 	getLeaderboard: function(cb)
 	{
-		connection.query(`select id,name,coins,leaderboard from users order by coins desc;`, function(err, result)
+		connection.query(`select id,firstname,lastname,coins,leaderboard from users order by coins desc;`, function(err, result)
 		{
 			if(err){throw err}
 			cb(result)
@@ -126,7 +126,16 @@ const orm =
 			if(err){throw err}
 			cb(result)
 		})
-	}
+	},
+
+	findAllStudents: function(teacher, cb)
+	{
+		connection.query(`SELECT id, firstname, lastname, section from users where teacher = ? order by section, lastname asc;`, [teacher], function(err, result)
+		{
+			if(err){throw err}
+			cb(result)
+		})
+	},
 }
 
 module.exports = orm;

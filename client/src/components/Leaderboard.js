@@ -45,7 +45,7 @@ class Leaderboard extends Component
 				</div>
 				{this.state.users.map((user, i) =>
 					{
-						return <User key={i} userid={this.state.userid} id={user.id} name={user.name} coins={user.coins} leaderboard={user.leaderboard} place={i} />
+						return <User key={i} userid={this.state.userid} id={user.id} name={user.firstname+" "+user.lastname} coins={user.coins} leaderboard={user.leaderboard} place={i} />
 					})}
 
 			</div>

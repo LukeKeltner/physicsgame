@@ -80,6 +80,7 @@ module.exports =
 		questionModel.findQuestion(req.params.id, function(result)
 		{
 			const response = result[0]
+			console.log(response.question)
 			const question = JSON.parse(response.question)
 			const answers = []
 			question.correct.forEach(answer => answers.push({text: answer, type: "correct", selected: false}))

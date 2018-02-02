@@ -1,6 +1,6 @@
 insert into questions(topic, subtopic, question) values
 (
-    "Fictional Characters",
+    "Fictional Stories",
     "Harry Potter",
     '{
         "text":"Who is this character?",
@@ -11,7 +11,7 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Fictional Characters",
+    "Fictional Stories",
     "Harry Potter",
     '{
         "text":"Who is this character?",
@@ -22,7 +22,7 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Fictional Characters",
+    "Fictional Stories",
     "Harry Potter",
     '{
         "text":"Who is this character?",
@@ -33,7 +33,7 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Fictional Characters",
+    "Fictional Stories",
     "Harry Potter",
     '{
         "text":"Who is this character?",
@@ -44,7 +44,7 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Fictional Characters",
+    "Fictional Stories",
     "Harry Potter",
     '{
         "text":"Who is this character?",
@@ -55,27 +55,27 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Fictional Characters",
+    "Fictional Stories",
     "Disney",
     '{
         "text":"In Beauty and the Beast, Mrs. Potts is the mother of which personified household object?",
         "correct":["A teacup named Chip"],
-        "wrong":["A candlestick named Lumiere", "A clock named Cogsworth", "A footstool named Sultan"],
+        "wrong":["A candlestick named Lumiere", "A clock named Cogsworth", "A footstool named Sultan"]
     }'
 ),
 
 (
-    "Fictional Characters",
+    "Fictional Stories",
     "Disney",
     '{
         "text":"Which of the following Disney characters were born into royalty?",
         "correct":["Hercules", "Simba", "Ariel"],
-        "wrong":["Aladdin", "Belle"],
+        "wrong":["Aladdin", "Belle"]
     }'
 ),
 
 (
-    "Fictional Characters",
+    "Fictional Stories",
     "Disney",
     '{
         "text":"Which Disney Princess owned a pet tiger named Raja?",
@@ -86,12 +86,32 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
+    "Fictional Stories",
+    "Disney",
+    '{
+        "text":"In The Sword in the Stone, what does Merlin call The Greatest Force on Earth?",
+        "correct":["Love"],
+        "wrong":["Happiness", "Power", "Courage", "Money"]
+    }'
+),
+
+(
+    "Fictional Stories",
+    "Disney",
+    '{
+        "text":"In the Lion King, where does Mufasa and his family live?",
+        "correct":["Pride Rock"],
+        "wrong":["Bikini Bottom", "Camelot", "The Upside Down", "Hogwarts", "Middle Earth"]
+    }'
+),
+
+(
     "Math",
     "Addition",
     '{
         "text":"What is 2+2?",
         "correct":["4"],
-        "wrong":["1", "2", "3", "5"],
+        "wrong":["1", "2", "3", "5"]
     }'
 ),
 
@@ -101,7 +121,7 @@ insert into questions(topic, subtopic, question) values
     '{
         "text":"What is 14+6?",
         "correct":["20"],
-        "wrong":["10", "20", "30", "40"],
+        "wrong":["10", "20", "30", "40"]
     }'
 ),
 
@@ -111,7 +131,7 @@ insert into questions(topic, subtopic, question) values
     '{
         "text":"What is 300+14?",
         "correct":["314"],
-        "wrong":["315", "209", "340", "460"],
+        "wrong":["315", "209", "340", "460"]
     }'
 ),
 
@@ -121,7 +141,7 @@ insert into questions(topic, subtopic, question) values
     '{
         "text":"What is 3+3?",
         "correct":["6"],
-        "wrong":["7", "8", "9", "5"],
+        "wrong":["7", "8", "9", "5"]
     }'
 ),
 
@@ -131,7 +151,7 @@ insert into questions(topic, subtopic, question) values
     '{
         "text":"What is 2+6?",
         "correct":["8"],
-        "wrong":["13", "29", "11", "10"],
+        "wrong":["13", "29", "11", "10"]
     }'
 ),
 
@@ -141,7 +161,7 @@ insert into questions(topic, subtopic, question) values
     '{
         "text":"What is 2x6?",
         "correct":["12"],
-        "wrong":["13", "29", "11", "10"],
+        "wrong":["13", "29", "11", "10"]
     }'
 ),
 
@@ -151,7 +171,7 @@ insert into questions(topic, subtopic, question) values
     '{
         "text":"What is 4x6?",
         "correct":["24"],
-        "wrong":["23", "29", "21", "20"],
+        "wrong":["23", "29", "21", "20"]
     }'
 ),
 
@@ -161,6 +181,26 @@ insert into questions(topic, subtopic, question) values
     '{
         "text":"x squared equals 4, what is x?",
         "correct":["+2", "-2"],
-        "wrong":["+4", "-4", "+1", "-1", "0"],
+        "wrong":["+4", "-4", "+1", "-1", "0"]
+    }'
+),
+
+(
+    "Math",
+    "Multiplication",
+    '{
+        "text":"What is 11x2?",
+        "correct":["22"],
+        "wrong":["23", "29", "21", "20"]
+    }'
+),
+
+(
+    "Math",
+    "Multiplication",
+    '{
+        "text":"What is i squared?",
+        "correct":["-1"],
+        "wrong":["1", "0", "2", "-2"]
     }'
 );

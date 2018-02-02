@@ -76,7 +76,7 @@ module.exports =
 				{
 				  	if (body === "NULL")
 				  	{
-				  		const teacherLastName = `http://sas.hawken.edu/api/teacher/${hawkenUserName}/lastname`;
+				  		const teacherLastName = `http://sas.hawken.edu/api/teacher/${hawkenUserName}/fullname`;
 				  		http.get(teacherLastName, httpres3 =>
 				  		{
 				  			httpres3.setEncoding("utf8");
@@ -93,13 +93,14 @@ module.exports =
 
 				  				if (body3 === "NULL")
 				  				{
-				  					console.log("HIT!")
 				  					res.send("No Hawken Account")
 				  				}
 
 				  				else
 				  				{
-				  					const name = body3
+				  					const nameArray = body3.split(" ");
+				  					const firstname = nameArray[0]
+				  					const lastname = nameArray[1]
 				  					const teacher = "yes"
 				  					const email = req.body.email
 				  					const password = req.body.password
@@ -123,7 +124,7 @@ module.exports =
 											const saltRounds = 10;
 											bcrypt.hash(password, saltRounds, function(err, hash)
 											{
-												usersModel.registerNewUser(name, email, hash, token, leaderboard, teacher, section, function(result)
+												usersModel.registerNewUser(firstname, lastname, email, hash, token, leaderboard, teacher, section, function(result)
 												{
 													res.send(token)
 												})
@@ -174,6 +175,9 @@ module.exports =
 
 									httpres4.on("end", () =>
 									{
+										const nameArray = body.split(" ");
+				  						const firstname = nameArray[0]
+				  						const lastname = nameArray[1]
 									  	const teacher = body2
 										const name = hawkenName
 										const email = req.body.email
@@ -198,7 +202,7 @@ module.exports =
 												const saltRounds = 10;
 												bcrypt.hash(password, saltRounds, function(err, hash)
 												{
-													usersModel.registerNewUser(name, email, hash, token, leaderboard, teacher, section, function(result)
+													usersModel.registerNewUser(firstname, lastname, email, hash, token, leaderboard, teacher, section, function(result)
 													{
 														res.send(token)
 													})
@@ -221,7 +225,8 @@ module.exports =
 
 		else
 		{
-			const name = req.body.name
+			const firstname = req.body.firstname
+			const lastname = req.body.lastname
 			const email = req.body.email
 			const password = req.body.password
 			const teacher = ""
@@ -245,7 +250,7 @@ module.exports =
 					const saltRounds = 10;
 					bcrypt.hash(password, saltRounds, function(err, hash)
 					{
-						usersModel.registerNewUser(name, email, hash, token, leaderboard, teacher, section, function(result)
+						usersModel.registerNewUser(firstname, lastname, email, hash, token, leaderboard, teacher, section, function(result)
 						{
 							res.send(token)
 						})
@@ -362,7 +367,6 @@ module.exports =
 
 	headerColorChange: function(req, res)
 	{
-
 		const newCoins = req.body.coins - 50;
 		
 		usersModel.updateUser("coins", newCoins, "id", req.body.userid, function(result)
@@ -372,6 +376,37 @@ module.exports =
 				res.end()
 			})
 		})		
+	},
 
-	}
+	findAllStudents: function(req, res)
+	{
+
+		usersModel.findDistinctWhere("section", "users", "teacher", req.params.teacher, function(sections)
+		{
+			console.log(sections)
+			usersModel.findAllStudents(req.params.teacher, function(students)
+			{
+				const classes = []
+
+				sections.forEach(section =>
+				{
+					idArray = []
+					studentArray = []
+
+					students.forEach(student =>
+					{
+						if (section.section === student.section)
+						{
+							idArray.push(student.id)
+							studentArray.push(student.firstname+" "+student.lastname)
+						}
+					})
+
+					classes.push({section: section.section, ids: idArray, students: studentArray})
+				})
+
+				console.log(classes)
+			})
+		})
+	},
 }

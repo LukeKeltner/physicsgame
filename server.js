@@ -19,23 +19,3 @@ app.listen(port, function()
 {
 	console.log("Listening on port "+port)
 });
-
-
-			const studentFullName = `http://sas.hawken.edu/api/teacher/rshur/fullname`;
-
-			http.get(studentFullName, httpres => 
-			{
-				httpres.setEncoding("utf8");
-
-				let body = "";
-
-				httpres.on("data", data => 
-				{
-				    body += data;
-				});
-
-				httpres.on("end", () => 
-				{
-					console.log(body)
-				})
-			})

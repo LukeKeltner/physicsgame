@@ -10,6 +10,7 @@ import Question from './components/Question'
 import Status from './components/Status'
 import Leaderboard from './components/Leaderboard'
 import Store from './components/Store'
+import Grades from './components/Grades'
 import NoMatch from './components/NoMatch'
 
 class App extends Component 
@@ -47,8 +48,7 @@ class App extends Component
 
 				else
 				{
-					console.log(user.data[0].headercolor)
-					This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, teacher:user.data[0].teacher, background: user.data[0].headercolor})
+					This.setState({id: user.data[0].id, name: user.data[0].firstname, coins: user.data[0].coins, teacher:user.data[0].teacher, background: user.data[0].headercolor})
 				}
 			})				
 		}
@@ -72,6 +72,7 @@ class App extends Component
 			            <Route exact path="/status" component={Status} />
 			            <Route exact path="/leaderboard" component={Leaderboard} />
 			            <Route exact path="/store" component={Store} />
+			            <Route exact path="/grades" component={Grades} />
 			            <Route component={NoMatch} />
 			        </Switch>
 			    </Router>

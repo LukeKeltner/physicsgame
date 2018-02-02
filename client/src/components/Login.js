@@ -9,12 +9,14 @@ class Login extends Component
 	{
 		loginEmail: "",
 		loginPassword: "",
-		registerName: "",
+		registerFirstName: "",
+		registerLastName: "",
 		registerEmail: "",
 		registerPassword1: "",
 		registerPassword2: "",
 		leaderboard: "",
-		badName: false,
+		badFirstName: false,
+		badLastName: false,
 		badRegisterEmail: false,
 		badLoginEmail: false,
 		loginError: "",
@@ -24,17 +26,32 @@ class Login extends Component
 	handleChange = event =>
 	{
 
-		if ([event.target.id][0] === "registerName")
+		if ([event.target.id][0] === "registerFirstName")
 		{
 			const badNames = ["fuck", "ass", "shit", "pussy", "vagina", "penis", "head", "cum", "jizz", "bitch", "nipple", "cunt", "sick", "dick", "cock", "ball", "slut", "whore", "suck", "anal", "blow", "tit", "diarrhea", "boob", "stain", "moist", "hairy", "fag", "gay", "lesbian", "trans", "homo", "nigg", "dyke", "dike", "jew", "kike", "diddle", "sac", "sex", "hump", "butt", "munch", "dumb", "stupid", "god", "damn", "dammit"]
 
-			this.setState({badName: false})
+			this.setState({badFirstName: false})
 			badNames.forEach(word =>
 			{
 				const programmingReg = new RegExp(word)
-				if ((programmingReg.test([event.target.value][0].toLowerCase()) || !(/^[a-zA-Z ]+$/).test([event.target.value][0].toLowerCase())) && [event.target.id][0] === 'registerName')
+				if ((programmingReg.test([event.target.value][0].toLowerCase()) || !(/^[a-zA-Z ]+$/).test([event.target.value][0].toLowerCase())) && [event.target.id][0] === 'registerFirstName')
 				{
-					this.setState({badName: true})
+					this.setState({badFirstName: true})
+				}
+			})
+		}
+
+		else if ([event.target.id][0] === "registerLastName")
+		{
+			const badNames = ["fuck", "ass", "shit", "pussy", "vagina", "penis", "head", "cum", "jizz", "bitch", "nipple", "cunt", "sick", "dick", "cock", "ball", "slut", "whore", "suck", "anal", "blow", "tit", "diarrhea", "boob", "stain", "moist", "hairy", "fag", "gay", "lesbian", "trans", "homo", "nigg", "dyke", "dike", "jew", "kike", "diddle", "sac", "sex", "hump", "butt", "munch", "dumb", "stupid", "god", "damn", "dammit"]
+
+			this.setState({badLastName: false})
+			badNames.forEach(word =>
+			{
+				const programmingReg = new RegExp(word)
+				if ((programmingReg.test([event.target.value][0].toLowerCase()) || !(/^[a-zA-Z ]+$/).test([event.target.value][0].toLowerCase())) && [event.target.id][0] === 'registerLastName')
+				{
+					this.setState({badLastName: true})
 				}
 			})
 		}
@@ -64,12 +81,14 @@ class Login extends Component
 	{
 		const This = this;
 		event.preventDefault()
-		if (!this.state.badName && !this.state.badRegisterEmail && this.state.registerPassword1 === this.state.registerPassword2 && this.state.registerName !== "" && this.state.registerEmail !== "" && this.state.registerPassword1 !== "")
+		if (!this.state.badNFirstame && !this.state.badLastName && !this.state.badRegisterEmail && this.state.registerPassword1 === this.state.registerPassword2 && this.state.registerFirstName !== "" && this.state.registerLastName !== "" && this.state.registerEmail !== "" && this.state.registerPassword1 !== "")
 		{
+			console.log(this.state)
 			const leaderboard = document.getElementById("leaderboard").value
 			const newUser =
 			{
-				name: this.state.registerName,
+				firstname: this.state.registerFirstName,
+				lastname: this.state.registerLastName,
 				email: this.state.registerEmail.toLowerCase(),
 				password: this.state.registerPassword1,
 				leaderboard: leaderboard
@@ -177,14 +196,27 @@ class Login extends Component
 						<h3>Register</h3>
 						<form>
 							<div className="form-group">
-								<label htmlFor="registerName">Name</label>
-								{!this.state.badName || this.state.registerName === ""
-								?	<input type="test" className="form-control" id="registerName" placeholder="Enter your name" required onChange={this.handleChange}></input>
-								:   <div><input type="test" className="form-control is-invalid" id="registerName" placeholder="Enter your name" required onChange={this.handleChange}></input>
+								<label htmlFor="registerFirstName">First Name</label>
+								{!this.state.badFirstName || this.state.registerFirstName === ""
+								?	<input type="test" className="form-control" id="registerFirstName" placeholder="Enter your first name" required onChange={this.handleChange}></input>
+								:   <div><input type="test" className="form-control is-invalid" id="registerFirstName" placeholder="Enter your first name" required onChange={this.handleChange}></input>
 									<div className="invalid-feedback">
           								Certain words and characters are blocked
         							</div></div>
 								}
+							</div>
+							<div className="form-group">
+
+								<label htmlFor="registerLastName">Last Name</label>	
+								{!this.state.badLastName || this.state.registerLastName === ""
+								?	<input type="test" className="form-control" id="registerLastName" placeholder="Enter your last name" required onChange={this.handleChange}></input>
+								:   <div><input type="test" className="form-control is-invalid" id="registerLastName" placeholder="Enter your last name" required onChange={this.handleChange}></input>
+									<div className="invalid-feedback">
+          								Certain words and characters are blocked
+        							</div></div>
+								}
+
+
 								<small id="emailHelp" className="form-text text-muted">This name will appear on the Leaderboard if you choose.</small>
 							</div>
 							{!this.state.badRegisterEmail

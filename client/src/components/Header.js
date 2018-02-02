@@ -59,6 +59,11 @@ class Header extends Component
 		window.location="/leaderboard"
 	}
 
+	toGrades = () =>
+	{
+		window.location="/grades"
+	}
+
 	logout = () =>
 	{
 		sessionStorage.removeItem('token');
@@ -77,7 +82,7 @@ class Header extends Component
 						</div>
 						{this.props.teacher === "yes"
 							?
-								<button type="button" className="btn btn-info">Check Grades</button>
+								<button type="button" className="btn btn-info" onClick={this.toGrades}>Check Grades</button>
 							:
 								""
 						}

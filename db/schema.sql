@@ -16,7 +16,8 @@ create table questions
 create table users
 (
     id int(50) not null auto_increment,
-    name varchar(255) not null,
+    firstname varchar(255) not null,
+    lastname varchar(255) not null,
     email varchar(255) not null,
     password varchar(255) not null,
     token varchar(255),
@@ -29,8 +30,6 @@ create table users
     headercolor varchar(255) default "#6400a8",
     primary key(id)
 );
-
-
 
 create table correctlookup
 (

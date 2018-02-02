@@ -26,9 +26,17 @@ const user =
 		})
 	},
 
-	registerNewUser: function(name, email, password, token, leaderboard, teacher, section, cb)
+	findDistinctWhere: function(field, table, whereField, whereValue, cb)
 	{
-		orm.registerNewUser(name, email, password, token, leaderboard, teacher, section, function(result)
+		orm.findDistinctWhere(field, table, whereField, whereValue, function(result)
+		{
+			cb(result)
+		})
+	},
+
+	registerNewUser: function(firstname, lastname, email, password, token, leaderboard, teacher, section, cb)
+	{
+		orm.registerNewUser(firstname, lastname, email, password, token, leaderboard, teacher, section, function(result)
 		{
 			cb(result)
 		})
@@ -53,6 +61,14 @@ const user =
 	getLeaderboard: function(cb)
 	{
 		orm.getLeaderboard(function(result)
+		{
+			cb(result)
+		})
+	},
+
+	findAllStudents: function(teacher, cb)
+	{
+		orm.findAllStudents(teacher, function(result)
 		{
 			cb(result)
 		})
