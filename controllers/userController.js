@@ -383,7 +383,6 @@ module.exports =
 
 		usersModel.findDistinctWhere("section", "users", "teacher", req.params.teacher, function(sections)
 		{
-			console.log(sections)
 			usersModel.findAllStudents(req.params.teacher, function(students)
 			{
 				const classes = []
@@ -405,7 +404,7 @@ module.exports =
 					classes.push({section: section.section, ids: idArray, students: studentArray})
 				})
 
-				console.log(classes)
+				res.send(classes)
 			})
 		})
 	},

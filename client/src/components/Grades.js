@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../assets/styles/grades.css'
 import API from "../utils/API";
-//import coin from '../assets/images/coin.png'
+import SingleClassReport from './SingleClassReport';
 
 
 class Grades extends Component 
@@ -9,7 +9,8 @@ class Grades extends Component
 	state =
 	{
 		id: 0,
-		name: ""
+		name: "",
+		classes: []
 	}
 
 	componentWillMount = () =>
@@ -29,7 +30,11 @@ class Grades extends Component
 			{
 				API.findAllStudents(user.data[0].lastname).then(result =>
 				{
-					console.log(result)
+					result.data.forEach(thing =>
+					{
+						console.log(thing)
+					})
+					This.setState({classes: result.data})
 				})
 			}
 		})
@@ -38,8 +43,12 @@ class Grades extends Component
 	render()
 	{
 		return(
-			<div>
-				Coming soon!
+			<div className="container">
+				{this.state.classes.map((oneclass, i) =>
+					{
+						return <SingleClassReport key={i} section={oneclass.section} students={oneclass.students}/>
+					})
+				}
 			</div>
 			)
 	}
