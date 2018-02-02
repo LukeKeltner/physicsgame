@@ -41,19 +41,22 @@ class Header extends Component
 						</div>
 						<div className="col-md-5">
 							<div className="row">
-								<div className="col-md-3 text-center">
+								<div className="col-2 text-center">
+									
+								</div>
+								<div className="col-2 text-center">
 									<i className="fas fa-question-circle fa-2x header-button"></i>
 								</div>
-								<div className="col-md-2 text-center">
+								<div className="col-2 text-center">
 									<i className="fas fa-list-alt fa-2x header-button"></i>
 								</div>
-								<div className="col-md-2 text-center">
+								<div className="col-2 text-center">
 									<i className="fas fa-shopping-cart fa-2x header-button"></i>
 								</div>
-								<div className="col-md-2 text-center">
+								<div className="col-2 text-center">
 									<i className="fas fa-trophy fa-2x header-button"></i>
 								</div>
-								<div className="col-md-2 text-center">
+								<div className="col-2 text-center">
 									<i className="fas fa-arrow-alt-circle-right fa-2x header-button"></i>
 								</div>
 							</div>

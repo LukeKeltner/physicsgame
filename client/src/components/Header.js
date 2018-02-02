@@ -93,30 +93,30 @@ class Header extends Component
 					</div>
 					<div className="col-md-5">
 						<div className="row">
-							<div className="col-md-2 text-center">
+							<div className="col-2 text-center">
 
 							</div>
-							<div className="col-md-2 text-center">
+							<div className="col-2 text-center">
 								<i className="fas fa-question-circle fa-2x header-button" onClick={this.toHub}></i>
 								<br></br>
 								<div className="icon-name">Coins!</div>
 							</div>
-							<div className="col-md-2 text-center">
+							<div className="col-2 text-center">
 								<i className="fas fa-list-alt fa-2x header-button" onClick={this.toStatus}></i>
 								<br></br>
 								<div className="icon-name">Status</div>
 							</div>
-							<div className="col-md-2 text-center">
+							<div className="col-2 text-center">
 								<i className="fas fa-shopping-cart fa-2x header-button" onClick={this.toStore}></i>
 								<br></br>
 								<div className="icon-name">Store</div>
 							</div>
-							<div className="col-md-2 text-center">
+							<div className="col-2 text-center">
 								<i className="fas fa-trophy fa-2x header-button" onClick={this.toLeaderboard}></i>
 								<br></br>
 								<div className="icon-name">Leaders</div>
 							</div>
-							<div className="col-md-2 text-center">
+							<div className="col-2 text-center">
 								<i className="fas fa-arrow-alt-circle-right fa-2x header-button" onClick={this.logout}></i>
 								<br></br>
 								<div className="icon-name">Logout</div>
