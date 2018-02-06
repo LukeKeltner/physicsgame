@@ -37,7 +37,9 @@ router.route(`/determineResult`).post(userController.determineResult)
 
 router.route(`/headerColorChange`).post(userController.headerColorChange)
 
-router.route(`/findAllStudents/:teacher`).get(userController.findAllStudents)
+router.route(`/findAllStudents/:section/:teacher`).get(userController.findAllStudents)
+
+router.route(`/findSections/:teacher`).get(userController.findSections)
 
 
 router.use(function(req, res) 

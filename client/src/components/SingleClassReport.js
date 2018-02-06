@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../assets/styles/grades.css'
+import API from "../utils/API";
 import SingleStudentReport from './SingleStudentReport';
 
 
@@ -7,45 +8,43 @@ class SingleClassReport extends Component
 {
 	state =
 	{
+		section: this.props.section,
+		teacher: this.props.teacher,
+		studentIds: []
+	}
 
+	componentWillReceiveProps = nextProps =>
+	{
+		const This = this;
+		this.setState({section: nextProps.section, teacher:nextProps.teacher})
+
+		const data = 
+		{
+			section: nextProps.section,
+			teacher: nextProps.teacher
+		}
+
+		API.findAllStudents(data).then(students =>
+		{
+			if (Array.isArray(students.data))
+			{
+				This.setState({studentIds: students.data})
+				console.log(students.data)
+			}
+		})
 	}
 
 	render()
 	{
 		return(
-				<div className="row">
-					<div className="col-2 text-center">
-						<table>
-						    <thead>
-						        <tr>
-						            <th>Section</th>
-						        </tr>
-						    </thead>
-						    <tbody>
-						        <tr>
-						            <td>{this.props.section}</td>
-						        </tr>
-						    </tbody>
-						</table>
-					</div>
-					<div className="col-10 text-center">
-						<table>
-						    <thead>
-						        <tr>
-						            <th>Name</th>
-						            <th>Grade</th>
-						        </tr>
-						    </thead>
-						    <tbody>
-						    {this.props.students.map((student, i) =>
-						    	{
-						    		return <SingleStudentReport key={i} name={student} grade={i}/>
-						    	})
-						    }
-						    </tbody>
-						</table>
-					</div>
-				</div>
+			<div>
+				{
+					this.state.studentIds.map(student =>
+					{
+						return student.id
+					})
+				}
+			</div>
 			)
 	}
 

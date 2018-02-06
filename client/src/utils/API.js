@@ -82,8 +82,13 @@ export default {
 		return axios.post(`/headerColorChange`, data)
 	},
 
-	findAllStudents: function(teacher)
+	findSections: function(teacher)
 	{
-		return axios.get(`/findAllStudents/${teacher}`)
+		return axios.get(`/findSections/${teacher}`)
+	},
+
+	findAllStudents: function(data)
+	{
+		return axios.get(`/findAllStudents/${data.section}/${data.teacher}`)
 	}
 };

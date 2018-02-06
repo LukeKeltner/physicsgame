@@ -378,70 +378,20 @@ module.exports =
 		})		
 	},
 
+	findSections: function(req, res)
+	{
+		usersModel.findDistinctWhere("section", "users", "teacher", req.params.teacher, function(sections)
+		{
+			res.send(sections)
+		})
+	},
+
 	findAllStudents: function(req, res)
 	{
-		questionModel.findAll(allQuestions =>
+		console.log(req.params)
+		usersModel.findAllStudents(req.params.section, req.params.teacher, function(students)
 		{
-			usersModel.findDistinctWhere("section", "users", "teacher", req.params.teacher, function(sections)
-			{
-				usersModel.findAllStudents(req.params.teacher, function(students)
-				{
-					console.log(students)
-					const classes = []
-
-					let numberOfSectionsChecked = 0;
-					sections.forEach(section =>
-					{
-						const idArray = [];
-						const studentArray = [];
-						const totalGrade = [];
-
-						students.forEach(student =>
-						{
-							if (section.section === student.section)
-							{
-								idArray.push(student.id)
-								studentArray.push(student.firstname+" "+student.lastname)
-							}
-						})
-
-						let numberOfStudents = 0;
-						let numberOfStudentsChecked = 0;
-						idArray.forEach(id =>
-						{
-							numberOfStudents = numberOfStudents + 1;
-							//Finding how many questions each user has correct.
-							usersModel.findAllWhere("correctlookup", "userid", id, function(result)
-							{
-								totalGrade.push(100*result.length/allQuestions.length)
-								console.log(result.length+" correct")
-								console.log("with a total of "+allQuestions.length+" questions")
-								numberOfStudentsChecked = numberOfStudentsChecked + 1;
-								console.log(numberOfStudents+" ->  number of students")
-								console.log(numberOfStudentsChecked+" -> number of students checked")
-
-								console.log("CHECKING IF STUDENT NUMBERS MATCH")
-								if (numberOfStudents === numberOfStudentsChecked)
-								{
-									console.log("SECTIONS CHECKED BEFORE ADDED: "+numberOfSectionsChecked)
-									numberOfSectionsChecked = numberOfSectionsChecked + 1
-									console.log("ADDED SECTION  TO CLASS")
-									classes.push({section: section.section, ids: idArray, students: studentArray, totalGrades: totalGrade})
-
-									console.log("Number of Sections Checked: "+numberOfSectionsChecked)
-									console.log("Number of Sections: "+sections.length)
-									if (numberOfSectionsChecked === sections.length)
-									{
-										console.log("About to log classes!")
-										console.log(classes)
-										res.send(classes)					
-									}
-								}
-							})
-						})
-					})
-				})
-			})
+			res.send(students)
 		})
 	},
 }

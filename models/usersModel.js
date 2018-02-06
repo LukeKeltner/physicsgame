@@ -66,9 +66,9 @@ const user =
 		})
 	},
 
-	findAllStudents: function(teacher, cb)
+	findAllStudents: function(section, teacher, cb)
 	{
-		orm.findAllStudents(teacher, function(result)
+		orm.findAllStudents(section, teacher, function(result)
 		{
 			cb(result)
 		})

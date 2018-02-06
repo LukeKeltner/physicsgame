@@ -128,9 +128,9 @@ const orm =
 		})
 	},
 
-	findAllStudents: function(teacher, cb)
+	findAllStudents: function(section, teacher, cb)
 	{
-		connection.query(`SELECT id, firstname, lastname, section from users where teacher = ? order by section, lastname asc;`, [teacher], function(err, result)
+		connection.query(`SELECT id from users where section = ? and teacher = ? order by lastname asc;`, [section, teacher], function(err, result)
 		{
 			if(err){throw err}
 			cb(result)

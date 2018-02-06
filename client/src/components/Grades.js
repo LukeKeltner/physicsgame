@@ -9,8 +9,10 @@ class Grades extends Component
 	state =
 	{
 		id: 0,
-		name: "",
-		classes: []
+		lastname: "",
+		classes: [],
+		sections: [],
+		currentSection: ""
 	}
 
 	componentWillMount = () =>
@@ -28,27 +30,56 @@ class Grades extends Component
 
 			else
 			{
-				API.findAllStudents(user.data[0].lastname).then(result =>
+				API.findSections(user.data[0].lastname).then(sections =>
 				{
-					result.data.forEach(thing =>
+					const sectionsArray = []
+					sections.data.forEach(section =>
 					{
-						console.log(thing)
+						sectionsArray.push(section.section)
 					})
-					This.setState({classes: result.data})
+					
+					This.setState({currentSection:sectionsArray[0],  sections: sectionsArray, lastname: user.data[0].lastname})
 				})
 			}
 		})
+	}
+
+	viewSection = event =>
+	{
+		this.setState({currentSection: event.target.id})
 	}
 
 	render()
 	{
 		return(
 			<div className="container">
-				{this.state.classes.map((oneclass, i) =>
-					{
-						return <SingleClassReport key={i} section={oneclass.section} students={oneclass.students} totalGrades={oneclass.totalGrades}/>
-					})
-				}
+				<div className="row">
+					<div className="col-md-2">
+						<div className="row">
+							<div className="col-md-12">
+							View: 
+							</div>
+						</div>
+						<br></br>
+						{this.state.sections.map((section, i) =>
+							{
+								return(
+									<div key={i}>
+										<div className="row">
+											<div className="col-md-12">
+												<button type="button" className="btn btn-primary" id={section} onClick={this.viewSection}>Section {section}</button>
+											</div>
+										</div>
+										<br></br>
+									</div>
+								)
+							})}
+					</div>
+						
+					<div className="col-md-10">	
+						<SingleClassReport section={this.state.currentSection} teacher={this.state.lastname}/>
+					</div>
+				</div>
 			</div>
 			)
 	}
