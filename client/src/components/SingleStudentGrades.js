@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import '../assets/styles/grades.css'
-import SingleStudentGrades from './SingleStudentGrades';
 
 
-class SingleStudentReport extends Component 
+class SingleStudentGrades extends Component 
 {
 	state =
 	{
@@ -21,4 +20,4 @@ class SingleStudentReport extends Component
 	}
 }
 
-export default SingleStudentReport;
+export default SingleStudentGrades;

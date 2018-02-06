@@ -46,7 +46,7 @@ class Grades extends Component
 			<div className="container">
 				{this.state.classes.map((oneclass, i) =>
 					{
-						return <SingleClassReport key={i} section={oneclass.section} students={oneclass.students}/>
+						return <SingleClassReport key={i} section={oneclass.section} students={oneclass.students} totalGrades={oneclass.totalGrades}/>
 					})
 				}
 			</div>
