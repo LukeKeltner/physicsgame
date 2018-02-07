@@ -18,6 +18,14 @@ const user =
 		})
 	},
 
+	getUserById: function(id, cb)
+	{
+		orm.findOne("users", "id", id, function(result)
+		{
+			cb(result)
+		})
+	},
+
 	findAllWhere: function(table, whereField, whereValue, cb)
 	{
 		orm.findAllWhere(table, whereField, whereValue, function(result)
@@ -69,6 +77,22 @@ const user =
 	findAllStudents: function(section, teacher, cb)
 	{
 		orm.findAllStudents(section, teacher, function(result)
+		{
+			cb(result)
+		})
+	},
+
+	findCorrectQuestionsFromTopicAndSubtopic: function(userid, topic, subtopic, cb)
+	{
+		orm.findCorrectQuestionsFromTopicAndSubtopic(userid, topic, subtopic, function(result)
+		{
+			cb(result)
+		})
+	},
+
+	findNumberOfQuestionsInSubtopic: function (topic, subtopic, cb)
+	{
+		orm.findNumberOfQuestionsInSubtopic(topic, subtopic, function(result)
 		{
 			cb(result)
 		})

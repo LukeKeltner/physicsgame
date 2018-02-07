@@ -136,6 +136,24 @@ const orm =
 			cb(result)
 		})
 	},
+
+	findCorrectQuestionsFromTopicAndSubtopic: function(userid, topic, subtopic, cb)
+	{
+		connection.query(`select count(id) as correct from correctlookup where userid = ? and questionid in (select id from questions where topic = ? and subtopic = ?);`, [userid, topic, subtopic], function(err, result)
+		{
+			if(err){throw err}
+			cb(result)
+		})
+	},
+
+	findNumberOfQuestionsInSubtopic: function(topic, subtopic, cb)
+	{
+		connection.query(`select count(id) as questionAmount from questions where topic = ? and subtopic = ?;`, [topic, subtopic], function(err, result)
+		{
+			if(err){throw err}
+			cb(result)
+		})
+	}
 }
 
 module.exports = orm;

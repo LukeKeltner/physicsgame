@@ -45,6 +45,14 @@ module.exports =
 		})
 	},
 
+	getUserById: function(req, res)
+	{
+		usersModel.getUserById(req.params.id, function(result)
+		{
+			res.send(result)
+		})
+	},
+
 	registerNewUser: function(req, res)
 	{
 		let leaderboard = 0;
@@ -388,10 +396,21 @@ module.exports =
 
 	findAllStudents: function(req, res)
 	{
-		console.log(req.params)
 		usersModel.findAllStudents(req.params.section, req.params.teacher, function(students)
 		{
 			res.send(students)
 		})
 	},
+
+	findCorrectQuestionsFromTopicAndSubtopic: function(req, res)
+	{
+		usersModel.findCorrectQuestionsFromTopicAndSubtopic(req.params.userid, req.params.topic, req.params.subtopic, function(totalCorrect)
+		{
+			usersModel.findNumberOfQuestionsInSubtopic(req.params.topic, req.params.subtopic, function(totalQuestions)
+			{
+				const grade = totalCorrect[0]["correct"]*100/totalQuestions[0]["questionAmount"]
+				res.send(""+grade)
+			})
+		})
+	}
 }

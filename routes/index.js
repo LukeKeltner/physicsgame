@@ -9,7 +9,11 @@ router.route("/user/:token").get(userController.getUser)
 
 router.route(`/updateUser`).post(userController.updateUser)
 
+router.route(`/getUserById/:id`).get(userController.getUserById)
+
 router.route(`/getQuestion/:id`).get(questionController.getQuestion)
+
+router.route(`/findDistinctTopicsAndSubtopics`).get(questionController.findDistinctTopicsAndSubtopics)
 
 router.route("/findAllTopics").get(questionController.findDistinctTopics)
 
@@ -40,6 +44,8 @@ router.route(`/headerColorChange`).post(userController.headerColorChange)
 router.route(`/findAllStudents/:section/:teacher`).get(userController.findAllStudents)
 
 router.route(`/findSections/:teacher`).get(userController.findSections)
+
+router.route(`/findCorrectQuestionsFromTopicAndSubtopic/:userid/:topic/:subtopic`).get(userController.findCorrectQuestionsFromTopicAndSubtopic)
 
 
 router.use(function(req, res) 

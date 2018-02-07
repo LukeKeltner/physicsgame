@@ -12,9 +12,19 @@ export default {
 		return axios.get(`/user/${token}`)
 	},
 
+	getUserById: function(id)
+	{
+		return axios.get(`/getUserById/${id}`)
+	},
+
 	updateUser: function(data)
 	{
 		return axios.post(`/updateUser`, data)
+	},
+
+	findDistinctTopicsAndSubtopics: function()
+	{
+		return axios.get(`/findDistinctTopicsAndSubtopics`)
 	},
 
 	getAllTopics: function()
@@ -90,5 +100,10 @@ export default {
 	findAllStudents: function(data)
 	{
 		return axios.get(`/findAllStudents/${data.section}/${data.teacher}`)
+	},
+
+	findCorrectQuestionsFromTopicAndSubtopic: function(data)
+	{
+		return axios.get(`/findCorrectQuestionsFromTopicAndSubtopic/${data.userid}/${data.topic}/${data.subtopic}`)
 	}
 };

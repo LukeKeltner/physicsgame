@@ -46,6 +46,14 @@ module.exports =
 		})
 	},
 
+	findDistinctTopicsAndSubtopics: function(req, res)
+	{
+		questionModel.findDistinct("topic, subtopic", function(result)
+		{
+			res.send(result)
+		})
+	},
+
 	findDistinctTopics: function(req, res)
 	{
 		questionModel.findDistinct("topic", function(result)
