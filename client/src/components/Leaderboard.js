@@ -22,6 +22,7 @@ class Leaderboard extends Component
 		{
 			API.getLeaderboard().then(users =>
 			{
+				console.log(users)
 				This.setState({users: users.data, userid: user.data[0].id})
 			})
 		})
@@ -45,7 +46,7 @@ class Leaderboard extends Component
 				</div>
 				{this.state.users.map((user, i) =>
 					{
-						return <User key={i} userid={this.state.userid} id={user.id} name={user.firstname+" "+user.lastname} coins={user.coins} leaderboard={user.leaderboard} place={i} />
+						return <User key={i} userid={this.state.userid} id={user.id} name={user.firstname+" "+user.lastname} coins={user.coins} leaderboard={user.leaderboard} place={i} icon={user.icon} theme={user.headercolor}/>
 					})}
 
 			</div>

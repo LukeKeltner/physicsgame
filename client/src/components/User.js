@@ -6,12 +6,20 @@ class User extends Component
 {
 	state =
 	{
-
+		icon: require('../assets/images/icons/'+this.props.icon),
+		styles: []
 	}
 
-	componentDidMount = () =>
+	componentWillMount = () =>
 	{
-		console.log(this.props.userid)
+		const newStyles = 
+		{
+			backgroundColor: this.props.theme
+		}
+
+		const array = []
+		array.push(newStyles)
+		this.setState({styles: array})
 	}
 
 	render()
@@ -27,12 +35,12 @@ class User extends Component
 
 					?
 
-						<div className="row you">
+						<div className="row you" style={this.state.styles[0]}>
 							<div className="col-2 text-center">
 								{this.props.place+1}
 							</div>
 							<div className="col-5 text-center">
-								{this.props.name}
+								<img className="icon float-left" alt="icon" src={this.state.icon}/> {this.props.name}
 							</div>
 							<div className="col-5 text-center">
 								{this.props.coins.toLocaleString()}
@@ -46,7 +54,7 @@ class User extends Component
 								{this.props.place+1}
 							</div>
 							<div className="col-5 text-center">
-								{this.props.name}
+								<img className="icon float-left" alt="icon" src={this.state.icon}/> {this.props.name}
 							</div>
 							<div className="col-5 text-center">
 								{this.props.coins.toLocaleString()}

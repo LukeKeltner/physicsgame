@@ -11,7 +11,8 @@ class Header extends Component
 		coins: this.props.coins,
 		styles: [],
 		currentColor: this.props.background,
-		icon: ""
+		icon: "",
+		greeting: "Hi "
 	}
 
 	componentWillMount = () =>
@@ -26,6 +27,11 @@ class Header extends Component
 			const array = []
 			array.push(newStyles)
 			this.setState({styles: array})
+		}
+
+		if (window.location.pathname === "/question")
+		{
+			this.setState({greeting: "Good luck "})
 		}
 	}
 
@@ -80,7 +86,7 @@ class Header extends Component
 				<div className="row">
 					<div className="col-md-5">
 						<div className="logo">
-							<img className="user-icon" src={this.state.icon} />Hi {this.props.name}!
+							<img className="user-icon" alt="icon" src={this.state.icon} />{this.state.greeting} {this.props.name}!
 						</div>
 						{this.props.teacher === "yes"
 							?

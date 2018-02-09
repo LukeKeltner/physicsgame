@@ -3,7 +3,6 @@ import '../assets/styles/hub.css'
 import API from "../utils/API";
 import Topic from './Topic';
 import GambleAmount from './GambleAmount';
-import coin from '../assets/images/coin.png'
 
 
 class Hub extends Component 
@@ -19,7 +18,8 @@ class Hub extends Component
 		name:"",
 		coins: 0,
 		id: 0,
-		teacher: ""
+		teacher: "",
+		styles: []
 	}
 
 	componentWillMount = () =>
@@ -40,7 +40,14 @@ class Hub extends Component
 			{
 				API.getAllTopics().then(function(result)
 				{
-					This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, teacher:user.data[0].teacher, allTopics: result.data})
+					const newStyles = 
+					{
+						backgroundColor: user.data[0].headercolor
+					}
+
+					const array = []
+					array.push(newStyles)
+					This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, teacher:user.data[0].teacher, allTopics: result.data, styles: newStyles})
 				})
 			}
 		})
@@ -127,7 +134,7 @@ class Hub extends Component
 
 					<div className="row">
 						<div className="col-md-4">
-							<div className="topic-container">
+							<div className="topic-container" style={this.state.styles}>
 								<div className="topic-header">
 									Topics
 									{this.state.topic === ""
@@ -143,7 +150,7 @@ class Hub extends Component
 							}	
 						</div>
 						<div className="col-md-4">
-							<div className="topic-container">
+							<div className="topic-container" style={this.state.styles}>
 								<div className="topic-header">
 									Subtopics in  
 									{this.state.topic === "" 
@@ -164,9 +171,9 @@ class Hub extends Component
 							
 						</div>
 						<div className="col-md-4">
-							<div className="topic-container">
+							<div className="topic-container" style={this.state.styles}>
 								<div className="topic-header">
-									Wager <img className="coin" alt="coins" src={coin} />
+									Wager
 									{this.state.gamble === 0
 											? <i className="fas fa-check fa-1x float-right"></i>
 											: <i className="fas fa-check fa-1x hand-selected float-right"></i>
