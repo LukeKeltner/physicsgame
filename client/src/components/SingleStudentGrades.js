@@ -26,14 +26,15 @@ class SingleStudentGrades extends Component
 
 		API.findCorrectQuestionsFromTopicAndSubtopic(data).then(grade =>
 		{
-			This.setState({grade: grade.data})
+			const gradeDisplay = grade.data.toFixed(0)
+			This.setState({grade: gradeDisplay})
 		})
 	}
 
 	render()
 	{
 		return(
-			<td>{this.state.grade}</td>
+			<td>{this.state.grade}%</td>
 		)
 	}
 }

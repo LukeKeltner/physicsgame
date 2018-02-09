@@ -92,6 +92,11 @@ export default {
 		return axios.post(`/headerColorChange`, data)
 	},
 
+	iconChange: function(data)
+	{
+		return axios.post(`/iconChange`, data)
+	},
+
 	findSections: function(teacher)
 	{
 		return axios.get(`/findSections/${teacher}`)

@@ -22,7 +22,8 @@ class App extends Component
 		name: "",
 		coins: "",
 		teacher: "",
-		background: ""
+		background: "",
+		icon: ""
 	}
 
 	componentWillMount = () =>
@@ -48,7 +49,8 @@ class App extends Component
 
 				else
 				{
-					This.setState({id: user.data[0].id, name: user.data[0].firstname, coins: user.data[0].coins, teacher:user.data[0].teacher, background: user.data[0].headercolor})
+					console.log(user.data[0].icon)
+					This.setState({id: user.data[0].id, name: user.data[0].firstname, coins: user.data[0].coins, teacher:user.data[0].teacher, background: user.data[0].headercolor, icon: user.data[0].icon})
 				}
 			})				
 		}
@@ -60,7 +62,7 @@ class App extends Component
 			<div>
 				{!this.state.login
 					?
-					<Header name={this.state.name} coins={this.state.coins} background={this.state.background} teacher={this.state.teacher}/>
+					<Header name={this.state.name} coins={this.state.coins} background={this.state.background} teacher={this.state.teacher} icon={this.state.icon}/>
 					:
 					<div></div>
 				}

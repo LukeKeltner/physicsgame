@@ -3,9 +3,36 @@
 	border: 1px solid #d6d6d6;;
 	padding:20px;
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+	margin-bottom: 20px;
 }
 
 .item-name
 {
 	font-weight: bold;
+}
+
+.icons
+{
+	width:100%;
+	border-radius: 5px;
+}
+
+.icons:hover
+{
+	border:1px solid blue;
+}
+
+.active
+{
+	box-shadow: 0 0px 0px 0 rgba(0, 0, 255, 1), 0 0px 40px 0 rgba(0, 0, 255, 1);
+}
+
+.btn-success
+{
+	margin-top: 20px;
+}
+
+.icon-row
+{
+	margin-bottom: 20px;
 }

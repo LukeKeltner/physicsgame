@@ -386,6 +386,19 @@ module.exports =
 		})		
 	},
 
+	iconChange: function(req, res)
+	{
+		const newCoins = req.body.coins - 50;
+		
+		usersModel.updateUser("coins", newCoins, "id", req.body.userid, function(result)
+		{
+			usersModel.updateUser(req.body.icon, req.body.svg, "id", req.body.userid, function(result)
+			{
+				res.end()
+			})
+		})		
+	},
+
 	findSections: function(req, res)
 	{
 		usersModel.findDistinctWhere("section", "users", "teacher", req.params.teacher, function(sections)

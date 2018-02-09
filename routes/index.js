@@ -41,6 +41,8 @@ router.route(`/determineResult`).post(userController.determineResult)
 
 router.route(`/headerColorChange`).post(userController.headerColorChange)
 
+router.route(`/iconChange`).post(userController.iconChange)
+
 router.route(`/findAllStudents/:section/:teacher`).get(userController.findAllStudents)
 
 router.route(`/findSections/:teacher`).get(userController.findSections)

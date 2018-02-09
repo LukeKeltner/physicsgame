@@ -10,7 +10,8 @@ class Header extends Component
 		name: this.props.name,
 		coins: this.props.coins,
 		styles: [],
-		currentColor: this.props.background
+		currentColor: this.props.background,
+		icon: ""
 	}
 
 	componentWillMount = () =>
@@ -28,8 +29,9 @@ class Header extends Component
 		}
 	}
 
-	componentWillReceiveProps  = nextProps =>
+	componentWillReceiveProps = nextProps =>
 	{
+		this.setState({icon: require("../assets/images/icons/"+nextProps.icon)})
 		const newStyles = 
 		{
 			backgroundColor: nextProps.background
@@ -78,7 +80,7 @@ class Header extends Component
 				<div className="row">
 					<div className="col-md-5">
 						<div className="logo">
-							<i className="fas fa-user avatar"></i>Hi {this.props.name}!
+							<img className="user-icon" src={this.state.icon} />Hi {this.props.name}!
 						</div>
 						{this.props.teacher === "yes"
 							?
@@ -88,7 +90,6 @@ class Header extends Component
 						}
 					</div>
 					<div className="col-md-2 coins text-center">
-						{/*<img className="coin" alt="coins" src={coin} />*/}
 						{this.props.coins.toLocaleString()}
 					</div>
 					<div className="col-md-5">
