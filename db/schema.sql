@@ -28,6 +28,7 @@ create table users
     teacher varchar(255) not null,
     section varchar(255),
     headercolor varchar(255) default "#6400a8",
+    icon varchar(255) default "default.svg",
     primary key(id)
 );
 
