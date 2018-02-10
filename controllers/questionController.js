@@ -1,6 +1,7 @@
 const express = require('express');
 const questionModel = require('../models/questionModel.js');
 const usersModel = require('../models/usersModel.js');
+const math = require('mathjs');
 
 const createToken = function()
 {
@@ -10,7 +11,7 @@ const createToken = function()
 
 	for (var i=0; i<10; i++)
 	{
-		var r = Math.floor(Math.random()*(inputs.length-1));
+		var r = math.floor(math.random()*(inputs.length-1));
 		token = token + inputs[r];
 	}
 
@@ -21,7 +22,7 @@ const shuffle = array =>
 {
 	for (let i = array.length - 1; i > 0; i--)
 	{
-		const j = Math.floor(Math.random() * (i + 1));
+		const j = math.floor(math.random() * (i + 1));
 		[array[i], array[j]] = [array[j], array[i]];
 	}
 
@@ -87,16 +88,77 @@ module.exports =
 	{
 		questionModel.findQuestion(req.params.id, function(result)
 		{
-			const response = result[0]
-			console.log(response.question)
-			const question = JSON.parse(response.question)
+			console.log("-------------------------------------------")
+			const string = "Here is a test string with test words."
+			const string2 = string.replace(/test/g, "bear")
+
+			const question = JSON.parse(result[0].question)
+
+			if (question.random)
+			{
+				const randoms = []
+				for (let i=0; i<question.random; i++)
+				{
+					const randomNumber = math.floor(math.random() * 11)+1
+					randoms.push(randomNumber)
+					const currentRandom = "rand"+i
+					question.text = question.text.replace(new RegExp(currentRandom, "g"), randomNumber)
+				}
+
+				for (let i=0; i<question.correct.length; i++)
+				{
+					for (j=0; j<randoms.length; j++)
+					{
+						const currentRandom = "rand"+j
+						let answerString =  question.correct[i].replace(new RegExp(currentRandom, "g"), randoms[j])		
+
+						if (j === randoms.length-1)
+						{
+							answerString = math.eval(answerString)
+
+							if (!Number.isInteger(answerString))
+							{
+								answerString = answerString.toFixed(2)
+							}
+						}
+
+						question.correct[i] = answerString					
+					}
+				}
+
+				for (let i=0; i<question.wrong.length; i++)
+				{
+					for (j=0; j<randoms.length; j++)
+					{
+						const currentRandom = "rand"+j
+						let answerString = question.wrong[i].replace(new RegExp(currentRandom, "g"), randoms[j])
+
+						if (j === randoms.length-1)
+						{
+							answerString = math.eval(answerString)
+
+							if (!Number.isInteger(answerString))
+							{
+								answerString = answerString.toFixed(2)
+							}
+						}
+
+						question.wrong[i] = answerString				
+					}
+				}
+
+				console.log(randoms)
+				console.log(question.correct)
+				console.log(question.wrong)
+			}
+
 			const answers = []
 			question.correct.forEach(answer => answers.push({text: answer, type: "correct", selected: false}))
 			question.wrong.forEach(answer => answers.push({text: answer, type: "wrong", selected: false}))
 			const shuffledAnswers = shuffle(answers)
-			response.question = question;
-			response.shuffledAnswers = shuffledAnswers
-			res.send(response)
+			result[0].question = question;
+			result[0].shuffledAnswers = shuffledAnswers
+			res.send(result[0])
 		})
 	},
 
