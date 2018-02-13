@@ -121,7 +121,7 @@ insert into questions(topic, subtopic, question) values
     '{
         "text":"What is 14+6?",
         "correct":["20"],
-        "wrong":["10", "20", "30", "40"]
+        "wrong":["10", "30", "40"]
     }'
 ),
 
@@ -218,13 +218,9 @@ insert into questions(topic, subtopic, question) values
     }'
 );
 
-
-
 wharr@hawken.edu
 21royris@hawken.edu
 21obrmai@hawken.edu
 21allfis@hawken.edu
 21katchl@hawken.edu
 21drolau@hawken.edu
-
-
