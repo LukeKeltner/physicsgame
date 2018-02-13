@@ -19,7 +19,8 @@ class Hub extends Component
 		coins: 0,
 		id: 0,
 		teacher: "",
-		styles: []
+		styles: [],
+		theme: "",
 	}
 
 	componentWillMount = () =>
@@ -47,7 +48,7 @@ class Hub extends Component
 
 					const array = []
 					array.push(newStyles)
-					This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, teacher:user.data[0].teacher, allTopics: result.data, styles: newStyles})
+					This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, teacher:user.data[0].teacher, allTopics: result.data, styles: newStyles, theme: user.data[0].headercolor})
 				})
 			}
 		})
@@ -57,6 +58,22 @@ class Hub extends Component
 	{
 		const This = this;
 		const topic = event.target.innerHTML
+		const topics = document.getElementsByClassName("topics")
+
+		for (let i=0; i<topics.length; i++)
+		{
+			topics[i].classList.remove("selected")
+		}
+
+		const subtopics = document.getElementsByClassName("subtopics")
+
+		for (let i=0; i<subtopics.length; i++)
+		{
+			subtopics[i].classList.remove("selected")
+		}
+
+		event.target.classList.add("selected")
+
 		API.getAllSubtopics(topic).then(function(result)
 		{
 			This.setState({topic: topic, allSubtopics: result.data, subtopic: ""})
@@ -66,11 +83,37 @@ class Hub extends Component
 	subtopicSelected = event =>
 	{
 		this.setState({subtopic: event.target.innerHTML})
+		const subtopics = document.getElementsByClassName("subtopics")
+
+		for (let i=0; i<subtopics.length; i++)
+		{
+			subtopics[i].classList.remove("selected")
+		}
+
+		event.target.classList.add("selected")
 	}
 
 	gambleSelected = event =>
 	{
 		this.setState({gamble: event.target.innerHTML})
+
+		const gamble = document.getElementsByClassName("gamble")
+
+		for (let i=0; i<gamble.length; i++)
+		{
+			gamble[i].classList.remove("selected")
+		}
+
+		event.target.classList.add("selected")
+	}
+
+	componentDidUpdate = () =>
+	{
+		console.log("UPDATED!")
+		if (this.state.topic !== "" && this.state.subtopic !== "" && this.state.gamble !== 0)
+		{
+			this.getNewQuestion()
+		}
 	}
 
 	getNewQuestion = () =>
@@ -85,12 +128,9 @@ class Hub extends Component
 
 		API.getNewQuestion(data).then(function(result)
 		{
-			console.log("Here's the question!")
-			console.log(result)
-
 			if (result.data.length === 0)
 			{
-				alert("You've already answered all quesiton in this Subtopic!")
+				alert("You've already answered all quesitons in this Subtopic!")
 				window.location.reload()
 			}
 
@@ -103,8 +143,6 @@ class Hub extends Component
 					whereField: "id",
 					whereValue: This.state.id
 				}
-
-				console.log(data2)
 
 				API.updateUser(data2).then(function(result2)
 				{
@@ -145,7 +183,7 @@ class Hub extends Component
 							</div>
 							{this.state.allTopics.map((topic, i) =>
 								{
-									return <Topic key={i} name={topic.topic} topicSelected={this.topicSelected}/>
+									return <Topic key={i} name={topic.topic} topicSelected={this.topicSelected} theme={this.state.theme} className="topicContainer topics"/>
 								})
 							}	
 						</div>
@@ -165,7 +203,7 @@ class Hub extends Component
 							</div>
 							{this.state.allSubtopics.map((topic, i) =>
 								{
-									return <Topic key={i} name={topic.subtopic} topicSelected={this.subtopicSelected}/>
+									return <Topic key={i} name={topic.subtopic} topicSelected={this.subtopicSelected} theme={this.state.theme} className="topicContainer subtopics"/>
 								})
 							}
 							
@@ -182,26 +220,10 @@ class Hub extends Component
 							</div>
 							{this.state.gambleAmounts.map((amount, i) =>
 								{
-									return <GambleAmount key={i} amount={amount} gambleSelected={this.gambleSelected}/>
+									return <GambleAmount key={i} amount={amount} gambleSelected={this.gambleSelected} theme={this.state.theme} className="topicContainer gamble text-center"/>
 								})
 							}
-							<div className="row">
-								<div className="col-md-12">
-									<div className="choice-container">
-										<div className="selection-header">
-											Your Choices
-										</div>
-										Topic: {this.state.topic}
-										<br></br>
-										Subtopic: {this.state.subtopic}
-										<br></br>
-										Wager: {this.state.gamble}
-										{this.state.topic !== "" && this.state.subtopic !== "" && this.state.gamble !== 0
-										?<button type="button" className="btn btn-primary btn-lg btn-block" onClick={this.getNewQuestion}>Go for it!</button>
-										:" "}
-									</div>
-								</div>
-							</div>
+
 						</div>
 					</div>
 				</div>

@@ -79,13 +79,10 @@ module.exports =
 	{
 		questionModel.findQuestion(req.params.id, function(result)
 		{
-			console.log("-------------------------------------------")
 			const string = "Here is a test string with test words."
 			const string2 = string.replace(/test/g, "bear")
 
-			console.log(result[0].question)
 			const question = JSON.parse(result[0].question)
-			console.log(question)
 
 			if (question.random)
 			{
@@ -139,10 +136,6 @@ module.exports =
 						question.wrong[i] = answerString				
 					}
 				}
-
-				console.log(randoms)
-				console.log(question.correct)
-				console.log(question.wrong)
 			}
 
 			const answers = []
@@ -167,10 +160,8 @@ module.exports =
 	{
 		questionModel.getCoinsFromLookup("correctlookup", req.body.userid, req.body.topic, req.body.subtopic, function(correctcoins)
 		{
-			console.log("Total coins correct from here = "+correctcoins[0].totalcoins)
 			questionModel.getCoinsFromLookup("wronglookup", req.body.userid, req.body.topic, req.body.subtopic, function(wrongcoins)
 			{
-				console.log("Total coins incorrect from here = "+wrongcoins[0].totalcoins)
 				questionModel.deleteAnswers("correctlookup", req.body.userid, req.body.topic, req.body.subtopic, function(result)
 				{
 					questionModel.deleteAnswers("wronglookup", req.body.userid, req.body.topic, req.body.subtopic, function(result3)

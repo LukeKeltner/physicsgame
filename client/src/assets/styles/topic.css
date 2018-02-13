@@ -15,12 +15,7 @@
 { 
     transform: translateY(5px);
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.2);
-
-}
-
-.topicContainer:hover
-{ 
-    background-color: #f2e3fc;
+    background-color: #00ff15;
 
 }
 
@@ -28,4 +23,10 @@
 {
 	border: 1px solid #009ec1;
 	background-color: #00d0ff;	
+}
+
+.selected
+{
+	border:0px;
+	background-color: #00ff15;
 }

@@ -23,6 +23,11 @@ body
 	font-size: 40px;
 }
 
+#coins
+{
+	width:40px;
+	align:middle;
+}
 .coin
 {
 	width:10%;

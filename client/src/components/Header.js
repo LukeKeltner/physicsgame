@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../assets/styles/header.css'
-//import coin from '../assets/images/coin.png'
+//import coins from '../assets/images/coins.svg'
 
 
 class Header extends Component 
@@ -96,7 +96,10 @@ class Header extends Component
 						}
 					</div>
 					<div className="col-md-2 coins text-center">
-						{this.props.coins.toLocaleString()}
+						<span>
+							{this.props.coins.toLocaleString()}
+						</span>
+
 					</div>
 					<div className="col-md-5">
 						<div className="row">
@@ -106,7 +109,7 @@ class Header extends Component
 							<div className="col-2 text-center">
 								<i className="fas fa-question-circle fa-2x header-button" onClick={this.toHub}></i>
 								<br></br>
-								<div className="icon-name">Coins!</div>
+								<div className="icon-name">Questions</div>
 							</div>
 							<div className="col-2 text-center">
 								<i className="fas fa-list-alt fa-2x header-button" onClick={this.toStatus}></i>

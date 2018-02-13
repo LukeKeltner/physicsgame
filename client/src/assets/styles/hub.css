@@ -36,3 +36,8 @@
 {
 	color:#00db06 !important;
 }
+
+.topic:active
+{
+	background-color: red;
+}
