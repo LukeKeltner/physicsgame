@@ -13,13 +13,11 @@ const orm =
 
 	findOne: function(table, whereField, whereValue, cb)
 	{
-		const query = connection.query(`SELECT * FROM ${table} WHERE ${whereField}=?`, [whereValue], function(err, result)
+		connection.query(`SELECT * FROM ${table} WHERE ${whereField}=?`, [whereValue], function(err, result)
 		{
 			if(err){throw err}
 			cb(result)
 		})
-
-		console.log(query.sql)
 	},
 
 	findAllWhere: function(table, whereField, whereValue, cb)

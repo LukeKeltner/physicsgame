@@ -203,7 +203,21 @@ insert into questions(topic, subtopic, question) values
         "correct":["-1"],
         "wrong":["1", "0", "2", "-2"]
     }'
+),
+
+(
+    "Random",
+    "Range Equation",
+    '{
+        "text":"An object is launched at rand0 degrees from the horizontal at an initial speed of rand1 m/s on a horizontal surface.  Using g = 10 m/s/s, hhow far does the object travel by the time it hits the ground?",
+        "correct":["rand1*rand1*sin(2*rand0*pi/180)/10"],
+        "wrong":["rand0-rand1", "rand0*rand1", "rand0/rand1"],
+        "random":2,
+        "rand0": [10,80,0],
+        "rand1":  [1,10,2]
+    }'
 );
+
 
 
 wharr@hawken.edu

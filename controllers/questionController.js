@@ -3,30 +3,21 @@ const questionModel = require('../models/questionModel.js');
 const usersModel = require('../models/usersModel.js');
 const math = require('mathjs');
 
-const createToken = function()
-{
-	const inputs = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-	let token = "";
-	const date = Date.now()
-
-	for (var i=0; i<10; i++)
-	{
-		var r = math.floor(math.random()*(inputs.length-1));
-		token = token + inputs[r];
-	}
-
-	return token+date
-}
 
 const shuffle = array =>
 {
 	for (let i = array.length - 1; i > 0; i--)
 	{
-		const j = math.floor(math.random() * (i + 1));
+		const j = Math.floor(Math.random() * (i + 1));
 		[array[i], array[j]] = [array[j], array[i]];
 	}
 
 	return array;
+}
+
+const randomVariable = (min, max, range) =>
+{
+	return (Math.random()*(max-min)+min).toFixed(range)
 }
 
 module.exports = 
@@ -92,14 +83,16 @@ module.exports =
 			const string = "Here is a test string with test words."
 			const string2 = string.replace(/test/g, "bear")
 
+			console.log(result[0].question)
 			const question = JSON.parse(result[0].question)
+			console.log(question)
 
 			if (question.random)
 			{
 				const randoms = []
 				for (let i=0; i<question.random; i++)
 				{
-					const randomNumber = math.floor(math.random() * 11)+1
+					const randomNumber = randomVariable(question["rand"+i][0], question["rand"+i][1], question["rand"+i][2])
 					randoms.push(randomNumber)
 					const currentRandom = "rand"+i
 					question.text = question.text.replace(new RegExp(currentRandom, "g"), randomNumber)
