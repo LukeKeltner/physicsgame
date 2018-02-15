@@ -6,6 +6,7 @@ body
 
 .header-container
 {
+	position:relative;
 	margin-bottom: 20px;
 	background-color: white;
 	color:white;
@@ -13,14 +14,37 @@ body
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.header-row
+{
+	height:100px;
+}
+
+
 .logo
 {
+	position: absolute;
 	font-size:40px;
+	top:50%;
+	transform: translateY(-50%);
+}
+
+.icon-container
+{
+	position: absolute;
+	font-size:40px;
+	top:50%;
+	transform: translateY(-50%);	
+	right:20px;
 }
 
 .coins
 {
-	font-size: 40px;
+	position: absolute;
+	font-size:40px;
+	top:50%;
+	transform: translate(-50%, -50%);
+	left:50%;
+
 }
 
 #coins
@@ -36,7 +60,9 @@ body
 .header-button
 {
 	color:white !important;
+	font-size: 100% !important;
 }
+
 
 .header-button:hover
 {
@@ -62,5 +88,55 @@ body
 
 .user-icon
 {
-	width:20%;
+	height:70px;
+}
+
+.header-button
+{
+	position: relative;
+}
+
+
+.header-button .header-tooltip
+{
+	font-family: 'Quicksand', sans-serif;
+	font-weight: normal;
+	visibility: hidden;
+    width: 140px;
+    background-color: black;
+    color: #fff;
+    border-radius: 6px;
+    padding: 5px;
+
+	position: absolute;
+	top:120%;
+	right:0%;
+	z-index: 6;
+}
+
+.header-button:hover .header-tooltip
+{
+	visibility: visible;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 768px)
+{
+	.header-row
+	{
+		height: 200px;
+	}
 }

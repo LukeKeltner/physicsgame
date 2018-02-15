@@ -21,7 +21,7 @@ class Question extends Component
 		correct: [],
 		wrong: [],
 		numberCorrect: 0,
-		result: "",
+		result: "Loading...",
 		img: "",
 		successRate: 0,
 		correctSound: new Audio(correctSound),
@@ -186,13 +186,13 @@ class Question extends Component
 									?
 									<div>
 										<p className="result-text">You have finished this subtopic!</p>
-										<button type="button" class="btn btn-primary" onClick={this.back}>Back</button>
+										<button type="button" className="btn btn-primary" onClick={this.back}>Back</button>
 									</div>
 									:
 									<div>
-										<button type="button" class="btn btn-success" onClick={this.newQuestion}>Give me another question!</button>
+										<button type="button" className="btn btn-success" onClick={this.newQuestion}>Give me another question!</button>
 										<br></br>
-										<button type="button" class="btn btn-primary" onClick={this.back}>Back</button>
+										<button type="button" className="btn btn-primary" onClick={this.back}>Back</button>
 									</div>
 								}
 							</div>
