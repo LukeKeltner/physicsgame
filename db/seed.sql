@@ -1,7 +1,7 @@
 insert into questions(topic, subtopic, question) values
 (
-    "Fictional Stories",
-    "Harry Potter",
+    "Just for Fun",
+    "You feeling lucky?",
     '{
         "text":"Who is this character?",
         "correct":["Harry Potter"],
@@ -11,8 +11,8 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Fictional Stories",
-    "Harry Potter",
+    "Just for Fun",
+    "You feeling lucky?",
     '{
         "text":"Who is this character?",
         "correct":["Ron Weasley"],
@@ -22,8 +22,8 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Fictional Stories",
-    "Harry Potter",
+    "Just for Fun",
+    "You feeling lucky?",
     '{
         "text":"Who is this character?",
         "correct":["Hermione Granger"],
@@ -33,8 +33,8 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Fictional Stories",
-    "Harry Potter",
+    "Just for Fun",
+    "You feeling lucky?",
     '{
         "text":"Who is this character?",
         "correct":["Dolores Umbridge"],
@@ -44,8 +44,8 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Fictional Stories",
-    "Harry Potter",
+    "Just for Fun",
+    "You feeling lucky?",
     '{
         "text":"Who is this character?",
         "correct":["Professor Snape"],
@@ -55,8 +55,8 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Fictional Stories",
-    "Disney",
+    "Just for Fun",
+    "You feeling lucky?",
     '{
         "text":"In Beauty and the Beast, Mrs. Potts is the mother of which personified household object?",
         "correct":["A teacup named Chip"],
@@ -65,8 +65,8 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Fictional Stories",
-    "Disney",
+    "Just for Fun",
+    "You feeling lucky?",
     '{
         "text":"Which of the following Disney characters were born into royalty?",
         "correct":["Hercules", "Simba", "Ariel"],
@@ -75,8 +75,8 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Fictional Stories",
-    "Disney",
+    "Just for Fun",
+    "You feeling lucky?",
     '{
         "text":"Which Disney Princess owned a pet tiger named Raja?",
         "correct":["Jasmine"],
@@ -86,8 +86,8 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Fictional Stories",
-    "Disney",
+    "Just for Fun",
+    "You feeling lucky?",
     '{
         "text":"In The Sword in the Stone, what does Merlin call The Greatest Force on Earth?",
         "correct":["Love"],
@@ -96,8 +96,8 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Fictional Stories",
-    "Disney",
+    "Just for Fun",
+    "You feeling lucky?",
     '{
         "text":"In the Lion King, where does Mufasa and his family live?",
         "correct":["Pride Rock"],
@@ -106,8 +106,8 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Math",
-    "Addition",
+    "Just for Fun",
+    "You feeling lucky?",
     '{
         "text":"What is 2+2?",
         "correct":["4"],
@@ -116,8 +116,8 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Math",
-    "Addition",
+    "Just for Fun",
+    "You feeling lucky?",
     '{
         "text":"What is 14+6?",
         "correct":["20"],
@@ -126,8 +126,8 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Math",
-    "Addition",
+    "Just for Fun",
+    "You feeling lucky?",
     '{
         "text":"What is 300+14?",
         "correct":["314"],
@@ -136,8 +136,8 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Math",
-    "Addition",
+    "Just for Fun",
+    "You feeling lucky?",
     '{
         "text":"What is 3+3?",
         "correct":["6"],
@@ -146,8 +146,8 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Math",
-    "Addition",
+    "Just for Fun",
+    "You feeling lucky?",
     '{
         "text":"What is 2+6?",
         "correct":["8"],
@@ -156,8 +156,8 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Math",
-    "Multiplication",
+    "Just for Fun",
+    "You feeling lucky?",
     '{
         "text":"What is 2x6?",
         "correct":["12"],
@@ -166,8 +166,8 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Math",
-    "Multiplication",
+    "Just for Fun",
+    "You feeling lucky?",
     '{
         "text":"What is 4x6?",
         "correct":["24"],
@@ -176,8 +176,8 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Math",
-    "Multiplication",
+    "Just for Fun",
+    "You feeling lucky?",
     '{
         "text":"x squared equals 4, what is x?",
         "correct":["+2", "-2"],
@@ -186,8 +186,8 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Math",
-    "Multiplication",
+    "Just for Fun",
+    "You feeling lucky?",
     '{
         "text":"What is 11x2?",
         "correct":["22"],
@@ -196,8 +196,8 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Math",
-    "Multiplication",
+    "Just for Fun",
+    "You feeling lucky?",
     '{
         "text":"What is i squared?",
         "correct":["-1"],
@@ -206,8 +206,8 @@ insert into questions(topic, subtopic, question) values
 ),
 
 (
-    "Random",
-    "Range Equation",
+    "Just for Fun",
+    "You feeling lucky?",
     '{
         "text":"An object is launched at rand0 degrees from the horizontal at an initial speed of rand1 m/s on a horizontal surface.  Using g = 10 m/s/s, how far does the object travel by the time it hits the ground?",
         "correct":["rand1*rand1*sin(2*rand0*pi/180)/10"],
