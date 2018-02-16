@@ -40,7 +40,7 @@ class Report extends Component
 
 		const reducer = (accumulator, currentValue) => accumulator + currentValue;
 		const rights = this.props.corrects.reduce(reducer)
-		const percent = (rights/this.props.amount).toFixed(2)*100
+		const percent = (rights/this.props.amount*100).toFixed(0)
 
 		this.setState({questions: array, percent: percent})
 	}

@@ -1,7 +1,7 @@
 insert into questions(topic, subtopic, question) values
 (
     "Just for Fun",
-    "You feeling lucky?",
+    "Random Questions",
     '{
         "text":"Who is this character?",
         "correct":["Harry Potter"],
@@ -12,7 +12,7 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Just for Fun",
-    "You feeling lucky?",
+    "Random Questions",
     '{
         "text":"Who is this character?",
         "correct":["Ron Weasley"],
@@ -23,7 +23,7 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Just for Fun",
-    "You feeling lucky?",
+    "Random Questions",
     '{
         "text":"Who is this character?",
         "correct":["Hermione Granger"],
@@ -34,7 +34,7 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Just for Fun",
-    "You feeling lucky?",
+    "Random Questions",
     '{
         "text":"Who is this character?",
         "correct":["Dolores Umbridge"],
@@ -45,7 +45,7 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Just for Fun",
-    "You feeling lucky?",
+    "Random Questions",
     '{
         "text":"Who is this character?",
         "correct":["Professor Snape"],
@@ -56,7 +56,7 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Just for Fun",
-    "You feeling lucky?",
+    "Random Questions",
     '{
         "text":"In Beauty and the Beast, Mrs. Potts is the mother of which personified household object?",
         "correct":["A teacup named Chip"],
@@ -66,7 +66,7 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Just for Fun",
-    "You feeling lucky?",
+    "Random Questions",
     '{
         "text":"Which of the following Disney characters were born into royalty?",
         "correct":["Hercules", "Simba", "Ariel"],
@@ -76,7 +76,7 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Just for Fun",
-    "You feeling lucky?",
+    "Random Questions",
     '{
         "text":"Which Disney Princess owned a pet tiger named Raja?",
         "correct":["Jasmine"],
@@ -87,7 +87,7 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Just for Fun",
-    "You feeling lucky?",
+    "Random Questions",
     '{
         "text":"In The Sword in the Stone, what does Merlin call The Greatest Force on Earth?",
         "correct":["Love"],
@@ -97,7 +97,7 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Just for Fun",
-    "You feeling lucky?",
+    "Random Questions",
     '{
         "text":"In the Lion King, where does Mufasa and his family live?",
         "correct":["Pride Rock"],
@@ -107,7 +107,7 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Just for Fun",
-    "You feeling lucky?",
+    "Random Questions",
     '{
         "text":"What is 2+2?",
         "correct":["4"],
@@ -117,7 +117,7 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Just for Fun",
-    "You feeling lucky?",
+    "Random Questions",
     '{
         "text":"What is 14+6?",
         "correct":["20"],
@@ -127,7 +127,7 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Just for Fun",
-    "You feeling lucky?",
+    "Random Questions",
     '{
         "text":"What is 300+14?",
         "correct":["314"],
@@ -137,7 +137,7 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Just for Fun",
-    "You feeling lucky?",
+    "Random Questions",
     '{
         "text":"What is 3+3?",
         "correct":["6"],
@@ -147,7 +147,7 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Just for Fun",
-    "You feeling lucky?",
+    "Random Questions",
     '{
         "text":"What is 2+6?",
         "correct":["8"],
@@ -157,7 +157,7 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Just for Fun",
-    "You feeling lucky?",
+    "Random Questions",
     '{
         "text":"What is 2x6?",
         "correct":["12"],
@@ -167,7 +167,7 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Just for Fun",
-    "You feeling lucky?",
+    "Random Questions",
     '{
         "text":"What is 4x6?",
         "correct":["24"],
@@ -177,7 +177,7 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Just for Fun",
-    "You feeling lucky?",
+    "Random Questions",
     '{
         "text":"x squared equals 4, what is x?",
         "correct":["+2", "-2"],
@@ -187,7 +187,7 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Just for Fun",
-    "You feeling lucky?",
+    "Random Questions",
     '{
         "text":"What is 11x2?",
         "correct":["22"],
@@ -197,7 +197,7 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Just for Fun",
-    "You feeling lucky?",
+    "Random Questions",
     '{
         "text":"What is i squared?",
         "correct":["-1"],
@@ -207,7 +207,7 @@ insert into questions(topic, subtopic, question) values
 
 (
     "Just for Fun",
-    "You feeling lucky?",
+    "Random Questions",
     '{
         "text":"An object is launched at rand0 degrees from the horizontal at an initial speed of rand1 m/s on a horizontal surface.  Using g = 10 m/s/s, how far does the object travel by the time it hits the ground?",
         "correct":["rand1*rand1*sin(2*rand0*pi/180)/10"],
@@ -215,6 +215,132 @@ insert into questions(topic, subtopic, question) values
         "random":2,
         "rand0": [10,80,0],
         "rand1":  [1,10,2]
+    }'
+),
+
+(
+    "2D Kinematics",
+    "Horizontal Projectiles",
+    '{
+        "text":"A ball is launched completely horizontally off a rand0 m cliff with an initial velocity of rand1 m/s. How far in meters from the base of the cliff does the ball get by the time it hits the water?  Use the acceleration due to gravity to be 10 m/s/s.",
+        "correct":["rand1*sqrt(rand0/5)"],
+        "wrong":["5*(rand1/rand0)^2", "sqrt(5/rand0)*rand1", "rand0*sqrt(rand1/5)"],
+        "img":"horizontalprojectile.jpg",
+        "random":2,
+        "rand0": [10,100,0],
+        "rand1": [1,10,2]
+    }'
+),
+
+(
+    "2D Kinematics",
+    "Horizontal Projectiles",
+    '{
+        "text":"A ball is launched completely horizontally off a cliff with an initial velocity of rand0 m/s. The ball ends up rand1 m away from the base of the cliff.  How high is the cliff in meters?  Use the acceleration due to gravity to be 10 m/s/s.",
+        "correct":["5*(rand1/rand0)^2"],
+        "wrong":["rand1*sqrt(rand0/5)", "sqrt(5/rand0)*rand1", "5*(rand0/rand1)^2"],
+        "img":"horizontalprojectile.jpg",
+        "random":2,
+        "rand0": [1,10,2],
+        "rand1": [30,100,0]
+    }'
+),
+
+(
+    "2D Kinematics",
+    "Horizontal Projectiles",
+    '{
+        "text":"A ball is launched completely horizontally off a rand0 m cliff with some initial velocity. The ball ends up rand1 m away from the base of the cliff.  What must have been the initial velocity of the ball in meters per second?  Use the acceleration due to gravity to be 10 m/s/s.",
+        "correct":["sqrt(5/rand0)*rand1"],
+        "wrong":["rand1*sqrt(rand0/5)", "5*(rand1/rand0)^2", "sqrt(5/rand1)*rand0"],
+        "img":"horizontalprojectile.jpg",
+        "random":2,
+        "rand0": [10,100,0],
+        "rand1": [10,50,2]
+    }'
+),
+
+(
+    "2D Kinematics",
+    "Horizontal Projectiles",
+    '{
+        "text":"A ball is launched completely horizontally off a rand0 m cliff with an initial velocity of rand1 m/s. How far in meters from the base of the cliff does the ball get by the time it hits the water?  Use the acceleration due to gravity to be 10 m/s/s.",
+        "correct":["rand1*sqrt(rand0/5)"],
+        "wrong":["5*(rand1/rand0)^2", "sqrt(5/rand0)*rand1", "rand0*sqrt(rand1/5)"],
+        "img":"horizontalprojectile.jpg",
+        "random":2,
+        "rand0": [10,100,0],
+        "rand1": [1,10,2]
+    }'
+),
+
+(
+    "2D Kinematics",
+    "Horizontal Projectiles",
+    '{
+        "text":"A ball is launched completely horizontally off a cliff with an initial velocity of rand0 m/s. The ball ends up rand1 m away from the base of the cliff.  How high is the cliff in meters?  Use the acceleration due to gravity to be 10 m/s/s.",
+        "correct":["5*(rand1/rand0)^2"],
+        "wrong":["rand1*sqrt(rand0/5)", "sqrt(5/rand0)*rand1", "5*(rand0/rand1)^2"],
+        "img":"horizontalprojectile.jpg",
+        "random":2,
+        "rand0": [1,10,2],
+        "rand1": [30,100,0]
+    }'
+),
+
+(
+    "2D Kinematics",
+    "Horizontal Projectiles",
+    '{
+        "text":"A ball is launched completely horizontally off a rand0 m cliff with some initial velocity. The ball ends up rand1 m away from the base of the cliff.  What must have been the initial velocity of the ball in meters per second?  Use the acceleration due to gravity to be 10 m/s/s.",
+        "correct":["sqrt(5/rand0)*rand1"],
+        "wrong":["rand1*sqrt(rand0/5)", "5*(rand1/rand0)^2", "sqrt(5/rand1)*rand0"],
+        "img":"horizontalprojectile.jpg",
+        "random":2,
+        "rand0": [10,100,0],
+        "rand1": [10,50,2]
+    }'
+),
+
+(
+    "2D Kinematics",
+    "Horizontal Projectiles",
+    '{
+        "text":"A ball is launched completely horizontally off a rand0 m cliff with an initial velocity of rand1 m/s. How far in meters from the base of the cliff does the ball get by the time it hits the water?  Use the acceleration due to gravity to be 10 m/s/s.",
+        "correct":["rand1*sqrt(rand0/5)"],
+        "wrong":["5*(rand1/rand0)^2", "sqrt(5/rand0)*rand1", "rand0*sqrt(rand1/5)"],
+        "img":"horizontalprojectile.jpg",
+        "random":2,
+        "rand0": [10,100,0],
+        "rand1": [1,10,2]
+    }'
+),
+
+(
+    "2D Kinematics",
+    "Horizontal Projectiles",
+    '{
+        "text":"A ball is launched completely horizontally off a cliff with an initial velocity of rand0 m/s. The ball ends up rand1 m away from the base of the cliff.  How high is the cliff in meters?  Use the acceleration due to gravity to be 10 m/s/s.",
+        "correct":["5*(rand1/rand0)^2"],
+        "wrong":["rand1*sqrt(rand0/5)", "sqrt(5/rand0)*rand1", "5*(rand0/rand1)^2"],
+        "img":"horizontalprojectile.jpg",
+        "random":2,
+        "rand0": [1,10,2],
+        "rand1": [30,100,0]
+    }'
+),
+
+(
+    "2D Kinematics",
+    "Horizontal Projectiles",
+    '{
+        "text":"A ball is launched completely horizontally off a rand0 m cliff with some initial velocity. The ball ends up rand1 m away from the base of the cliff.  What must have been the initial velocity of the ball in meters per second?  Use the acceleration due to gravity to be 10 m/s/s.",
+        "correct":["sqrt(5/rand0)*rand1"],
+        "wrong":["rand1*sqrt(rand0/5)", "5*(rand1/rand0)^2", "sqrt(5/rand1)*rand0"],
+        "img":"horizontalprojectile.jpg",
+        "random":2,
+        "rand0": [10,100,0],
+        "rand1": [10,50,2]
     }'
 );
 

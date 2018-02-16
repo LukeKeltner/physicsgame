@@ -9,11 +9,16 @@ class Header extends Component
 		name: this.props.name,
 		coins: this.props.coins,
 		styles: [],
-		currentColor: this.props.background
+		currentColor: this.props.background,
+		icon: ""
 	}
 
 	componentWillReceiveProps  = nextProps =>
 	{
+		if (nextProps.icon !== "")
+		{
+			this.setState({icon: require("../assets/images/icons/"+nextProps.icon)})
+		}
 		const newStyles = 
 		{
 			backgroundColor: nextProps.background
@@ -27,37 +32,56 @@ class Header extends Component
 	render()
 	{
 		return(
-			<div>
-				<div className="container-fluid header-container" style={this.state.styles[0]}>
-					<div className="row">
-						<div className="col-md-5">
-							<div className="logo">
-								<i className="fas fa-user avatar"></i>Hi {this.props.name}!
-							</div>
+			<div className="container-fluid header-container" style={this.state.styles[0]}>
+				<div className="row header-row">
+					<div className="col-md-5">
+						<div className="logo">
+							<img className="user-icon" alt="icon" src={this.state.icon} />Hi {this.props.name}!
+						{this.props.teacher === "yes"
+							?
+								<button type="button" className="btn btn-info" onClick={this.toGrades}>Check Grades</button>
+							:
+								""
+						}
 						</div>
-						<div className="col-md-2 coins text-center">
-							{/*<img className="coin" alt="coins" src={coin} />*/}
-							{this.props.coins.toLocaleString()}
-						</div>
-						<div className="col-md-5">
-							<div className="row">
+					</div>
+					<div className="col-md-2 text-center">
+						<span>
+							<div className="coins">{this.props.coins.toLocaleString()}</div>
+						</span>
+
+					</div>
+					<div className="col-md-5">
+					<div className="icon-container">
+						<div className="row">
+							
 								<div className="col-2 text-center">
-									
+
 								</div>
 								<div className="col-2 text-center">
-									<i className="fas fa-question-circle fa-2x header-button"></i>
+									<i className="fas fa-question-circle fa-2x header-button" onClick={this.toHub}>
+										<span className="header-tooltip" style={{fontSize:"20px"}}>New question</span>
+									</i>
 								</div>
 								<div className="col-2 text-center">
-									<i className="fas fa-list-alt fa-2x header-button"></i>
+									<i className="fas fa-list-alt fa-2x header-button" onClick={this.toStatus}>
+										<span className="header-tooltip" style={{fontSize:"20px"}}>Status</span>
+									</i>
 								</div>
 								<div className="col-2 text-center">
-									<i className="fas fa-shopping-cart fa-2x header-button"></i>
+									<i className="fas fa-shopping-cart fa-2x header-button" onClick={this.toStore}>
+										<span className="header-tooltip" style={{fontSize:"20px"}}>Store</span>
+									</i>
 								</div>
 								<div className="col-2 text-center">
-									<i className="fas fa-trophy fa-2x header-button"></i>
+									<i className="fas fa-trophy fa-2x header-button" onClick={this.toLeaderboard}>
+										<span className="header-tooltip" style={{fontSize:"20px"}}>Leaderboard</span>
+									</i>
 								</div>
 								<div className="col-2 text-center">
-									<i className="fas fa-arrow-alt-circle-right fa-2x header-button"></i>
+									<i className="fas fa-arrow-alt-circle-right fa-2x header-button" onClick={this.logout}>
+										<span className="header-tooltip" style={{fontSize:"20px"}}>Logout</span>
+									</i>
 								</div>
 							</div>
 						</div>

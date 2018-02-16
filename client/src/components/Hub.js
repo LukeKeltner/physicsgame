@@ -175,10 +175,6 @@ class Hub extends Component
 							<div className="topic-container" style={this.state.styles}>
 								<div className="topic-header">
 									Topics
-									{this.state.topic === ""
-										? <i className="fas fa-check fa-1x float-right"></i>
-										: <i className="fas fa-check fa-1x hand-selected float-right"></i>
-									}
 								</div>
 							</div>
 							{this.state.allTopics.map((topic, i) =>
@@ -190,15 +186,7 @@ class Hub extends Component
 						<div className="col-md-4">
 							<div className="topic-container" style={this.state.styles}>
 								<div className="topic-header">
-									Subtopics in  
-									{this.state.topic === "" 
-									? "..."
-									: " "+this.state.topic
-									}
-									{this.state.subtopic === ""
-										? <i className="fas fa-check fa-1x float-right"></i>
-										: <i className="fas fa-check fa-1x hand-selected float-right"></i>
-									}
+									Subtopics
 								</div>
 							</div>
 							{this.state.allSubtopics.map((topic, i) =>
@@ -212,10 +200,6 @@ class Hub extends Component
 							<div className="topic-container" style={this.state.styles}>
 								<div className="topic-header">
 									Wager
-									{this.state.gamble === 0
-											? <i className="fas fa-check fa-1x float-right"></i>
-											: <i className="fas fa-check fa-1x hand-selected float-right"></i>
-										}
 								</div>
 							</div>
 							{this.state.gambleAmounts.map((amount, i) =>

@@ -68,7 +68,8 @@ class Store extends Component
 		name: "",
 		coins: "",
 	    background: 'red',
-	    iconPicked: ""
+	    iconPicked: "",
+	    icon: ""
 	}
 
 	componentWillMount = () =>
@@ -79,11 +80,12 @@ class Store extends Component
 
 		API.getUser(token).then(function(user)
 		{
-			This.setState({id: user.data[0].id, name: user.data[0].firstname, coins: user.data[0].coins})
+			console.log(user.data[0].icon)
+			This.setState({id: user.data[0].id, name: user.data[0].firstname, coins: user.data[0].coins, icon: user.data[0].icon})
 		})
 	}
 
-	handleChangeComplete = (color) => 
+	handleChangeComplete = (color) =>
 	{
 		this.setState({ background: color.hex });
 	}
@@ -154,9 +156,6 @@ class Store extends Component
 				<div className="container">
 
 
-
-
-
 					<div className="item-container">
 						<div>
 							<h3 className="item-name">Theme Color Picker</h3>
@@ -164,7 +163,7 @@ class Store extends Component
 
 						<div className="row">
 							<div className="col-md-8">
-								<HeaderTest name={this.state.name} coins={this.state.coins} background={this.state.background}/>
+								<HeaderTest name={this.state.name} coins={this.state.coins} background={this.state.background} icon={this.state.icon}/>
 							</div>
 							<div className="col-md-4">
 								<ChromePicker color={this.state.background} onChange={this.handleChangeComplete}/>

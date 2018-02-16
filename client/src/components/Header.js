@@ -87,13 +87,13 @@ class Header extends Component
 					<div className="col-md-5">
 						<div className="logo">
 							<img className="user-icon" alt="icon" src={this.state.icon} />{this.state.greeting} {this.props.name}!
-						</div>
 						{this.props.teacher === "yes"
 							?
 								<button type="button" className="btn btn-info" onClick={this.toGrades}>Check Grades</button>
 							:
 								""
 						}
+						</div>
 					</div>
 					<div className="col-md-2 text-center">
 						<span>
