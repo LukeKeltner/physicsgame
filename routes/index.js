@@ -43,11 +43,17 @@ router.route(`/headerColorChange`).post(userController.headerColorChange)
 
 router.route(`/iconChange`).post(userController.iconChange)
 
+router.route(`/buyChallengeToken`).post(userController.buyChallengeToken)
+
 router.route(`/findAllStudents/:section/:teacher`).get(userController.findAllStudents)
 
 router.route(`/findSections/:teacher`).get(userController.findSections)
 
 router.route(`/findCorrectQuestionsFromTopicAndSubtopic/:userid/:topic/:subtopic`).get(userController.findCorrectQuestionsFromTopicAndSubtopic)
+
+router.route(`/getChallengers/:questionid`).get(userController.getChallengers)
+
+router.route(`/challengeUser`).post(userController.challengeUser)
 
 
 router.use(function(req, res) 

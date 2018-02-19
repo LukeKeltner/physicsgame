@@ -96,6 +96,14 @@ const user =
 		{
 			cb(result)
 		})
+	},
+
+	challengeUser: function(challengedid, challengerid, questionid, cb)
+	{
+		orm.insert("challengelookup", "challengedid", "challengerid", "questionid", challengedid, challengerid, questionid, function(result)
+		{
+			cb(result)
+		})
 	}
 }
 

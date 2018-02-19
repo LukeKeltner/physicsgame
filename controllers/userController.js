@@ -3,6 +3,7 @@ const usersModel = require('../models/usersModel.js');
 const questionModel = require('../models/questionModel.js');
 const bcrypt = require('bcrypt');
 const http = require("http");
+const connection = require('../config/connection.js');
 
 const createToken = function()
 {
@@ -399,6 +400,19 @@ module.exports =
 		})		
 	},
 
+	buyChallengeToken: function(req, res)
+	{
+		const newCoins = req.body.coins - 100;
+
+		usersModel.updateUser("coins", newCoins, "id", req.body.userid, function(result)
+		{
+			usersModel.updateUser(req.body.columnName, req.body.columnValue, "id", req.body.userid, function(result)
+			{
+				res.end()
+			})
+		})	
+	},
+
 	findSections: function(req, res)
 	{
 		usersModel.findDistinctWhere("section", "users", "teacher", req.params.teacher, function(sections)
@@ -423,6 +437,27 @@ module.exports =
 			{
 				const grade = totalCorrect[0]["correct"]*100/totalQuestions[0]["questionAmount"]
 				res.send(""+grade)
+			})
+		})
+	},
+
+	getChallengers: function(req, res)
+	{
+		connection.query(`select id, firstname, lastname from users where id not in (select userid from correctlookup where questionid = ${req.params.questionid}) and id not in (select challengedid from challengelookup where questionid = ${req.params.questionid}) order by lastname asc;`, function(err, result)
+		{
+			if(err){throw err}
+			res.send(result)
+		})
+	},
+
+	challengeUser: function(req, res)
+	{
+		console.log("HEY THERE!!!!")
+		usersModel.updateUser("challengetokens", req.body.newChallengeTokens, "id", req.body.challengerid, function(result)
+		{
+			usersModel.challengeUser(req.body.challengedid, req.body.challengerid, req.body.questionid, function(result)
+			{
+				res.end()
 			})
 		})
 	}

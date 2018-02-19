@@ -4,6 +4,7 @@ import API from "../utils/API";
 import Answer from './Answer'
 import correctSound from '../assets/sounds/correct.mp3';
 import wrongSound from '../assets/sounds/wrong.mp3';
+import challenge from '../assets/images/icons/challenge.svg'
 
 class Question extends Component 
 {
@@ -26,7 +27,10 @@ class Question extends Component
 		successRate: 0,
 		correctSound: new Audio(correctSound),
 		wrongSound: new Audio(wrongSound),
-		newQuestion: 0
+		newQuestion: 0,
+		challengeTokens: 0,
+		challengers: [],
+		currentChallenger: 0
 	}
 
 	componentDidMount = () =>
@@ -70,6 +74,7 @@ class Question extends Component
 						coins: user.data[0].coins,
 						currentgamble: user.data[0].currentgamble,
 						currentquestion: user.data[0].currentquestion,
+						challengeTokens: user.data[0].challengetokens,
 						topic:result.data.topic,
 						subtopic:result.data.subtopic,
 						text:result.data.question.text,
@@ -77,6 +82,7 @@ class Question extends Component
 						wrong:result.data.question.wrong,
 						answers:result.data.shuffledAnswers,
 						numberCorrect:result.data.question.correct.length,
+
 					})
 				})
 			}
@@ -157,6 +163,53 @@ class Question extends Component
 		window.location="/hub"
 	}
 
+	challenge = event =>
+	{
+		const This = this;
+		const cover = document.getElementsByClassName("cover-challenge-container")
+		cover[0].classList.add("display");		
+		API.getChallengers({questionid: this.state.currentquestion}).then(challengers =>
+		{
+			console.log(challengers)
+			This.setState({challengers: challengers.data})
+		})
+	}
+
+	backOnChallenge = event =>
+	{
+		const cover = document.getElementsByClassName("cover-challenge-container")
+		cover[0].classList.remove("display");		
+	}
+
+	activeChallenger = event =>
+	{
+		for (let i=0; i<document.getElementsByClassName("challenger").length; i++)
+		{
+			document.getElementsByClassName("challenger")[i].classList.remove("challenger-active")
+		}
+
+		event.target.classList.add("challenger-active");
+		this.setState({currentChallenger: event.target.id})
+		console.log(this.state)
+	}
+
+	challengeUser = event =>
+	{
+		const data = 
+		{
+			newChallengeTokens: this.state.challengeTokens - 1,
+			challengedid: this.state.currentChallenger,
+			challengerid: this.state.id,
+			questionid: this.state.currentquestion
+		}
+
+		API.challengeUser(data).then(result =>
+		{
+
+			window.location.reload()			
+		})
+	}
+
 	newQuestion = event =>
 	{
 		const data3 =
@@ -198,7 +251,38 @@ class Question extends Component
 							</div>
 						</div>
 					</div>
-						<div className="container">
+
+					<div className="cover-challenge-container">
+						<div className="cover">
+							<div className="cover-challenge-result">
+								Whom do you want to challenge?
+								<br></br>
+								<div className="challengers-container">
+									{this.state.challengers.map((challenger, i) =>
+										{
+											let result;
+											{this.state.id !== challenger.id
+												?
+													result = <div key={i} id={challenger.id} className="challenger" onClick={this.activeChallenger}>{challenger.firstname} {challenger.lastname}</div>
+												:
+													result = <div key={i}></div>
+											}
+
+											return result
+										})}
+								</div>
+								<div className="row">
+									<div className="col-6">
+										<button type="button" className="btn btn-primary" onClick={this.backOnChallenge}>Back</button>
+									</div>
+									<div className="col-6">
+										<button type="button" className="btn btn-danger float-right challenge-button" onClick={this.challengeUser}>Challenge!</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+						<div className="container question-container">
 							<div className="row">
 
 								<div className="col-md-2 stats">
@@ -223,6 +307,21 @@ class Question extends Component
 
 										?
 										<div className="col-md-6 questionContainer-image">
+											{this.state.challengeTokens > 0
+												?
+													<div className="row">
+														<div className="col-9">
+														</div>
+														<div className="col-2">
+															<img className="challenge-icon float-right" alt="challenge" src={challenge} onClick={this.challenge}/>
+														</div>
+														<div className="col-1 challenge-amount-container">
+															<div className="challenge-amount">+{this.state.challengeTokens}</div>
+														</div>
+													</div>
+												:
+													<div></div>
+											}
 											<div className="row questionText-image">
 												<div className="col-md-12">
 													{this.state.text}
@@ -234,6 +333,21 @@ class Question extends Component
 
 										:
 										<div className="col-md-6 questionContainer">
+											{this.state.challengeTokens > 0
+												?
+													<div className="row">
+														<div className="col-9">
+														</div>
+														<div className="col-2">
+															<img className="challenge-icon float-right" alt="challenge" src={challenge} onClick={this.challenge}/>
+														</div>
+														<div className="col-1 challenge-amount-container">
+															<div className="challenge-amount">+{this.state.challengeTokens}</div>
+														</div>
+													</div>
+												:
+													<div></div>
+											}
 											<div className="row questionText">
 												<div className="col-md-12">
 													{this.state.text}

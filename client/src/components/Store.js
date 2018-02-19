@@ -3,6 +3,7 @@ import '../assets/styles/store.css'
 import API from "../utils/API";
 import { ChromePicker } from 'react-color';
 import HeaderTest from './HeaderTest'
+import challenge from '../assets/images/icons/challenge.svg'
 
 import girl from '../assets/images/icons/girl.svg'
 import girl2 from '../assets/images/icons/girl-2.svg'
@@ -69,7 +70,8 @@ class Store extends Component
 		coins: "",
 	    background: 'red',
 	    iconPicked: "",
-	    icon: ""
+	    icon: "",
+	    challengeTokens: 0
 	}
 
 	componentWillMount = () =>
@@ -80,8 +82,8 @@ class Store extends Component
 
 		API.getUser(token).then(function(user)
 		{
-			console.log(user.data[0].icon)
-			This.setState({id: user.data[0].id, name: user.data[0].firstname, coins: user.data[0].coins, icon: user.data[0].icon})
+			console.log(user.data[0])
+			This.setState({id: user.data[0].id, name: user.data[0].firstname, coins: user.data[0].coins, icon: user.data[0].icon, challengeTokens: user.data[0].challengetokens})
 		})
 	}
 
@@ -148,12 +150,68 @@ class Store extends Component
 		})
 	}
 
+	buyChallengeToken = event =>
+	{
+		const newTokens = this.state.challengeTokens + 1;
+		const data = 
+		{
+			userid: this.state.id,
+			columnName: "challengetokens",
+			columnValue: newTokens,
+			coins: this.state.coins
+		}
+
+		API.buyChallengeToken(data).then(result =>
+		{
+			window.location.reload()
+		})
+	}
+
 
 	render()
 	{
 		return(
 			<div>
 				<div className="container">
+
+					<div className="item-container">
+						<div className="row">
+							<div className="col-md-6">
+								<h3 className="item-name">Challenge Tokens</h3>
+							</div>
+							<div className="col-md-6">
+								<div className="float-right">
+									{this.state.challengeTokens === 1 
+										?
+										<div>You currently have {this.state.challengeTokens} Challenge Token</div>
+										:
+										<div>You currently have {this.state.challengeTokens} Challenge Tokens</div>
+									}
+								</div>
+							</div>
+						</div>
+
+						<div className="row">
+							<div className="col-md-6 text-center">
+								<img className="challenge" alt="challenge" src={challenge}/>
+							</div>
+							<div className="col-md-6">
+								A Challenge Token allows you challenge another user!  If you find yourself on a question that you would like to challenge a peer, you may use one of these tokens to pick a user to challenge them!  If the challenger gets the quesiton right, they get 100 of your coins.  If they get it wrong, you get 100 of theirs!
+							</div>
+						</div>
+						<div className="row">
+							<div className="col-md-12">
+								{this.state.coins >= 100
+									?
+										<button type="button" className="btn btn-success btn-lg float-right" onClick={this.buyChallengeToken}>Buy Challenge Token! 100</button>
+									:
+										<button type="button" className="btn btn-success btn-lg float-right"  disabled>Buy Challenge Token! 100</button>
+								}
+							</div>
+						</div>
+					</div>
+
+
 
 
 					<div className="item-container">
@@ -175,7 +233,7 @@ class Store extends Component
 									?
 										<button type="button" className="btn btn-success btn-lg float-right" onClick={this.buyColor}>Buy Color! 50</button>
 									:
-										<button type="button" className="btn btn-success btn-lg float-right" onClick={this.buyColor} disabled>Buy Color! 50</button>
+										<button type="button" className="btn btn-success btn-lg float-right" disabled>Buy Color! 50</button>
 								}
 							</div>
 						</div>
@@ -393,7 +451,7 @@ class Store extends Component
 									?
 										<button type="button" className="btn btn-success btn-lg float-right" onClick={this.buyIcon}>Buy Icon! 50</button>
 									:
-										<button type="button" className="btn btn-success btn-lg float-right" onClick={this.buyIcon} disabled>Buy Icon! 50</button>
+										<button type="button" className="btn btn-success btn-lg float-right" disabled>Buy Icon! 50</button>
 								}
 							</div>
 						</div>

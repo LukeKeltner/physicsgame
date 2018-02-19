@@ -97,6 +97,11 @@ export default {
 		return axios.post(`/iconChange`, data)
 	},
 
+	buyChallengeToken: function(data)
+	{
+		return axios.post(`/buyChallengeToken`, data)
+	},
+
 	findSections: function(teacher)
 	{
 		return axios.get(`/findSections/${teacher}`)
@@ -110,5 +115,15 @@ export default {
 	findCorrectQuestionsFromTopicAndSubtopic: function(data)
 	{
 		return axios.get(`/findCorrectQuestionsFromTopicAndSubtopic/${data.userid}/${data.topic}/${data.subtopic}`)
+	},
+
+	getChallengers: function(data)
+	{
+		return axios.get(`getChallengers/${data.questionid}`)
+	},
+
+	challengeUser: function(data)
+	{
+		return axios.post(`/challengeUser`, data)
 	}
 };
