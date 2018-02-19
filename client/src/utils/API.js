@@ -125,5 +125,10 @@ export default {
 	challengeUser: function(data)
 	{
 		return axios.post(`/challengeUser`, data)
+	},
+
+	getChallenges: function(data)
+	{
+		return axios.get(`/getChallenges/${data.userid}`)
 	}
 };

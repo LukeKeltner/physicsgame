@@ -450,9 +450,17 @@ module.exports =
 		})
 	},
 
+	getChallenges: function(req, res)
+	{
+		usersModel.findAllWhere("challengelookup", "challengedid", req.params.userid, function(result)
+		{
+			console.log(result)
+			res.end()
+		})
+	},
+
 	challengeUser: function(req, res)
 	{
-		console.log("HEY THERE!!!!")
 		usersModel.updateUser("challengetokens", req.body.newChallengeTokens, "id", req.body.challengerid, function(result)
 		{
 			usersModel.challengeUser(req.body.challengedid, req.body.challengerid, req.body.questionid, function(result)

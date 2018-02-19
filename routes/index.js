@@ -55,6 +55,8 @@ router.route(`/getChallengers/:questionid`).get(userController.getChallengers)
 
 router.route(`/challengeUser`).post(userController.challengeUser)
 
+router.route(`/getChallenges/:userid`).get(userController.getChallenges)
+
 
 router.use(function(req, res) 
 {

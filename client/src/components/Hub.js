@@ -48,7 +48,17 @@ class Hub extends Component
 
 					const array = []
 					array.push(newStyles)
-					This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, teacher:user.data[0].teacher, allTopics: result.data, styles: newStyles, theme: user.data[0].headercolor})
+
+					const data = 
+					{
+						userid: user.data[0].id
+					}
+
+					API.getChallenges(data).then(challanges =>
+					{
+						console.log(challanges)
+						This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, teacher:user.data[0].teacher, allTopics: result.data, styles: newStyles, theme: user.data[0].headercolor})
+					})
 				})
 			}
 		})
@@ -209,6 +219,20 @@ class Hub extends Component
 							}
 
 						</div>
+					</div>
+
+					<div className="row">
+						<div className="col-md-4">
+							<div className="topic-container" style={this.state.styles}>
+								<div className="topic-header">
+										Challenges
+								</div>
+							</div>
+
+							<Topic name="View your challenges" topicSelected={this.subtopicSelected} theme={this.state.theme} className="topicContainer subtopics"/>
+
+						</div>
+
 					</div>
 				</div>
 			</div>
