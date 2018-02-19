@@ -29,6 +29,7 @@ create table users
     section varchar(255),
     headercolor varchar(255) default "#6400a8",
     icon varchar(255) default "default.svg",
+    challengetokens int(50) default 0,
     primary key(id)
 );
 
@@ -59,5 +60,23 @@ create table wronglookup
             references questions(id)
             on delete cascade,
     coins int(50) not null,
+    primary key(id)
+);
+
+create table challengelookup
+(
+    id int(50) not null auto_increment,
+    challengedid INT(50) not null,
+    FOREIGN KEY (challengedid)
+            REFERENCES users(id)
+            ON DELETE CASCADE,
+    challengerid INT(50) not null,
+    FOREIGN KEY (challengerid)
+            REFERENCES users(id)
+            ON DELETE CASCADE,
+    questionid INT(50) not null,
+    foreign key (questionid)
+            references questions(id)
+            on delete cascade,
     primary key(id)
 );
