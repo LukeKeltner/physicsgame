@@ -21,6 +21,7 @@ class Hub extends Component
 		teacher: "",
 		styles: [],
 		theme: "",
+		challanges: []
 	}
 
 	componentWillMount = () =>
@@ -56,8 +57,7 @@ class Hub extends Component
 
 					API.getChallenges(data).then(challanges =>
 					{
-						console.log(challanges)
-						This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, teacher:user.data[0].teacher, allTopics: result.data, styles: newStyles, theme: user.data[0].headercolor})
+						This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, teacher:user.data[0].teacher, allTopics: result.data, styles: newStyles, theme: user.data[0].headercolor, challanges: challanges.data})
 					})
 				})
 			}
@@ -103,6 +103,16 @@ class Hub extends Component
 		event.target.classList.add("selected")
 	}
 
+	viewChallenges = event =>
+	{
+		this.setState({topic: "", subtopic: "", gamble: 0})
+		const topics = document.getElementsByClassName("topicContainer")
+		for (let i=0; i<topics.length; i++)
+		{
+			topics[i].classList.remove("selected")
+		}
+	}
+
 	gambleSelected = event =>
 	{
 		this.setState({gamble: event.target.innerHTML})
@@ -119,7 +129,6 @@ class Hub extends Component
 
 	componentDidUpdate = () =>
 	{
-		console.log("UPDATED!")
 		if (this.state.topic !== "" && this.state.subtopic !== "" && this.state.gamble !== 0)
 		{
 			this.getNewQuestion()
@@ -226,10 +235,11 @@ class Hub extends Component
 							<div className="topic-container" style={this.state.styles}>
 								<div className="topic-header">
 										Challenges
+										<div className="float-right">{this.state.challanges.length}</div>
 								</div>
 							</div>
 
-							<Topic name="View your challenges" topicSelected={this.subtopicSelected} theme={this.state.theme} className="topicContainer subtopics"/>
+							<Topic name="View your challenges!" topicSelected={this.viewChallenges} theme={this.state.theme} className="topicContainer viewChallenges"/>
 
 						</div>
 
