@@ -452,11 +452,9 @@ module.exports =
 
 	getChallenges: function(req, res)
 	{
-		console.log(req.params.userid)
 		connection.query(`select users.firstname, users.lastname, challengelookup.questionid from users inner join challengelookup on users.id = challengerid where challengedid = ?;`, [req.params.userid], function(err, result)
 		{
 			if(err){throw err}
-			console.log(result)
 			res.send(result)
 		})
 	},

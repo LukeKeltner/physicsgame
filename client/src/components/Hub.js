@@ -21,7 +21,8 @@ class Hub extends Component
 		teacher: "",
 		styles: [],
 		theme: "",
-		challanges: []
+		challanges: [],
+		challengeQuestionId: 0
 	}
 
 	componentWillMount = () =>
@@ -57,6 +58,7 @@ class Hub extends Component
 
 					API.getChallenges(data).then(challanges =>
 					{
+						console.log(challanges.data)
 						This.setState({id: user.data[0].id, name: user.data[0].name, coins: user.data[0].coins, teacher:user.data[0].teacher, allTopics: result.data, styles: newStyles, theme: user.data[0].headercolor, challanges: challanges.data})
 					})
 				})
@@ -111,6 +113,27 @@ class Hub extends Component
 		{
 			topics[i].classList.remove("selected")
 		}
+
+		const cover = document.getElementsByClassName("cover-challenge-view-container")
+		cover[0].classList.add("display");		
+	}
+
+	back = event =>
+	{
+		const cover = document.getElementsByClassName("cover-challenge-view-container")
+		cover[0].classList.remove("display");			
+	}
+
+	activeChallenge = event =>
+	{
+		for (let i=0; i<document.getElementsByClassName("challenger").length; i++)
+		{
+			document.getElementsByClassName("challenger")[i].classList.remove("challenger-active")
+		}
+
+		event.target.classList.add("challenger-active");
+		this.setState({challengeQuestionId: event.target.id})
+		console.log(this.state)
 	}
 
 	gambleSelected = event =>
@@ -187,6 +210,33 @@ class Hub extends Component
 	{
 		return(
 			<div>
+					<div className="cover-challenge-view-container">
+						<div className="cover">
+							<div className="cover-challenge-view-result">
+								Your Challenges
+								<br></br>
+								<div className="challengers-container">
+									{this.state.challanges.map((challenge, i) =>
+										{
+											return <div key={i} id={challenge.questionid} className="challenger" onClick={this.activeChallenge}>{challenge.firstname} {challenge.lastname}</div>
+										})
+									}
+								</div>
+								<div className="row">
+									<div className="col-6">
+										<button type="button" className="btn btn-primary" onClick={this.back}>Back</button>
+									</div>
+									<div className="col-6">
+										<button type="button" className="btn btn-danger float-right challenge-button" onClick={this.goToChallenge}>Challenge!</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+
 				<div className="container">
 
 					<div className="row">
@@ -240,9 +290,7 @@ class Hub extends Component
 							</div>
 
 							<Topic name="View your challenges!" topicSelected={this.viewChallenges} theme={this.state.theme} className="topicContainer viewChallenges"/>
-
 						</div>
-
 					</div>
 				</div>
 			</div>

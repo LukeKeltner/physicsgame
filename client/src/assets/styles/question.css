@@ -166,6 +166,7 @@
 .cover-challenge-result
 {
 	border-radius: 5px;
+	width:70%;
 	font-size:40px;
 	background-color: white;
 	padding:20px;
