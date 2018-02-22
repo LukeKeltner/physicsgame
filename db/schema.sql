@@ -30,6 +30,9 @@ create table users
     headercolor varchar(255) default "#6400a8",
     icon varchar(255) default "default.svg",
     challengetokens int(50) default 0,
+    challenging bit default 0,
+    currentchallenger int(50) default 0,
+    currentchallengeid int(50) default 0,
     primary key(id)
 );
 
@@ -79,4 +82,3 @@ create table challengelookup
             references questions(id)
             on delete cascade,
     primary key(id)
-);

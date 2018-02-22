@@ -39,6 +39,8 @@ router.route(`/updateQuestion`).post(questionController.updateQuestion)
 
 router.route(`/determineResult`).post(userController.determineResult)
 
+router.route(`/determineChallengeResult`).post(userController.determineChallengeResult)
+
 router.route(`/headerColorChange`).post(userController.headerColorChange)
 
 router.route(`/iconChange`).post(userController.iconChange)

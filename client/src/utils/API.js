@@ -87,6 +87,11 @@ export default {
 		return axios.post(`/determineResult`, data)
 	},
 
+	determineChallengeResult: function(data)
+	{
+		return axios.post(`/determineChallengeResult`, data)
+	},
+
 	headerColorChange: function(data)
 	{
 		return axios.post(`/headerColorChange`, data)

@@ -22,7 +22,9 @@ class Hub extends Component
 		styles: [],
 		theme: "",
 		challanges: [],
-		challengeQuestionId: 0
+		challengeQuestionId: 0,
+		currentChallenger: 0,
+		currentChallengeId: 0
 	}
 
 	componentWillMount = () =>
@@ -33,10 +35,16 @@ class Hub extends Component
 
 		API.getUser(token).then(function(user)
 		{
-			if (user.data[0].currentquestion !== 0)
+			if (user.data[0].currentquestion !== 0 && user.data[0].challenging.data[0] === 0)
 			{
 				alert("You haven't answered a question, go answer it!")
 				window.location = "/question"
+			}
+
+			else if (user.data[0].currentquestion !== 0 && user.data[0].challenging.data[0] !== 0)
+			{
+				alert("You have already accepted a challenge!")
+				window.location = "/challengequestion"
 			}
 
 			else
@@ -132,7 +140,7 @@ class Hub extends Component
 		}
 
 		event.target.classList.add("challenger-active");
-		this.setState({challengeQuestionId: event.target.id})
+		this.setState({challengeQuestionId: event.target.id, currentChallenger:event.target.getAttribute("challenger"), currentChallengeId: event.target.getAttribute("challengeid")})
 	}
 
 	gambleSelected = event =>
@@ -208,7 +216,7 @@ class Hub extends Component
 	goToChallenge = event =>
 	{
 		const This = this
-		const data2 =
+		const gambleAmountData =
 		{
 			column: "currentgamble",
 			value: 150,
@@ -216,10 +224,9 @@ class Hub extends Component
 			whereValue: this.state.id
 		}
 
-		API.updateUser(data2).then(function(result2)
+		API.updateUser(gambleAmountData).then(function(result2)
 		{
-
-			const data3 =
+			const challengeQuestion =
 			{
 				column: "currentquestion",
 				value: This.state.challengeQuestionId,
@@ -227,9 +234,44 @@ class Hub extends Component
 				whereValue: This.state.id
 			}
 					
-			API.updateUser(data3).then(function(result3)
+			API.updateUser(challengeQuestion).then(function(result3)
 			{
-				window.location="/question"
+				const userChallenging = 
+				{
+					column: "challenging",
+					value: 1,
+					whereField: "id",
+					whereValue: This.state.id
+				}
+
+				API.updateUser(userChallenging).then(function(result4)
+				{
+
+					const currentChallenger = 
+					{
+						column: "currentchallenger",
+						value: This.state.currentChallenger,
+						whereField: "id",
+						whereValue: This.state.id
+					}
+
+					API.updateUser(currentChallenger).then(function(result5)
+					{	
+
+						const challengeId = 
+						{
+							column: "currentchallengeid",
+							value: This.state.currentChallengeId,
+							whereField: "id",
+							whereValue: This.state.id
+						}	
+
+						API.updateUser(challengeId).then(function(result6)
+						{	
+							window.location="/challengequestion"
+						})
+					})
+				})
 			})
 		})
 	}
@@ -246,7 +288,7 @@ class Hub extends Component
 								<div className="challengers-container">
 									{this.state.challanges.map((challenge, i) =>
 										{
-											return <div key={i} id={challenge.questionid} className="challenger" onClick={this.activeChallenge}>
+											return <div key={i} id={challenge.questionid} challenger={challenge.id} challengeid={challenge.challengeid} className="challenger" onClick={this.activeChallenge}>
 														{challenge.firstname} {challenge.lastname}
 														<br></br>
 														{challenge.topic}: {challenge.subtopic}

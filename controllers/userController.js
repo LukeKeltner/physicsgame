@@ -374,6 +374,82 @@ module.exports =
 		}
 	},
 
+	determineChallengeResult: function(req, res)
+	{
+		let correct = true;
+		const userid = req.body.userid;
+		const questionid = req.body.questionid;
+		const currentgamble = req.body.currentgamble;
+		const coins = req.body.coins;
+		const challenger = req.body.currentChallenger;
+		const challengeid = req.body.currentChallengeId;
+
+		console.log(req.body)
+
+		for (let i=0; i<req.body.answers.length; i++)
+		{
+			if ((req.body.answers[i].type === "correct" && !req.body.answers[i].selected) || (req.body.answers[i].type === "wrong" && req.body.answers[i].selected))
+			{
+				correct = false;
+				break;
+			}
+		}
+
+		if (correct)
+		{
+			const expression = 'totalcorrect = totalcorrect + 1';
+
+			questionModel.updateQuestion(expression, questionid, function(result)
+			{
+				questionModel.insert("correctlookup", "userid", "questionid", "coins", userid, questionid, currentgamble, function(result2)
+				{
+					usersModel.updateUser("currentquestion", 0, "id", userid, function(result3)
+					{
+						const newCoins = coins+currentgamble
+						usersModel.updateUser("coins", newCoins, "id", userid, function(result4)
+						{
+							usersModel.getUserById(challenger, function(challengerFound)
+							{
+								const newChallengerCoins = challengerFound[0].coins - 150
+								usersModel.updateUser("coins", newChallengerCoins, "id", challenger, function(result5)
+								{
+									res.send("correct")
+								})
+							})
+						})
+					})
+				})
+			})
+		}
+
+		else
+		{
+			const expression = 'totalwrong = totalwrong + 1';
+
+			questionModel.updateQuestion(expression, questionid, function(result)
+			{
+				questionModel.insert("wronglookup", "userid", "questionid", "coins", userid, questionid, currentgamble, function(result2)
+				{
+					usersModel.updateUser("currentquestion", 0, "id", userid, function(result3)
+					{
+						const newCoins = coins-currentgamble
+						usersModel.updateUser("coins", newCoins, "id", userid, function(result4)
+						{
+							usersModel.getUserById(challenger, function(challengerFound)
+							{
+								const newChallengerCoins = challengerFound[0].coins + 150
+								usersModel.updateUser("coins", newChallengerCoins, "id", challenger, function(result5)
+								{
+									res.send("incorrect")
+								})
+							})
+						})
+					})
+				})
+			})
+		}
+	},
+
 	headerColorChange: function(req, res)
 	{
 		const newCoins = req.body.coins - 50;
@@ -452,7 +528,7 @@ module.exports =
 
 	getChallenges: function(req, res)
 	{
-		connection.query(`select users.firstname, users.lastname, challengelookup.questionid, questions.topic, questions.subtopic from users inner join challengelookup on users.id = challengerid inner join questions on questions.id = challengelookup.questionid where challengedid = ?;`, [req.params.userid], function(err, result)
+		connection.query(`select users.id, users.firstname, users.lastname, challengelookup.id as challengeid, challengelookup.questionid, questions.topic, questions.subtopic from users inner join challengelookup on users.id = challengerid inner join questions on questions.id = challengelookup.questionid where challengedid = ?;`, [req.params.userid], function(err, result)
 		{
 			if(err){throw err}
 			res.send(result)

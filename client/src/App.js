@@ -7,6 +7,7 @@ import Header from './components/Header'
 import Login from './components/Login'
 import Hub from './components/Hub'
 import Question from './components/Question'
+import ChallengeQuestion from './components/ChallengeQuestion'
 import Status from './components/Status'
 import Leaderboard from './components/Leaderboard'
 import Store from './components/Store'
@@ -70,6 +71,7 @@ class App extends Component
 			        	<Route exact path="/" component={Login} />
 			            <Route exact path="/hub" component={Hub} />
 			            <Route exact path="/question" component={Question} />
+			            <Route exact path="/challengequestion" component={ChallengeQuestion} />
 			            <Route exact path="/status" component={Status} />
 			            <Route exact path="/leaderboard" component={Leaderboard} />
 			            <Route exact path="/store" component={Store} />
