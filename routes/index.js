@@ -51,7 +51,7 @@ router.route(`/findSections/:teacher`).get(userController.findSections)
 
 router.route(`/findCorrectQuestionsFromTopicAndSubtopic/:userid/:topic/:subtopic`).get(userController.findCorrectQuestionsFromTopicAndSubtopic)
 
-router.route(`/getChallengers/:questionid`).get(userController.getChallengers)
+router.route(`/getChallengers/:questionid/:userid`).get(userController.getChallengers)
 
 router.route(`/challengeUser`).post(userController.challengeUser)
 

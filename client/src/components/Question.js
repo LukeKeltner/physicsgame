@@ -168,9 +168,8 @@ class Question extends Component
 		const This = this;
 		const cover = document.getElementsByClassName("cover-challenge-container")
 		cover[0].classList.add("display");		
-		API.getChallengers({questionid: this.state.currentquestion}).then(challengers =>
+		API.getChallengers({questionid: this.state.currentquestion, userid: this.state.id}).then(challengers =>
 		{
-			console.log(challengers)
 			This.setState({challengers: challengers.data})
 		})
 	}

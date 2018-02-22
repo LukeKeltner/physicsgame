@@ -443,7 +443,7 @@ module.exports =
 
 	getChallengers: function(req, res)
 	{
-		connection.query(`select id, firstname, lastname from users where id not in (select userid from correctlookup where questionid = ${req.params.questionid}) and id not in (select challengedid from challengelookup where questionid = ${req.params.questionid}) order by lastname asc;`, function(err, result)
+		connection.query(`select id, firstname, lastname from users where id not in (select userid from correctlookup where questionid = ${req.params.questionid}) and id not in (select challengedid from challengelookup where questionid = ${req.params.questionid}) and id not in (select challengedid from challengelookup where challengerid = ${req.params.userid} group by challengedid having count(*) > 1) order by lastname asc;`, function(err, result)
 		{
 			if(err){throw err}
 			res.send(result)
@@ -452,7 +452,7 @@ module.exports =
 
 	getChallenges: function(req, res)
 	{
-		connection.query(`select users.firstname, users.lastname, challengelookup.questionid from users inner join challengelookup on users.id = challengerid where challengedid = ?;`, [req.params.userid], function(err, result)
+		connection.query(`select users.firstname, users.lastname, challengelookup.questionid, questions.topic, questions.subtopic from users inner join challengelookup on users.id = challengerid inner join questions on questions.id = challengelookup.questionid where challengedid = ?;`, [req.params.userid], function(err, result)
 		{
 			if(err){throw err}
 			res.send(result)

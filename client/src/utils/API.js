@@ -119,7 +119,7 @@ export default {
 
 	getChallengers: function(data)
 	{
-		return axios.get(`getChallengers/${data.questionid}`)
+		return axios.get(`getChallengers/${data.questionid}/${data.userid}`)
 	},
 
 	challengeUser: function(data)

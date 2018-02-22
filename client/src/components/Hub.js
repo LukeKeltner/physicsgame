@@ -133,7 +133,6 @@ class Hub extends Component
 
 		event.target.classList.add("challenger-active");
 		this.setState({challengeQuestionId: event.target.id})
-		console.log(this.state)
 	}
 
 	gambleSelected = event =>
@@ -206,6 +205,35 @@ class Hub extends Component
 		})
 	}
 
+	goToChallenge = event =>
+	{
+		const This = this
+		const data2 =
+		{
+			column: "currentgamble",
+			value: 150,
+			whereField: "id",
+			whereValue: this.state.id
+		}
+
+		API.updateUser(data2).then(function(result2)
+		{
+
+			const data3 =
+			{
+				column: "currentquestion",
+				value: This.state.challengeQuestionId,
+				whereField: "id",
+				whereValue: This.state.id
+			}
+					
+			API.updateUser(data3).then(function(result3)
+			{
+				window.location="/question"
+			})
+		})
+	}
+
 	render()
 	{
 		return(
@@ -218,7 +246,11 @@ class Hub extends Component
 								<div className="challengers-container">
 									{this.state.challanges.map((challenge, i) =>
 										{
-											return <div key={i} id={challenge.questionid} className="challenger" onClick={this.activeChallenge}>{challenge.firstname} {challenge.lastname}</div>
+											return <div key={i} id={challenge.questionid} className="challenger" onClick={this.activeChallenge}>
+														{challenge.firstname} {challenge.lastname}
+														<br></br>
+														{challenge.topic}: {challenge.subtopic}
+													</div>
 										})
 									}
 								</div>
@@ -227,7 +259,7 @@ class Hub extends Component
 										<button type="button" className="btn btn-primary" onClick={this.back}>Back</button>
 									</div>
 									<div className="col-6">
-										<button type="button" className="btn btn-danger float-right challenge-button" onClick={this.goToChallenge}>Challenge!</button>
+										<button type="button" className="btn btn-danger float-right challenge-button" onClick={this.goToChallenge}>Accept challenge!</button>
 									</div>
 								</div>
 							</div>
