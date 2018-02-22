@@ -82,3 +82,4 @@ create table challengelookup
             references questions(id)
             on delete cascade,
     primary key(id)
+);
