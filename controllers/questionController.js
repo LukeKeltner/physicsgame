@@ -80,9 +80,6 @@ module.exports =
 	{
 		questionModel.findQuestion(req.params.id, function(result)
 		{
-			const string = "Here is a test string with test words."
-			const string2 = string.replace(/test/g, "bear")
-
 			const question = JSON.parse(result[0].question)
 
 			if (question.random)

@@ -25,6 +25,8 @@ router.route(`/findAllQuestions/:subtopic`).get(questionController.findAllQuesti
 
 router.route(`/findAnsweredQuestions/:table/:id`).get(userController.findAnsweredQuestions)
 
+router.route(`/findChallenges/:table/:id`).get(userController.findChallenges)
+
 router.route(`/register`).post(userController.registerNewUser)
 
 router.route(`/login/:email/:password`).get(userController.login)

@@ -22,11 +22,13 @@ const orm =
 
 	findAllWhere: function(table, whereField, whereValue, cb)
 	{
-		connection.query(`SELECT * FROM ${table} WHERE ${whereField} = ?`, [whereValue], function(err, result)
+		const query = connection.query(`SELECT * FROM ${table} WHERE ${whereField} = ?`, [whereValue], function(err, result)
 		{
 			if(err){throw err}
 			cb(result)
 		})
+
+		console.log(query.sql)
 	},
 
 	findDistinct: function(field, table, cb)
@@ -49,11 +51,13 @@ const orm =
 
 	getNewQuestion: function(topic, subtopic, userid, cb)
 	{
-		connection.query(`SELECT * FROM questions WHERE topic=? and subtopic=? and questions.id not in (select questionid from correctlookup where userid=?) and questions.id not in (select questionid from wronglookup where userid=?) order by rand() limit 1;`, [topic, subtopic, userid, userid], function(err, result)
+		const query = connection.query(`SELECT * FROM questions WHERE topic=? and subtopic=? and questions.id not in (select questionid from correctlookup where userid=?) and questions.id not in (select questionid from wronglookup where userid=?) and questions.id not in (select questionid from challengelookup where challengedid=?) order by rand() limit 1;`, [topic, subtopic, userid, userid, userid], function(err, result)
 		{
 			if(err){throw err}
 			cb(result)
 		})
+
+		console.log(query.sql)
 	},
 
 	registerNewUser: function(firstname, lastname, email, password, token, leaderboard, teacher, section, cb)

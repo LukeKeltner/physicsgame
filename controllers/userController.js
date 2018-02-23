@@ -38,6 +38,14 @@ module.exports =
 		})
 	},
 
+	findChallenges: function(req, res)
+	{
+		usersModel.findAllWhere(req.params.table, "challengedid", req.params.id, function(result)
+		{
+			res.send(result)
+		})
+	},
+
 	getUser: function(req, res)
 	{
 		usersModel.getUser(req.params.token, function(result)

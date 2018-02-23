@@ -52,6 +52,11 @@ export default {
 		return axios.get(`/findAnsweredQuestions/${data.table}/${data.id}`)
 	},
 
+	findChallenges: function(data)
+	{
+		return axios.get(`/findChallenges/${data.table}/${data.id}`)
+	},
+
 	register: function(data)
 	{
 		return axios.post(`/register`, data)

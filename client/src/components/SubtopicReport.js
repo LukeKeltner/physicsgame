@@ -23,6 +23,7 @@ class Report extends Component
 			{
 				correct: false,
 				wrong: false,
+				challenge: false
 			}
 
 			if (this.props.corrects[i] === 1)
@@ -33,6 +34,11 @@ class Report extends Component
 			else if (this.props.wrongs[i] === 1)
 			{
 				element.wrong = true
+			}
+
+			else if (this.props.challenges[i] === 1)
+			{
+				element.challenge = true
 			}
 
 			array.push(element)
@@ -79,7 +85,7 @@ class Report extends Component
 						<span>
 						{this.state.questions.map((element, i) => 
 							{
-								return <QuestionIcon key={i} correct={element.correct} wrong={element.wrong}/>
+								return <QuestionIcon key={i} correct={element.correct} wrong={element.wrong} challenge={element.challenge}/>
 							})}
 						</span>
 						<div className="float-right">

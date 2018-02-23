@@ -190,7 +190,6 @@ class ChallengeQuestion extends Component
 				id: This.state.currentChallengeId
 			}
 
-			console.log("ABOUT TO DELETE CHALLENGE!")
 			API.deleteChallenge(data).then(function(result2)
 			{
 				window.location="/hub"

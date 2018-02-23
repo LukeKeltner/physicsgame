@@ -12,3 +12,10 @@
 {
 	color:#d80000;
 }
+
+.challenge-icon-status
+{
+	width:18px;
+	margin-right: 5px;
+	transform: translateY(-2px);
+}
