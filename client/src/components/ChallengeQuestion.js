@@ -42,8 +42,6 @@ class ChallengeQuestion extends Component
 
 		API.getUser(token).then(function(user)
 		{
-			console.log("CURRENT CHALLENGER!")
-			console.log(user.data[0].currentchallenger)
 			if (user.data[0].currentquestion === 0)
 			{
 				alert("Please select a question")
@@ -143,13 +141,13 @@ class ChallengeQuestion extends Component
 			if (result.data === "correct")
 			{
 				This.state.correctSound.play()
-				This.setState({result: `Correct!  +${This.state.currentgamble}`})
+				This.setState({result: `Woo!  You won the challenge!  +${This.state.currentgamble}`})
 			}
 
 			else
 			{
 				This.state.wrongSound.play()
-				This.setState({result: `Incorrect!  -${This.state.currentgamble}`})
+				This.setState({result: `Oh no!  Better luck next time!  -${This.state.currentgamble}`})
 			}
 
 			const data = 
@@ -175,31 +173,43 @@ class ChallengeQuestion extends Component
 
 	back = event =>
 	{
-		window.location="/hub"
+		const This = this;
+
+		const userChallenging = 
+		{
+			column: "challenging",
+			value: 0,
+			whereField: "id",
+			whereValue: this.state.id
+		}
+
+		API.updateUser(userChallenging).then(function(result)
+		{
+			const data = 
+			{
+				id: This.state.currentChallengeId
+			}
+
+			console.log("ABOUT TO DELETE CHALLENGE!")
+			API.deleteChallenge(data).then(function(result2)
+			{
+				window.location="/hub"
+			})
+		})
 	}
 
 	render()
 	{
 		return(
-			<div className="container-fluid challenge-question-background">
+			<div>
 					<div className="cover-container">
 						<div className="cover">
 							<div className="cover-result">
 								{this.state.result}
 								<br></br>
-								{this.state.newQuestion === 0
-									?
 									<div>
-										<p className="result-text">You have finished this subtopic!</p>
 										<button type="button" className="btn btn-primary" onClick={this.back}>Back</button>
 									</div>
-									:
-									<div>
-										<button type="button" className="btn btn-success" onClick={this.newQuestion}>Give me another question!</button>
-										<br></br>
-										<button type="button" className="btn btn-primary" onClick={this.back}>Back</button>
-									</div>
-								}
 							</div>
 						</div>
 					</div>
@@ -246,21 +256,6 @@ class ChallengeQuestion extends Component
 
 										:
 										<div className="col-md-6 questionContainer">
-											{this.state.challengeTokens > 0
-												?
-													<div className="row">
-														<div className="col-9">
-														</div>
-														<div className="col-2">
-															<img className="challenge-icon float-right" alt="challenge" src={challenge} onClick={this.challenge}/>
-														</div>
-														<div className="col-1 challenge-amount-container">
-															<div className="challenge-amount">+{this.state.challengeTokens}</div>
-														</div>
-													</div>
-												:
-													<div></div>
-											}
 											<div className="row questionText">
 												<div className="col-md-12">
 													{this.state.text}

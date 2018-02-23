@@ -135,5 +135,10 @@ export default {
 	getChallenges: function(data)
 	{
 		return axios.get(`/getChallenges/${data.userid}`)
+	},
+
+	deleteChallenge: function(data)
+	{
+		return axios.post(`/deleteChallenge`, data)
 	}
 };

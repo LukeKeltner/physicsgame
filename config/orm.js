@@ -76,13 +76,11 @@ const orm =
 
 	update: function(table, column, value, whereField, whereValue, cb)
 	{
-		const query = connection.query(`UPDATE ${table} SET ${column} = ? WHERE ${whereField} = ?`, [value, whereValue], function(err, result)
+		connection.query(`UPDATE ${table} SET ${column} = ? WHERE ${whereField} = ?`, [value, whereValue], function(err, result)
 		{
 			if(err){throw err}
 			cb(result)
 		})
-
-		console.log(query.sql)
 	},
 
 	updateQuestion: function(table, expression, whereField, whereValue, cb)

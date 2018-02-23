@@ -1,8 +1,8 @@
-.challenge-question-background
+/* .challenge-question-background
 {
-	transform: translateY(-20px);
-	background-color: red;
-	height:100%;
+    transform: translateY(-20px);
+    background-color: red;
+    height:100%;
     animation-name: example;
     animation-duration: 20s;
     animation-iteration-count: infinite;
@@ -14,4 +14,4 @@
     50%  {background-color: white;}
     75%   {background-color: #ff5b5b;}
     100%   {background-color: white;}
-}
+} */

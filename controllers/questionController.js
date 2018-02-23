@@ -2,6 +2,7 @@ const express = require('express');
 const questionModel = require('../models/questionModel.js');
 const usersModel = require('../models/usersModel.js');
 const math = require('mathjs');
+const connection = require('../config/connection.js');
 
 
 const shuffle = array =>
@@ -184,4 +185,14 @@ module.exports =
 			res.end()
 		})
 	},
+
+	deleteChallenge: function(req, res)
+	{
+		console.log("About to delete challenge!")
+		connection.query(`delete from challengelookup where id = ?`, [req.body.id], function(err, result)
+		{
+			if (err){throw err}
+			res.send()
+		})
+	}
 }

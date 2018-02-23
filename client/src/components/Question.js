@@ -40,11 +40,16 @@ class Question extends Component
 
 		API.getUser(token).then(function(user)
 		{
-			console.log(user.data[0])
 			if (user.data[0].currentquestion === 0)
 			{
 				alert("Please select a question")
 				window.location = "/hub"
+			}
+
+			else if (user.data[0].challenging.data[0] !== 0)
+			{
+				alert("You are in a challenge!")
+				window.location = "/challengequestion"
 			}
 
 			else
