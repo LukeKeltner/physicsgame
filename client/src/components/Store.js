@@ -196,7 +196,15 @@ class Store extends Component
 								<img className="challenge" alt="challenge" src={challenge}/>
 							</div>
 							<div className="col-md-6">
-								A Challenge Token allows you challenge another user!  If you find yourself on a question that you would like to challenge a peer, you may use one of these tokens to pick a user to challenge them!  If the challenger gets the quesiton right, they get 100 of your coins.  If they get it wrong, you get 100 of theirs!
+								Find yourself on a question that you'd like to challenge a classmate?  Use a Challenge Token!
+								The Rules for challenging on a given question:
+								<ul>
+									<li>You can only have two open challenges per user at a given time</li>
+									<li>You cannot challenge a user who currently has the question correct</li>
+									<li>You cannot challenge a user who is currently being challenged on that question</li>
+									<li>If the user you challenge gets the question wrong, you get 150 of their coins!</li>
+									<li>However, if the user gets the question right, they get 150 of your coins!</li>
+								</ul>
 							</div>
 						</div>
 						<div className="row">
