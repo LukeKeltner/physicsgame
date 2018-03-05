@@ -418,6 +418,8 @@ module.exports =
 						{
 							usersModel.getUserById(challenger, function(challengerFound)
 							{
+								console.log("CHALLENGER! User got challenge correct")
+								console.log(challengerFound[0])
 								const newChallengerCoins = challengerFound[0].coins - 150
 								usersModel.updateUser("coins", newChallengerCoins, "id", challenger, function(result5)
 								{
@@ -445,6 +447,8 @@ module.exports =
 						{
 							usersModel.getUserById(challenger, function(challengerFound)
 							{
+								console.log("CHALLENGER! User got challenge correct")
+								console.log(challengerFound[0])
 								const newChallengerCoins = challengerFound[0].coins + 150
 								usersModel.updateUser("coins", newChallengerCoins, "id", challenger, function(result5)
 								{
