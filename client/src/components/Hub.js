@@ -301,7 +301,12 @@ class Hub extends Component
 										<button type="button" className="btn btn-primary" onClick={this.back}>Back</button>
 									</div>
 									<div className="col-6">
-										<button type="button" className="btn btn-danger float-right challenge-button" onClick={this.goToChallenge}>Accept challenge!</button>
+										{this.state.currentChallengeId === 0
+											?
+											<button type="button" className="btn btn-danger float-right challenge-button disabled">Accept challenge!</button>
+											:
+											<button type="button" className="btn btn-danger float-right challenge-button" onClick={this.goToChallenge}>Accept challenge!</button>
+										}
 									</div>
 								</div>
 							</div>
