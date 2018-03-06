@@ -26,7 +26,7 @@ class User extends Component
 	{
 		return(
 
-			<div>
+			<div className="leaderboard-row">
 			{this.props.leaderboard.data[0] === 1
 
 				?
