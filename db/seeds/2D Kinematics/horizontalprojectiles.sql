@@ -43,7 +43,7 @@ insert into questions(topic, subtopic, question) values
         "img":"horizontalprojectile.jpg",
         "random":5,
         "rand0": [10,100,0],
-        "rand1": [10,50,2]
+        "rand1": [10,50,2],
         "rand2": [0.9,1.1,2],
         "rand3": [0.9,1.1,2],
         "rand4": [0.9,1.1,2]
@@ -94,7 +94,7 @@ insert into questions(topic, subtopic, question) values
         "img":"horizontalprojectile.jpg",
         "random":5,
         "rand0": [10,100,0],
-        "rand1": [10,50,2]
+        "rand1": [10,50,2],
         "rand2": [0.9,1.1,2],
         "rand3": [0.9,1.1,2],
         "rand4": [0.9,1.1,2]
@@ -145,7 +145,7 @@ insert into questions(topic, subtopic, question) values
         "img":"horizontalprojectile.jpg",
         "random":5,
         "rand0": [10,100,0],
-        "rand1": [10,50,2]
+        "rand1": [10,50,2],
         "rand2": [0.9,1.1,2],
         "rand3": [0.9,1.1,2],
         "rand4": [0.9,1.1,2]
