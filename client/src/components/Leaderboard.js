@@ -36,17 +36,20 @@ class Leaderboard extends Component
 					<div className="col-2 leaderboard-heading">
 						Place
 					</div>
-					<div className="col-5 leaderboard-heading">
+					<div className="col-4 leaderboard-heading">
 						Name
 					</div>
-					<div className="col-5 leaderboard-heading">
-						Coins
+					<div className="col-4 leaderboard-heading">
+						Lifetime Coins
+					</div>
+					<div className="col-2 leaderboard-heading">
+						Current Coins
 					</div>
 
 				</div>
 				{this.state.users.map((user, i) =>
 					{
-						return <User key={i} userid={this.state.userid} id={user.id} name={user.firstname+" "+user.lastname} coins={user.coins} leaderboard={user.leaderboard} place={i} icon={user.icon} theme={user.headercolor}/>
+						return <User key={i} userid={this.state.userid} id={user.id} name={user.firstname+" "+user.lastname} coins={user.coins} totalcoins={user.totalcoins} leaderboard={user.leaderboard} place={i} icon={user.icon} theme={user.headercolor}/>
 					})}
 
 			</div>

@@ -112,7 +112,7 @@ const orm =
 
 	getLeaderboard: function(cb)
 	{
-		connection.query(`select id,firstname,lastname,coins,leaderboard,icon,headercolor from users order by coins desc;`, function(err, result)
+		connection.query(`select id,firstname,lastname,coins,leaderboard,icon,headercolor,totalcoins from users order by totalcoins desc;`, function(err, result)
 		{
 			if(err){throw err}
 			cb(result)

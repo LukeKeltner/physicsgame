@@ -331,6 +331,7 @@ module.exports =
 		const questionid = req.body.questionid;
 		const currentgamble = req.body.currentgamble;
 		const coins = req.body.coins;
+		const totalCoins = req.body.totalcoins;
 
 		for (let i=0; i<req.body.answers.length; i++)
 		{
@@ -354,7 +355,11 @@ module.exports =
 						const newCoins = coins+currentgamble
 						usersModel.updateUser("coins", newCoins, "id", userid, function(result4)
 						{
-							res.send("correct")
+							const newTotalCoins = totalCoins + currentgamble
+							usersModel.updateUser("totalcoins", newTotalCoins, "id", userid, function(result4)
+							{
+								res.send("correct")
+							})
 						})
 					})
 				})
@@ -391,6 +396,7 @@ module.exports =
 		const coins = req.body.coins;
 		const challenger = req.body.currentChallenger;
 		const challengeid = req.body.currentChallengeId;
+		const totalCoins = req.body.totalcoins;
 
 		console.log(req.body)
 
@@ -418,12 +424,14 @@ module.exports =
 						{
 							usersModel.getUserById(challenger, function(challengerFound)
 							{
-								console.log("CHALLENGER! User got challenge correct")
-								console.log(challengerFound[0])
 								const newChallengerCoins = challengerFound[0].coins - 150
 								usersModel.updateUser("coins", newChallengerCoins, "id", challenger, function(result5)
 								{
-									res.send("correct")
+									const newTotalCoins = totalCoins + currentgamble
+									usersModel.updateUser("totalcoins", newTotalCoins, "id", userid, function(result4)
+									{
+										res.send("correct")
+									})
 								})
 							})
 						})

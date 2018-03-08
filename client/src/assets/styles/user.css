@@ -35,3 +35,8 @@
 {
 	width:30px;
 }
+
+.cell
+{
+	border-right: 1px solid red;
+}

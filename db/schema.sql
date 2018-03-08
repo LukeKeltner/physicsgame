@@ -33,6 +33,7 @@ create table users
     challenging bit default 0,
     currentchallenger int(50) default 0,
     currentchallengeid int(50) default 0,
+    totalcoins int(50) default 100,
     primary key(id)
 );
 

@@ -32,7 +32,8 @@ class ChallengeQuestion extends Component
 		challengeTokens: 0,
 		challengers: [],
 		currentChallenger: 0,
-		currentChallengeId: 0
+		currentChallengeId: 0,
+		totalCoins: 0
 	}
 
 	componentDidMount = () =>
@@ -84,6 +85,7 @@ class ChallengeQuestion extends Component
 						challengeTokens: user.data[0].challengetokens,
 						currentChallenger: user.data[0].currentchallenger,
 						currentChallengeId: user.data[0].currentchallengeid,
+						totalCoins: user.data[0].totalcoins,
 						topic:result.data.topic,
 						subtopic:result.data.subtopic,
 						text:result.data.question.text,
@@ -131,7 +133,8 @@ class ChallengeQuestion extends Component
 			currentgamble: this.state.currentgamble,
 			coins: this.state.coins,
 			currentChallenger: this.state.currentChallenger,
-			currentChallengeId: this.state.currentChallengeId
+			currentChallengeId: this.state.currentChallengeId,
+			totalcoins: this.state.totalCoins
 		}
 
 		console.log(datatest)

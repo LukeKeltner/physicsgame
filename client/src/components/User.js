@@ -39,10 +39,13 @@ class User extends Component
 							<div className="col-2 text-center">
 								{this.props.place+1}
 							</div>
-							<div className="col-5 text-center">
+							<div className="col-4 text-center">
 								<img className="icon float-left" alt="icon" src={this.state.icon}/> {this.props.name}
 							</div>
-							<div className="col-5 text-center">
+							<div className="col-4 text-center">
+								{this.props.totalcoins.toLocaleString()}
+							</div>
+							<div className="col-2 text-center">
 								{this.props.coins.toLocaleString()}
 							</div>
 						</div>
@@ -53,10 +56,13 @@ class User extends Component
 							<div className="col-2 text-center">
 								{this.props.place+1}
 							</div>
-							<div className="col-5 text-center">
+							<div className="col-4 text-center">
 								<img className="icon float-left" alt="icon" src={this.state.icon}/> {this.props.name}
 							</div>
-							<div className="col-5 text-center">
+							<div className="col-4 text-center">
+								{this.props.totalcoins.toLocaleString()}
+							</div>
+							<div className="col-2 text-center">
 								{this.props.coins.toLocaleString()}
 							</div>
 						</div>

@@ -30,7 +30,8 @@ class Question extends Component
 		newQuestion: 0,
 		challengeTokens: 0,
 		challengers: [],
-		currentChallenger: 0
+		currentChallenger: 0,
+		totalCoins: 0
 	}
 
 	componentDidMount = () =>
@@ -80,6 +81,7 @@ class Question extends Component
 						currentgamble: user.data[0].currentgamble,
 						currentquestion: user.data[0].currentquestion,
 						challengeTokens: user.data[0].challengetokens,
+						totalCoins: user.data[0].totalcoins,
 						topic:result.data.topic,
 						subtopic:result.data.subtopic,
 						text:result.data.question.text,
@@ -125,7 +127,8 @@ class Question extends Component
 			userid: this.state.id,
 			questionid: this.state.currentquestion,
 			currentgamble: this.state.currentgamble,
-			coins: this.state.coins
+			coins: this.state.coins,
+			totalcoins: this.state.totalCoins
 		}
 
 		API.determineResult(datatest).then(result =>
