@@ -71,6 +71,25 @@ class Report extends Component
 		})
 	}
 
+	hoverLock = event =>
+	{
+		const id = event.target.getAttribute("lockgradeid")
+		console.log(id)
+		document.getElementById(id).classList.add("hover-locked")
+		//lockedGrade.classList.add("hover-locked");
+	}
+
+	leaveHover = event =>
+	{
+		const lockedGrade = document.getElementsByClassName("locked-grade-number")[0]
+		lockedGrade.classList.remove("hover-locked");
+	}
+
+	lockGrade = event =>
+	{
+
+	}
+
 	render()
 	{
 		return(
@@ -78,9 +97,24 @@ class Report extends Component
 			<div>
 				<div className="row subtopic">
 					<div className="col-md-1">
+						<div className="text-center float-right">
+							<i className="fas fa-lock fa-2x lock" userid={this.props.userid} topic={this.props.topic} subtopic={this.props.name} onMouseEnter={this.hoverLock} onMouseLeave={this.leaveHover} lockgradeid={this.props.id} onClick={this.lockGrade}></i>
+							<br></br>
+							Lock
+						</div>
 					</div>
-					<div className="col-md-10">
-						{this.props.name}
+					<div className="col-md-2 text-center">
+						Locked Grade
+						<br></br>
+						<div className="locked-grade-number" id={this.props.id}>90%</div>
+					</div>
+					<div className="col-md-2 text-center">
+						Current Grade
+						<br></br>
+						{this.state.percent}%
+					</div>
+					<div className="col-md-6">
+						<div className="subtopic-name">{this.props.name}</div>
 						<br></br>
 						<span>
 						{this.state.questions.map((element, i) => 
@@ -88,9 +122,6 @@ class Report extends Component
 								return <QuestionIcon key={i} correct={element.correct} wrong={element.wrong} challenge={element.challenge}/>
 							})}
 						</span>
-						<div className="float-right">
-							{this.state.percent}%
-						</div>
 					</div>
 					<div className="col-md-1">
 						<div className="text-center float-right">

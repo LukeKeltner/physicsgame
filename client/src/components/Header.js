@@ -87,12 +87,6 @@ class Header extends Component
 					<div className="col-md-5">
 						<div className="logo">
 							<img className="user-icon" alt="icon" src={this.state.icon} />{this.state.greeting} {this.props.name}!
-						{this.props.teacher === "yes"
-							?
-								<button type="button" className="btn btn-info" onClick={this.toGrades}>Check Grades</button>
-							:
-								""
-						}
 						</div>
 					</div>
 					<div className="col-md-2 text-center">
@@ -106,7 +100,14 @@ class Header extends Component
 						<div className="row">
 							
 								<div className="col-2 text-center">
-
+								{this.props.teacher === "yes"
+									?
+										<i className="fas fa-graduation-cap fa-2x header-button" onClick={this.toGrades}>
+											<span className="header-tooltip" style={{fontSize:"20px"}}>Check grades</span>
+										</i>
+									:
+										""
+								}							
 								</div>
 								<div className="col-2 text-center">
 									<i className="fas fa-question-circle fa-2x header-button" onClick={this.toHub}>

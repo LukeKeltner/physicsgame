@@ -3,6 +3,11 @@
 	margin-bottom:20px;
 }
 
+.subtopic-name
+{
+	font-weight: bold;
+}
+
 .topic
 {
 	border: 1px solid #d6d6d6;
@@ -37,6 +42,29 @@
 	color:#ff477a !important;
 }
 
-.reset:active { 
+.reset:active
+{ 
     transform: translateY(2px);
+}
+
+.lock
+{
+	color: #a5c4ff !important;
+}
+
+.lock:hover
+{
+	cursor: pointer;
+	color: #6399ff !important;
+}
+
+.lock:active
+{ 
+    transform: translateY(2px);
+}
+
+
+.hover-locked
+{
+	border:3px solid green;
 }
