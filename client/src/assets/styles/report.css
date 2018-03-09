@@ -63,8 +63,17 @@
     transform: translateY(2px);
 }
 
-
 .hover-locked
+{ 
+    animation-name: example;
+    animation-duration: .15s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes example 
 {
-	border:3px solid green;
+    from {}
+    to {color: #0eb218;
+    	font-size: 30px;
+    	font-weight: bold;}
 }

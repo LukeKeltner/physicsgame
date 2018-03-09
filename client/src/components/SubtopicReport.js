@@ -74,15 +74,13 @@ class Report extends Component
 	hoverLock = event =>
 	{
 		const id = event.target.getAttribute("lockgradeid")
-		console.log(id)
 		document.getElementById(id).classList.add("hover-locked")
-		//lockedGrade.classList.add("hover-locked");
 	}
 
 	leaveHover = event =>
 	{
-		const lockedGrade = document.getElementsByClassName("locked-grade-number")[0]
-		lockedGrade.classList.remove("hover-locked");
+		const id = event.target.getAttribute("lockgradeid")
+		document.getElementById(id).classList.remove("hover-locked")
 	}
 
 	lockGrade = event =>
@@ -97,7 +95,7 @@ class Report extends Component
 			<div>
 				<div className="row subtopic">
 					<div className="col-md-1">
-						<div className="text-center float-right">
+						<div>
 							<i className="fas fa-lock fa-2x lock" userid={this.props.userid} topic={this.props.topic} subtopic={this.props.name} onMouseEnter={this.hoverLock} onMouseLeave={this.leaveHover} lockgradeid={this.props.id} onClick={this.lockGrade}></i>
 							<br></br>
 							Lock
@@ -106,12 +104,12 @@ class Report extends Component
 					<div className="col-md-2 text-center">
 						Locked Grade
 						<br></br>
-						<div className="locked-grade-number" id={this.props.id}>90%</div>
+						90%
 					</div>
 					<div className="col-md-2 text-center">
 						Current Grade
 						<br></br>
-						{this.state.percent}%
+						<div className="locked-grade-number" id={this.props.id}>{this.state.percent}%</div>
 					</div>
 					<div className="col-md-6">
 						<div className="subtopic-name">{this.props.name}</div>

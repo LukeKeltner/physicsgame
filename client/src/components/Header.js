@@ -93,7 +93,6 @@ class Header extends Component
 						<span>
 							<div className="coins">{this.props.coins.toLocaleString()}</div>
 						</span>
-
 					</div>
 					<div className="col-md-5">
 					<div className="icon-container">
