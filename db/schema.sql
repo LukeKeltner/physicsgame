@@ -84,3 +84,16 @@ create table challengelookup
             on delete cascade,
     primary key(id)
 );
+
+create table lockedgrades
+(
+    id int(50) not null auto_increment,
+    topic varchar(255),
+    subtopic varchar(255),
+    userid int(50),
+    FOREIGN KEY (userid)
+            REFERENCES users(id)
+            ON DELETE CASCADE,
+    grade decimal(5,2),
+    primary key(id)
+);
