@@ -18,7 +18,14 @@ const shuffle = array =>
 
 const randomVariable = (min, max, range) =>
 {
-	return (Math.random()*(max-min)+min).toFixed(range)
+	let r = 1
+
+	while (r<1.01 && r>0.99)
+	{
+		r = (Math.random()*(max-min)+min).toFixed(range)
+	}
+
+	return r
 }
 
 module.exports = 
